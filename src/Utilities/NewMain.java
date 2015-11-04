@@ -20,13 +20,13 @@ package Utilities;
  *
  * @author late7dusk
  */
-public class FileManager {
-    
-    public static boolean isWin32(){
-        return System.getProperty("os.name").startsWith("Windows");
+public class NewMain {
+
+    /**
+     * @param args the command line arguments
+     */
+    public static void main(String[] args) {
+        // TODO code application logic here
     }
-    
-    
-    
     
 }
