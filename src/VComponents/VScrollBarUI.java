@@ -30,7 +30,7 @@ public class VScrollBarUI {
     public static final int ROUNDED = 0;
     public static final int SIMPLE_LINE = 1;
     public static final int SIMPLE_LINE_ROUND = 2;
-    public static final int SIMPLE_LINE_SLANTRECT = 3;
+    public static final int SIMPLE_RECTANGLE = 3;
 
     public MetalScrollBarUI GreyScrollbar = new VScrollbarUI();
 
@@ -91,11 +91,8 @@ public class VScrollBarUI {
                     g2d.fillRect(r.x + 2, r.y + 4, r.width - 4, r.height - 8);
                 } else if (STYLE == SIMPLE_LINE_ROUND) {
                     g2d.fillRoundRect(r.x + 2, r.y + 4, r.width - 4, r.height - 8, 6, 6);
-                } else if (STYLE == SIMPLE_LINE_SLANTRECT) {
-                    //GradientPaint gp1 = new GradientPaint(r.x+2, r.y+4, CurrentThumbColor.darker(), r.width, r.y-8, CurrentThumbColor, false);
-                    RoundGradientPaint rgp = new RoundGradientPaint(r.width / 2, r.height / 2, CurrentThumbColor, new Point2D.Double(0, 85), CurrentThumbColor.brighter());
-                    g2d.setPaint(rgp);
-                    g2d.fillRoundRect(r.x + 2, r.y + 4, r.width - 4, r.height - 8, 6, 6);
+                } else if (STYLE == SIMPLE_RECTANGLE) {
+                    g2d.fillRect(r.x+2, r.y+2, r.width-4, r.height-4);
                 } else {
                     g2d.fillRoundRect(r.x + 2, r.y + 4, r.width - 4, r.height - 8, 8, 8);
                     //g2d.drawImage(imageThumb,r.x, r.y, r.width, r.height, null);
@@ -118,11 +115,10 @@ public class VScrollBarUI {
                     g2d.fillRect(r.x + 4, r.y + 4, r.width - 8, r.height - 8);
                 } else if (STYLE == SIMPLE_LINE_ROUND) {
                     g2d.fillRect(r.x + 4, r.y + 4, r.width - 8, r.height - 8);
-                } else if (STYLE == SIMPLE_LINE_SLANTRECT) {
-                    g2d.fillRect(r.x + 4, r.y + 4, r.width - 8, r.height - 8);
+                } else if (STYLE == SIMPLE_RECTANGLE) {
+                    g2d.fillRect(r.x+2, r.y+2, r.width-4, r.height-4);
                 } else {
                     g2d.fillRoundRect(r.x + 2, r.y + 4, r.width - 4, r.height - 8, 8, 8);
-                    //g2d.drawImage(imageTrack,r.x, r.y+2, r.width, r.height-4, null);
                 }
 
             }
@@ -202,7 +198,7 @@ public class VScrollBarUI {
         STYLE_ROUNDED(ROUNDED),
         STYLE_SIMPLE_LINE(SIMPLE_LINE),
         STYLE_SIMPLE_LINE_ROUND(SIMPLE_LINE_ROUND),
-        STYLE_SIMPLE_LINE_SLANTRECT(SIMPLE_LINE_SLANTRECT);
+        STYLE_SIMPLE_RECTANGLE(SIMPLE_RECTANGLE);
 
         private final int val;
 

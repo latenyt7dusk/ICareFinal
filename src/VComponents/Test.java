@@ -37,6 +37,8 @@ public class Test extends javax.swing.JFrame {
         vPanel1 = new VComponents.VPanel();
         vComboBox2 = new VComponents.VComboBox();
         vComboBox4 = new VComponents.VComboBox();
+        vScrollPane1 = new VComponents.VScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -48,9 +50,32 @@ public class Test extends javax.swing.JFrame {
         vComboBox2.setForeground(new java.awt.Color(204, 204, 204));
         vComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "item 1", "item 2", "item 3", "item 4", "123", "1123", "1231", "123", "1231", "23123" }));
         vComboBox2.setVSubColor(new java.awt.Color(255, 255, 255));
-        vComboBox2.setScrollBackground(new java.awt.Color(0, 0, 0));
-        vComboBox2.setScrollThumbNormalColor(new java.awt.Color(51, 51, 51));
-        vComboBox2.setScrollTrackColor(new java.awt.Color(153, 153, 153));
+
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        vScrollPane1.setViewportView(jTable1);
 
         javax.swing.GroupLayout vPanel1Layout = new javax.swing.GroupLayout(vPanel1);
         vPanel1.setLayout(vPanel1Layout);
@@ -63,8 +88,11 @@ public class Test extends javax.swing.JFrame {
                         .addComponent(vComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(vPanel1Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
-                        .addComponent(vComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(56, Short.MAX_VALUE))
+                        .addComponent(vComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addGroup(vPanel1Layout.createSequentialGroup()
+                        .addGap(128, 128, 128)
+                        .addComponent(vScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addContainerGap(174, Short.MAX_VALUE))
         );
         vPanel1Layout.setVerticalGroup(
             vPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -73,7 +101,9 @@ public class Test extends javax.swing.JFrame {
                 .addComponent(vComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(56, 56, 56)
                 .addComponent(vComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(69, Short.MAX_VALUE))
+                .addGap(59, 59, 59)
+                .addComponent(vScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 149, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(53, Short.MAX_VALUE))
         );
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
@@ -138,8 +168,10 @@ public class Test extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JTable jTable1;
     private VComponents.VComboBox vComboBox2;
     private VComponents.VComboBox vComboBox4;
     private VComponents.VPanel vPanel1;
+    private VComponents.VScrollPane vScrollPane1;
     // End of variables declaration//GEN-END:variables
 }

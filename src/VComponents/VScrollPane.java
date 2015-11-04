@@ -6,14 +6,16 @@
 package VComponents;
 
 import java.awt.Color;
+import java.awt.Dimension;
 import javax.swing.Icon;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 /**
  *
  * @author late7dusk
  */
-public class VScrollPane extends JScrollPane implements VTheme{
+public class VScrollPane extends JScrollPane implements VTheme,VScrollBarUI.VScrollTheme{
     
     private int ThemeAlpha = 255;
     private Color ThemeColor = new Color(51, 153, 255, ThemeAlpha);
@@ -22,6 +24,102 @@ public class VScrollPane extends JScrollPane implements VTheme{
     private Icon VImage = null;
     private boolean ThemeVisible = true;
     private boolean SubVisible = true;
+    
+    private static Color ScrollBackground;
+    private static Color ScrollTrackColor;
+    private static Color ScrollThumbNormalColor;
+    private static Color ScrollThumbHoverColor;
+    private static int ScrollWidth = 10;
+    
+    private static VScrollBarUI.VScrollBarStyle VScrollStyle = VScrollBarUI.VScrollBarStyle.STYLE_ROUNDED;
+    
+    public VScrollPane(){
+        
+        setScrollBackground(new Color(0,0,0,0));
+        setScrollTrackColor(new Color(35, 35, 35));
+        setScrollThumbNormalColor(new Color(153, 153, 153));
+        setScrollThumbHoverColor(new Color(51, 153, 255));
+        
+        setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
+        setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+        getVerticalScrollBar().setUI(new VScrollBarUI().createVerticalScrollBar(ScrollBackground, ScrollTrackColor, ScrollThumbNormalColor, ScrollThumbHoverColor, VScrollStyle.Value()));//VScrollBarUI.SIMPLE_LINE
+        getVerticalScrollBar().setPreferredSize(new Dimension(ScrollWidth, 0));
+        getVerticalScrollBar().setOpaque(false);
+        getViewport().setOpaque(false);
+        setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        setOpaque(false);
+        
+        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                repaint();
+            }
+        });
+        
+    }
+    
+    private void updateScroll(){
+        
+    }
+    
+    @Override
+    public void setScrollWidth(int i) {
+        ScrollWidth = i;
+    }
+
+    @Override
+    public int getScrollWidth() {
+        return ScrollWidth;
+    }
+
+    @Override
+    public void setScrollTrackColor(Color c) {
+        ScrollTrackColor = c;
+    }
+
+    @Override
+    public Color getScrollTrackColor() {
+        return ScrollTrackColor;
+    }
+
+    @Override
+    public void setScrollThumbNormalColor(Color c) {
+        ScrollThumbNormalColor = c;
+    }
+
+    @Override
+    public Color getScrollThumbNormalColor() {
+        return ScrollThumbNormalColor;
+    }
+
+    @Override
+    public void setScrollThumbHoverColor(Color c) {
+        ScrollThumbHoverColor = c;
+    }
+
+    @Override
+    public Color getScrollThumbHoverColor() {
+        return ScrollThumbHoverColor;
+    }
+
+    @Override
+    public void setVScrollBarStyle(VScrollBarUI.VScrollBarStyle s) {
+        VScrollStyle = s;
+    }
+
+    @Override
+    public VScrollBarUI.VScrollBarStyle getVScrollBarStyle() {
+        return VScrollStyle;
+    }
+
+    @Override
+    public void setScrollBackground(Color c) {
+        ScrollBackground = c;
+    }
+
+    @Override
+    public Color getScrollBackground() {
+        return ScrollBackground;
+    }
     
     
     @Override
