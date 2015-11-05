@@ -93,17 +93,18 @@ public class Test extends javax.swing.JFrame {
         vPanel1Layout.setHorizontalGroup(
             vPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(vComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(vPanel1Layout.createSequentialGroup()
                 .addGroup(vPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addGroup(vPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(vComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 198, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(vPanel1Layout.createSequentialGroup()
                         .addGap(53, 53, 53)
                         .addComponent(vComboBox4, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(vPanel1Layout.createSequentialGroup()
                         .addGap(18, 18, 18)
                         .addComponent(vScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 285, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap(284, Short.MAX_VALUE))
+                .addGap(150, 284, Short.MAX_VALUE))
         );
         vPanel1Layout.setVerticalGroup(
             vPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
