@@ -21,6 +21,7 @@ import java.awt.Dimension;
 import javax.swing.Icon;
 import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
+import javax.swing.plaf.metal.MetalScrollBarUI;
 
 /**
  *
@@ -43,6 +44,7 @@ public class VScrollPane extends JScrollPane implements VTheme,VScrollBarUI.VScr
     private static int ScrollWidth = 10;
     
     private static VScrollBarUI.VScrollBarStyle VScrollStyle = VScrollBarUI.VScrollBarStyle.STYLE_ROUNDED;
+    private MetalScrollBarUI VSBUI = new VScrollBarUI().createVerticalScrollBar(ScrollBackground, ScrollTrackColor, ScrollThumbNormalColor, ScrollThumbHoverColor, VScrollStyle.Value());
     
     public VScrollPane(){
         
@@ -53,7 +55,7 @@ public class VScrollPane extends JScrollPane implements VTheme,VScrollBarUI.VScr
         
         setVerticalScrollBarPolicy(ScrollPaneConstants.VERTICAL_SCROLLBAR_AS_NEEDED);
         setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-        getVerticalScrollBar().setUI(new VScrollBarUI().createVerticalScrollBar(ScrollBackground, ScrollTrackColor, ScrollThumbNormalColor, ScrollThumbHoverColor, VScrollStyle.Value()));//VScrollBarUI.SIMPLE_LINE
+        getVerticalScrollBar().setUI(VSBUI);//VScrollBarUI.SIMPLE_LINE
         getVerticalScrollBar().setPreferredSize(new Dimension(ScrollWidth, 0));
         getVerticalScrollBar().setOpaque(false);
         getViewport().setOpaque(false);
@@ -66,11 +68,10 @@ public class VScrollPane extends JScrollPane implements VTheme,VScrollBarUI.VScr
             }
         });
         
-    }
-    
-    private void updateScroll(){
         
     }
+    
+    
     
     @Override
     public void setScrollWidth(int i) {
@@ -90,6 +91,7 @@ public class VScrollPane extends JScrollPane implements VTheme,VScrollBarUI.VScr
     @Override
     public Color getScrollTrackColor() {
         return ScrollTrackColor;
+        
     }
 
     @Override

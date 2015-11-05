@@ -81,7 +81,7 @@ public class VScrollBarUI {
             //imageTrack = FauxImage.create(32, 32, new Color(0,0,0,200));
         }
 
-        public VScrollbarUI(final Color bg, final Color Track, final Color Thumbnormal, final Color Thumbhover, int style) {
+        public VScrollbarUI( Color bg, Color Track, Color Thumbnormal, Color Thumbhover, int style) {
             this.TrackBG = bg;
             this.TrackColor = Track;
             this.CurrentThumbColor = Thumbnormal;
@@ -89,7 +89,9 @@ public class VScrollBarUI {
             this.ThumbNormal = Thumbnormal;
             this.STYLE = style;
         }
-
+        
+        
+                    
         @Override
         protected void paintThumb(Graphics g, JComponent c, Rectangle r) {
             //super.paintThumb(g, c, r);
