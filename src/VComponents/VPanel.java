@@ -1,24 +1,14 @@
 /*
- * Copyright (C) 2015 late7dusk
- *
- * This program is free software: you can redistribute it and/or modify
- * it under the terms of the GNU General Public License as published by
- * the Free Software Foundation, either version 3 of the License, or
- * (at your option) any later version.
- *
- * This program is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the
- * GNU General Public License for more details.
- *
- * You should have received a copy of the GNU General Public License
- * along with this program.  If not, see <http://www.gnu.org/licenses/>.
+ * 
+ * 
+ * 
  */
 package VComponents;
 
 import Utilities.ImageUtils;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.FontMetrics;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Image;
@@ -42,9 +32,12 @@ public class VPanel extends JPanel implements VTheme {
     private boolean SubVisible = true;
     private Icon VLabelIcon = null;
     private String VLabel = null;
-    private Color VLabelColor = Color.BLACK;
+    private int VLabelAlpha = 230;
+    private Color VLabelColor = new Color(0, 0, 0, VLabelAlpha);
+    private Color VLabelForeground = Color.WHITE;
     private Font VLabelFont = getFont();
     private BufferedImage myImage = null;
+    private int VLabelHeight = 24;
 
     public VPanel() {
         addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -55,7 +48,7 @@ public class VPanel extends JPanel implements VTheme {
     }
 
     public void setVLabel(String i) {
-        this.VLabel = i;
+        this.VLabel = ((i.isEmpty()) ? null : i);
     }
 
     public String getVLabel() {
@@ -71,11 +64,20 @@ public class VPanel extends JPanel implements VTheme {
     }
 
     public void setVLabelColor(Color c) {
-        this.VLabelColor = c;
+        this.VLabelColor = new Color(c.getRed(), c.getGreen(), c.getBlue(), VLabelAlpha);
     }
 
     public Color getVLabelColor() {
         return VLabelColor;
+    }
+
+    public void setVLabelApha(int i) {
+        this.VLabelAlpha = ((i > 255 || i < 0) ? 255 : i);
+        this.VLabelColor = new Color(VLabelColor.getRed(), VLabelColor.getGreen(), VLabelColor.getBlue(), VLabelAlpha);
+    }
+
+    public int getVLabelAlpha() {
+        return VLabelAlpha;
     }
 
     public void setVLabelFont(Font f) {
@@ -84,6 +86,22 @@ public class VPanel extends JPanel implements VTheme {
 
     public Font getVLabelFont() {
         return VLabelFont;
+    }
+
+    public void setVLabelForeground(Color c) {
+        this.VLabelForeground = c;
+    }
+
+    public Color getVLabelForeground() {
+        return VLabelForeground;
+    }
+
+    public void setVLabelHeight(int i) {
+        this.VLabelHeight = i;
+    }
+
+    public int getVLabelHeight() {
+        return VLabelHeight;
     }
 
     @Override
@@ -98,10 +116,18 @@ public class VPanel extends JPanel implements VTheme {
             g2d.drawImage(myImage.getScaledInstance(w, h, Image.SCALE_DEFAULT), 0, 0, null);
         }
         if (VLabel != null) {
-
-        }
-        if (VLabelIcon != null) {
-
+            g2d.setColor(VLabelColor);
+            g2d.fillRect(0, 0, w, 24);
+            g2d.setColor(VLabelForeground);
+            Font e = new Font(getFont().getName(), 1, getFont().getSize());
+            g2d.setFont(e);
+            FontMetrics fm = g.getFontMetrics();
+            //int x = (getWidth() - fm.stringWidth(VLabel)) / 2;
+            int y = (fm.getAscent() + ((VLabelHeight) - (fm.getAscent() + fm.getDescent())) / 2);
+            g2d.drawString(VLabel, ((VLabelIcon != null) ? VLabelHeight + 4 : 4), y);
+            if (VLabelIcon != null) {
+                g2d.drawImage(ImageUtils.Colorize(VLabelIcon, VLabelForeground).getScaledInstance(VLabelHeight - 2, VLabelHeight - 4, Image.SCALE_SMOOTH), 1, 2, null);
+            }
         }
 
     }
@@ -151,7 +177,7 @@ public class VPanel extends JPanel implements VTheme {
     @Override
     public void setVImage(Icon i) {
         this.VImage = i;
-        this.myImage = ((VImage!=null)? ImageUtils.Convert(i):null);
+        this.myImage = ((VImage != null) ? ImageUtils.Convert(i) : null);
     }
 
     @Override

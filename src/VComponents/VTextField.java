@@ -47,12 +47,13 @@ public class VTextField extends JTextField implements VTheme {
     private String Value;
     private String VLabel = null;
     private boolean hasError = false;
-    private Color LabelColor = new Color(200,200,200);
     
     
 
     public VTextField() {
-
+        
+        setBackground(VThemeManager.TextBackground);
+        setForeground(VThemeManager.TextForeground);
         putClientProperty("HasError", Boolean.FALSE);
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
         addPropertyChangeListener(new java.beans.PropertyChangeListener() {
@@ -62,13 +63,7 @@ public class VTextField extends JTextField implements VTheme {
         });
     }
     
-    public void setLabelColor(Color col){
-        this.LabelColor = col;
-    }
     
-    public Color getLabelColor(){
-        return LabelColor;
-    }
 
     public void setHasError(boolean b){
         this.hasError = b;
@@ -136,7 +131,7 @@ public class VTextField extends JTextField implements VTheme {
             g2d.fill(p);
         }
         if(VLabel != null && getText().isEmpty() && !hasFocus()){
-            g2d.setColor(LabelColor);
+            g2d.setColor(VThemeManager.TextInfoground);
             Font e = new Font(getFont().getName(), 1, getFont().getSize());
             g2d.setFont(e);
             FontMetrics fm = g.getFontMetrics();

@@ -16,7 +16,6 @@
  */
 package VComponents;
 
-import Utilities.RoundGradientPaint;
 import java.awt.Color;
 import java.awt.Dimension;
 import java.awt.Graphics;
@@ -26,11 +25,11 @@ import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
-import java.awt.geom.Point2D;
 import java.awt.image.BufferedImage;
 import javax.swing.JButton;
 import javax.swing.JComponent;
 import javax.swing.plaf.metal.MetalScrollBarUI;
+import javax.swing.text.Utilities;
 
 /**
  *
@@ -48,6 +47,8 @@ public class VScrollBarUI {
     public MetalScrollBarUI createVerticalScrollBar(Color bg, Color Track, Color Thumbnormal, Color Thumbhover, int style) {
         return new VScrollbarUI(bg, Track, Thumbnormal, Thumbhover, style);
     }
+    
+    
 
     private class VScrollbarUI extends MetalScrollBarUI {
 
@@ -64,7 +65,7 @@ public class VScrollBarUI {
 
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(12, 0);
+                return new Dimension(0, 0);
             }
 
         };
@@ -72,7 +73,7 @@ public class VScrollBarUI {
 
             @Override
             public Dimension getPreferredSize() {
-                return new Dimension(12, 0);
+                return new Dimension(0, 0);
             }
         };
 
@@ -101,13 +102,13 @@ public class VScrollBarUI {
                 g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
                 g2d.setColor(CurrentThumbColor);
                 if (STYLE == SIMPLE_LINE) {
-                    g2d.fillRect(r.x + 2, r.y + 4, r.width - 4, r.height - 8);
+                    g2d.fillRect(r.x + 2, r.y + 2, r.width - 4, r.height - 4);
                 } else if (STYLE == SIMPLE_LINE_ROUND) {
-                    g2d.fillRoundRect(r.x + 2, r.y + 4, r.width - 4, r.height - 8, 6, 6);
+                    g2d.fillRoundRect(r.x + 2, r.y + 2, r.width - 4, r.height - 4, 6, 6);
                 } else if (STYLE == SIMPLE_RECTANGLE) {
                     g2d.fillRect(r.x+2, r.y+2, r.width-4, r.height-4);
                 } else {
-                    g2d.fillRoundRect(r.x + 2, r.y + 4, r.width - 4, r.height - 8, 8, 8);
+                    g2d.fillRoundRect(r.x + 2, r.y + 2, r.width - 4, r.height - 4, 8, 8);
                     //g2d.drawImage(imageThumb,r.x, r.y, r.width, r.height, null);
                 }
 
@@ -131,7 +132,7 @@ public class VScrollBarUI {
                 } else if (STYLE == SIMPLE_RECTANGLE) {
                     g2d.fillRect(r.x+2, r.y+2, r.width-4, r.height-4);
                 } else {
-                    g2d.fillRoundRect(r.x + 2, r.y + 4, r.width - 4, r.height - 8, 8, 8);
+                    g2d.fillRoundRect(r.x + 2, r.y + 2, r.width - 4, r.height - 4, 8, 8);
                 }
 
             }
