@@ -98,7 +98,7 @@ public class VPasswordField extends JPasswordField implements VTheme {
                 g2d.setColor(ThemeColor);
                 g2d.fillRect(0, 0, getHeight(), getHeight());
             }
-            g2d.drawImage(image.getScaledInstance(getHeight(), getHeight() - 4, Image.SCALE_SMOOTH), 0, 2, null);
+            g2d.drawImage(image.getScaledInstance(getHeight(), getHeight() - 4, Image.SCALE_DEFAULT), 0, 2, null);
             setBorder(javax.swing.BorderFactory.createEmptyBorder(1, getHeight() + 4, 1, 2));
         } else {
             setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
