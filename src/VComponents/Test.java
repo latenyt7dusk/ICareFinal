@@ -17,7 +17,6 @@
 package VComponents;
 
 import java.awt.Color;
-import java.util.Base64.Encoder;
 import javax.swing.UIManager;
 
 /**

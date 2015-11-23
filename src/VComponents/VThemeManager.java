@@ -76,6 +76,7 @@ public class VThemeManager {
     private static final Color VTextForeground = fetchColorProps("VTextForeground");//Default TextFieldFG 20,20,20
     private static final Color VTextInfoground = fetchColorProps("VTextInfoground");//Default TextInfoG 200,200,200
     
+    private static final Color VPanelBackground = fetchColorProps("VPanelBackground");//Default Panel Background 35,35,35,200
     
     
     //Scroll UI Colors
@@ -104,5 +105,8 @@ public class VThemeManager {
     
     public static Color IconHoverBackground = VThemeColor.brighter();
     public static Color IconHoverForeground = VSubColor.brighter();
+    
+    //Panel Colors
+    public static Color PanelBackgrounds = VPanelBackground;
     
 }

@@ -20,11 +20,10 @@ import java.io.File;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
-import java.io.UnsupportedEncodingException;
 import java.security.InvalidKeyException;
 import java.security.Key;
 import java.security.NoSuchAlgorithmException;
-import java.util.Base64;
+//import java.util.Base64;
 import java.util.Calendar;
 import javax.crypto.BadPaddingException;
 import javax.crypto.Cipher;
@@ -37,13 +36,12 @@ import javax.crypto.spec.SecretKeySpec;
  * @author Kelvin Nakpil
  */
 public class Cryptography {
-    
-    public static void main(String args[]){
+
+    public static void main(String args[]) {
         System.out.println(base64encode("admin"));
         System.out.println(base64decode("YWRtaW4="));
     }
-    
-    
+
     //<editor-fold defaultstate="collapsed" desc=" File Crypto Block">  
     private static final String ALGORITHM = "AES";
     private static final String TRANSFORMATION = "AES";
@@ -121,12 +119,13 @@ public class Cryptography {
     }//xorMessage
 
     public static final String DEFAULT_ENCODING = "UTF-8";
-        
+
     public static String base64encode(String text) {
         try {
-            String rez = Base64.getEncoder().encodeToString(text.getBytes(DEFAULT_ENCODING));
+            String rez = "";
+            //String rez = Base64.getEncoder().encodeToString(text.getBytes(DEFAULT_ENCODING));
             return rez;
-        } catch (UnsupportedEncodingException e) {
+        } catch (Exception e) {
             return null;
         }
     }//base64encode
@@ -134,8 +133,10 @@ public class Cryptography {
     public static String base64decode(String text) {
 
         try {
-            return new String(Base64.getDecoder().decode(text), DEFAULT_ENCODING);
-        } catch (IOException e) {
+            String rez = "";
+            //rez = new String(Base64.getDecoder().decode(text), DEFAULT_ENCODING);
+            return rez;
+        } catch (Exception e) {
             return null;
         }
 
@@ -153,9 +154,9 @@ public class Cryptography {
     //<editor-fold defaultstate="collapsed" desc=" UUID Code Block">  
     public static String getNewID(String hd) {
         try {
-            Calendar cal = Calendar.getInstance();            
+            Calendar cal = Calendar.getInstance();
             String temp[] = cal.getTime().toString().split("[: ]");
-            String e = hd+ cal.get(Calendar.YEAR) + "" + (((cal.get(Calendar.MONTH)+1) < 10)? "0"+(cal.get(Calendar.MONTH)+1):(cal.get(Calendar.MONTH)+1)) + "" + cal.get(Calendar.DAY_OF_MONTH) + "-" + temp[3] + temp[4] + temp[5];
+            String e = hd + cal.get(Calendar.YEAR) + "" + (((cal.get(Calendar.MONTH) + 1) < 10) ? "0" + (cal.get(Calendar.MONTH) + 1) : (cal.get(Calendar.MONTH) + 1)) + "" + cal.get(Calendar.DAY_OF_MONTH) + "-" + temp[3] + temp[4] + temp[5];
             return e;
         } catch (Exception er) {
             System.out.println(er);
@@ -164,6 +165,4 @@ public class Cryptography {
     }
     //</editor-fold>
 
-    
-    
 }

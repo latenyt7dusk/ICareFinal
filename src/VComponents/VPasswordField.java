@@ -50,7 +50,6 @@ public class VPasswordField extends JPasswordField implements VTheme {
         setBackground(VThemeManager.TextBackground);
         setForeground(VThemeManager.TextForeground);
         putClientProperty("HasError", Boolean.FALSE);
-        setOpaque(false);
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
         addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
