@@ -47,9 +47,10 @@ public class VPasswordField extends JPasswordField{
         setForeground(VThemeManager.TextForeground);
         putClientProperty("HasError", Boolean.FALSE);
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
-        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                repaint();
+        
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                selectAll();
             }
         });
     }

@@ -16,10 +16,16 @@
  */
 package VComponents;
 
+import Utilities.ImageUtils;
 import java.awt.Color;
+import java.awt.Cursor;
+import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
+import java.awt.image.BufferedImage;
+import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 
 /**
@@ -30,15 +36,18 @@ public class VButton extends JButton {
 
     private boolean visi = true;
     private boolean hov = false;
+    private BufferedImage i;
+    private boolean changed = false;
 
     public VButton() {
-        setOpaque(false);
+        setOpaque(true);
         setBorderPainted(false);
         setContentAreaFilled(false);
         setFocusPainted(false);
         setFocusable(false);
         setForeground(VThemeManager.ButtonForeground);
         setBackground(new Color(0, 0, 0, 0));
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
@@ -54,7 +63,14 @@ public class VButton extends JButton {
                 hov = true;
             }
         });
-
+        
+        
+    }
+    
+    @Override
+    public void setIcon(Icon ii){
+        i = ImageUtils.Colorize(ii, VThemeManager.ButtonForeground);
+        super.setIcon(new ImageIcon(i));
     }
 
     public void setButtonVisible(boolean b) {
@@ -74,9 +90,13 @@ public class VButton extends JButton {
             g2d.setColor(VThemeManager.ButtonNormal);
             g2d.fillRect(0, 0, getWidth(), getHeight());
             if (hov) {
-                g2d.setColor(VThemeManager.ButtonHighlight);
-                g2d.fillRect(getWidth() - 5, 0, getWidth(), getHeight());
+                GradientPaint gp = new GradientPaint(getWidth(), 0, VThemeManager.ButtonNormal.brighter(), getWidth(), 27, VThemeManager.ButtonNormal, true);
+                g2d.setPaint(gp);
+                //g2d.setStroke(new BasicStroke(3,BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER));
+                g2d.fillRect(0, 0, getWidth(), getHeight());
             }
+            
+            
         }
         super.paintComponent(g);
 

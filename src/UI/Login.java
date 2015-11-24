@@ -19,6 +19,7 @@ package UI;
 import VComponents.VShadowBorder;
 import VComponents.VThemeManager;
 import java.awt.Color;
+import java.awt.Toolkit;
 
 /**
  *
@@ -31,7 +32,9 @@ public class Login extends javax.swing.JFrame {
      */
     public Login() {
         initComponents();
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
     }
+    
 
     /**
      * This method is called from within the constructor to initialize the form.
@@ -46,10 +49,12 @@ public class Login extends javax.swing.JFrame {
         vPanel1 = new VComponents.VPanel();
         jLabel1 = new javax.swing.JLabel();
         jLabel2 = new javax.swing.JLabel();
+        jLabel3 = new javax.swing.JLabel();
         jPanel2 = new javax.swing.JPanel();
         vTextField1 = new VComponents.VTextField();
         vPasswordField1 = new VComponents.VPasswordField();
-        vButton3 = new VComponents.VButton();
+        vButton2 = new VComponents.VButton();
+        vButton1 = new VComponents.VButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
         setTitle("Login");
@@ -71,13 +76,17 @@ public class Login extends javax.swing.JFrame {
         jLabel1.setForeground(new java.awt.Color(102, 102, 102));
         jLabel1.setText("Kelvin Nakpil");
         vPanel1.add(jLabel1);
-        jLabel1.setBounds(5, 275, 380, 10);
+        jLabel1.setBounds(35, 275, 350, 10);
 
         jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel2.setForeground(new java.awt.Color(51, 51, 51));
         jLabel2.setText("NAKPIL SOFTWARES");
         vPanel1.add(jLabel2);
-        jLabel2.setBounds(5, 262, 380, 14);
+        jLabel2.setBounds(35, 262, 350, 14);
+
+        jLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/Nakpil Softwares.png"))); // NOI18N
+        vPanel1.add(jLabel3);
+        jLabel3.setBounds(5, 263, 25, 25);
 
         jPanel1.add(vPanel1);
         vPanel1.setBounds(0, 0, 388, 293);
@@ -85,41 +94,57 @@ public class Login extends javax.swing.JFrame {
         jPanel2.setBackground(VThemeManager.PanelBackgrounds);
 
         vTextField1.setText("username");
-        vTextField1.setIconBackgroundVisible(false);
         vTextField1.setLabelIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/user.png"))); // NOI18N
+        vTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                vTextField1FocusGained(evt);
+            }
+        });
 
         vPasswordField1.setText("password");
         vPasswordField1.setLabelIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/lock.png"))); // NOI18N
 
-        vButton3.setText("vButton3");
-        vButton3.addActionListener(new java.awt.event.ActionListener() {
+        vButton2.setForeground(new java.awt.Color(255, 255, 255));
+        vButton2.setText("Close");
+        vButton2.setFont(new java.awt.Font("SansSerif", 1, 8)); // NOI18N
+        vButton2.setMargin(new java.awt.Insets(0, 0, 0, 0));
+        vButton2.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vButton3ActionPerformed(evt);
+                vButton2ActionPerformed(evt);
             }
         });
+
+        vButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/check.png"))); // NOI18N
+        vButton1.setText("Login");
+        vButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
         jPanel2.setLayout(jPanel2Layout);
         jPanel2Layout.setHorizontalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel2Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(5, 5, 5))
             .addGroup(jPanel2Layout.createSequentialGroup()
                 .addGap(28, 28, 28)
                 .addGroup(jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(vTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(vPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 175, Short.MAX_VALUE)
-                    .addComponent(vButton3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(vButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(27, Short.MAX_VALUE))
         );
         jPanel2Layout.setVerticalGroup(
             jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel2Layout.createSequentialGroup()
-                .addGap(123, 123, 123)
+                .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(96, 96, 96)
                 .addComponent(vTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(vPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(28, 28, 28)
-                .addComponent(vButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 33, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap(48, Short.MAX_VALUE))
+                .addGap(40, 40, 40)
+                .addComponent(vButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 32, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(50, Short.MAX_VALUE))
         );
 
         jPanel1.add(jPanel2);
@@ -140,10 +165,14 @@ public class Login extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void vButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton3ActionPerformed
+    private void vTextField1FocusGained(java.awt.event.FocusEvent evt) {//GEN-FIRST:event_vTextField1FocusGained
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vTextField1FocusGained
+
+    private void vButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton2ActionPerformed
         // TODO add your handling code here:
         System.exit(0);
-    }//GEN-LAST:event_vButton3ActionPerformed
+    }//GEN-LAST:event_vButton2ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -183,11 +212,14 @@ public class Login extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel3;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private VComponents.VButton vButton3;
+    private VComponents.VButton vButton1;
+    private VComponents.VButton vButton2;
     private VComponents.VPanel vPanel1;
     private VComponents.VPasswordField vPasswordField1;
     private VComponents.VTextField vTextField1;
     // End of variables declaration//GEN-END:variables
+    
 }

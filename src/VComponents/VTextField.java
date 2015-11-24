@@ -38,14 +38,19 @@ public class VTextField extends JTextField {
     private Icon ico = null;
     private Color IconFG = Color.BLACK;
     private boolean ibgVisible = false;
-    
+
     public VTextField() {
 
         setBackground(VThemeManager.TextBackground);
         setForeground(VThemeManager.TextForeground);
         putClientProperty("HasError", Boolean.FALSE);
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
-        
+
+        addFocusListener(new java.awt.event.FocusAdapter() {
+            public void focusGained(java.awt.event.FocusEvent evt) {
+                selectAll();
+            }
+        });
     }
 
     public void setHasError(boolean b) {
@@ -64,28 +69,29 @@ public class VTextField extends JTextField {
     public String getValue() {
         return Value;
     }
-    
-    public void setLabelIcon(Icon i){
+
+    public void setLabelIcon(Icon i) {
         this.ico = i;
         repaint();
     }
-    public Icon getLabelIcon(){
+
+    public Icon getLabelIcon() {
         return ico;
     }
-    
-    
-    public void setIconBackgroundVisible(boolean b){
+
+    public void setIconBackgroundVisible(boolean b) {
         this.ibgVisible = b;
     }
-    
-    public boolean isIconBackgroundVisible(){
+
+    public boolean isIconBackgroundVisible() {
         return ibgVisible;
     }
-    
-    public void setIconForeground(Color c){
+
+    public void setIconForeground(Color c) {
         this.IconFG = c;
     }
-    public Color getIconForeground(){
+
+    public Color getIconForeground() {
         return IconFG;
     }
 
@@ -100,27 +106,27 @@ public class VTextField extends JTextField {
         if (hasError == true) {
             g2d.setColor(Color.RED.brighter());
             GeneralPath p = new GeneralPath(GeneralPath.WIND_EVEN_ODD, 5);
-            p.moveTo(getWidth() - 10, getHeight()-1);
-            p.lineTo(getWidth()-1, getHeight()-1);
-            p.lineTo(getWidth()-1, getHeight() - 11);
-            p.lineTo(getWidth() - 10, getHeight()-1);
+            p.moveTo(getWidth() - 10, getHeight() - 1);
+            p.lineTo(getWidth() - 1, getHeight() - 1);
+            p.lineTo(getWidth() - 1, getHeight() - 11);
+            p.lineTo(getWidth() - 10, getHeight() - 1);
             p.closePath();
             g2d.fill(p);
         }
-        
-        if(ico != null){
+
+        if (ico != null) {
             BufferedImage image = ImageUtils.Convert(ico);
-            if(ibgVisible){
+            if (ibgVisible) {
                 g2d.setColor(getBackground().darker());
-                g2d.fillRect(1, 1, 24, getHeight()-2);
-                if(!IconFG.equals(Color.BLACK)){
+                g2d.fillRect(1, 1, 24, getHeight() - 2);
+                if (!IconFG.equals(Color.BLACK)) {
                     Colorizer.doRGB(IconFG, image);
                 }
             }
             setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 27, 1, 4));
             g2d.drawImage(image, 5, 4, null);
         }
-        
+
     }
 
 }
