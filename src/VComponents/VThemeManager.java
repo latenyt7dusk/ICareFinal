@@ -77,6 +77,10 @@ public class VThemeManager {
     private static final Color VTextInfoground = fetchColorProps("VTextInfoground");//Default TextInfoG 200,200,200
     
     private static final Color VPanelBackground = fetchColorProps("VPanelBackground");//Default Panel Background 35,35,35,200
+    private static final Color VButtonNormal = fetchColorProps("VButtonNormal");//Default Button Color 51,153,255
+    private static final Color VButtonForegroundNormal = fetchColorProps("VButtonForegroundNormal");
+    private static final Color VButtonHighlight = fetchColorProps("VButtonHighlight");
+
     
     
     //Scroll UI Colors
@@ -97,6 +101,10 @@ public class VThemeManager {
     public static Color TextBackground = VTextBackground;
     public static Color TextForeground = VTextForeground;
     public static Color TextInfoground = VTextInfoground;
+    
+    public static Color ButtonNormal = VButtonNormal;
+    public static Color ButtonForeground = VButtonForegroundNormal;
+    public static Color ButtonHighlight = VButtonHighlight;
     
     
     //UI Icon Colors

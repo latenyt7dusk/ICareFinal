@@ -32,18 +32,14 @@ import javax.swing.JPasswordField;
  *
  * @author HERU
  */
-public class VPasswordField extends JPasswordField implements VTheme {
+public class VPasswordField extends JPasswordField{
 
-    private int ThemeAlpha = 255;
-    private Color ThemeColor = new Color(51, 153, 255, ThemeAlpha);
-    private int SubAlpha = 255;
-    private Color SubColor = new Color(35, 35, 35, SubAlpha);
-    private Icon VImage = null;
-    private Color VIconColor = null;
-    private boolean ThemeVisible = true;
-    private boolean SubVisible = true;
+    
     private String Value;
     private boolean hasError = false;
+    private Icon ico = null;
+    private Color IconFG = Color.BLACK;
+    private boolean ibgVisible = false;
 
     public VPasswordField() {
 
@@ -60,6 +56,7 @@ public class VPasswordField extends JPasswordField implements VTheme {
 
     public void setHasError(boolean b) {
         this.hasError = b;
+        repaint();
     }
 
     public boolean HasError() {
@@ -73,13 +70,29 @@ public class VPasswordField extends JPasswordField implements VTheme {
     public String getValue() {
         return Value;
     }
-
-    public void setVIconColor(Color col) {
-        this.VIconColor = col;
+    
+    public void setLabelIcon(Icon i){
+        this.ico = i;
+        repaint();
     }
-
-    public Color getVIconColor() {
-        return VIconColor;
+    public Icon getLabelIcon(){
+        return ico;
+    }
+    
+    
+    public void setIconBackgroundVisible(boolean b){
+        this.ibgVisible = b;
+    }
+    
+    public boolean isIconBackgroundVisible(){
+        return ibgVisible;
+    }
+    
+    public void setIconForeground(Color c){
+        this.IconFG = c;
+    }
+    public Color getIconForeground(){
+        return IconFG;
     }
 
     @Override
@@ -89,102 +102,30 @@ public class VPasswordField extends JPasswordField implements VTheme {
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setColor(getBackground());
-        if (VImage != null) {
-            BufferedImage image = ImageUtils.Convert(VImage);
-            if (VIconColor != null) {
-                Colorizer.doRGB(VIconColor, image);
-            }
-            if (ThemeVisible == true) {
-                g2d.setColor(ThemeColor);
-                g2d.fillRect(0, 0, getHeight(), getHeight());
-            }
-            g2d.drawImage(image.getScaledInstance(getHeight(), getHeight() - 4, Image.SCALE_DEFAULT), 0, 2, null);
-            setBorder(javax.swing.BorderFactory.createEmptyBorder(1, getHeight() + 4, 1, 2));
-        } else {
-            setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
-        }
+
         if (hasError == true) {
-            g2d.setColor(Color.RED.darker());
+            g2d.setColor(Color.RED.brighter());
             GeneralPath p = new GeneralPath(GeneralPath.WIND_EVEN_ODD, 5);
-            p.moveTo(getWidth() - 10, getHeight());
-            p.lineTo(getWidth(), getHeight());
-            p.lineTo(getWidth(), getHeight() - 10);
-            p.lineTo(getWidth() - 10, getHeight());
+            p.moveTo(getWidth() - 10, getHeight()-1);
+            p.lineTo(getWidth()-1, getHeight()-1);
+            p.lineTo(getWidth()-1, getHeight() - 11);
+            p.lineTo(getWidth() - 10, getHeight()-1);
             p.closePath();
             g2d.fill(p);
         }
+        
+        if(ico != null){
+            BufferedImage image = ImageUtils.Convert(ico);
+            if(ibgVisible){
+                g2d.setColor(getBackground().darker());
+                g2d.fillRect(1, 1, 24, getHeight()-2);
+                if(!IconFG.equals(Color.BLACK)){
+                    Colorizer.doRGB(IconFG, image);
+                }
+            }
+            setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 27, 1, 4));
+            g2d.drawImage(image, 5, 4, null);
+        }
+        
     }
-
-    @Override
-    public void setVThemeColor(Color c) {
-        this.ThemeColor = new Color(c.getRed(), c.getGreen(), c.getBlue(), ThemeAlpha);
-    }
-
-    @Override
-    public Color getVThemeColor() {
-        return ThemeColor;
-    }
-
-    @Override
-    public void setVThemeAlpha(int i) {
-        this.ThemeAlpha = ((i > 255 || i < 0) ? 255 : i);
-        this.ThemeColor = new Color(ThemeColor.getRed(), ThemeColor.getGreen(), ThemeColor.getBlue(), ThemeAlpha);
-    }
-
-    @Override
-    public int getVThemeAlpha() {
-        return ThemeAlpha;
-    }
-
-    @Override
-    public void setVSubColor(Color c) {
-        this.SubColor = new Color(c.getRed(), c.getGreen(), c.getBlue(), SubAlpha);
-    }
-
-    @Override
-    public Color getVSubColor() {
-        return SubColor;
-    }
-
-    @Override
-    public void setVSubAlpha(int i) {
-        this.SubAlpha = ((i > 255 || i < 0) ? 255 : i);
-        this.SubColor = new Color(SubColor.getRed(), SubColor.getGreen(), SubColor.getBlue(), SubAlpha);
-    }
-
-    @Override
-    public int getVSubAlpha() {
-        return SubAlpha;
-    }
-
-    @Override
-    public void setVImage(Icon i) {
-        this.VImage = i;
-    }
-
-    @Override
-    public Icon getVImage() {
-        return VImage;
-    }
-
-    @Override
-    public void setVThemeVisible(boolean b) {
-        this.ThemeVisible = b;
-    }
-
-    @Override
-    public boolean isVThemeVisible() {
-        return ThemeVisible;
-    }
-
-    @Override
-    public void setVSubVisible(boolean b) {
-        this.SubVisible = b;
-    }
-
-    @Override
-    public boolean isVSubVisible() {
-        return SubVisible;
-    }
-
 }
