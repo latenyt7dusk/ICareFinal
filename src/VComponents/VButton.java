@@ -22,8 +22,8 @@ import java.awt.Cursor;
 import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
+import java.awt.Insets;
 import java.awt.RenderingHints;
-import java.awt.image.BufferedImage;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
 import javax.swing.JButton;
@@ -46,6 +46,7 @@ public class VButton extends JButton {
         setForeground(VThemeManager.ButtonForeground);
         setBackground(new Color(0, 0, 0, 0));
         setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setMargin(new Insets(1,3,1,3));
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {

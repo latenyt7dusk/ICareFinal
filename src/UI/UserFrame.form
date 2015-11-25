@@ -191,10 +191,8 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jLabel10" alignment="0" pref="173" max="32767" attributes="0"/>
                           <Component id="jLabel11" max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="1" max="-2" attributes="0">
-                              <Component id="vTextField8" alignment="0" pref="173" max="32767" attributes="0"/>
-                              <Component id="vTextField7" alignment="0" max="32767" attributes="0"/>
-                          </Group>
+                          <Component id="vTextField8" alignment="0" pref="173" max="32767" attributes="0"/>
+                          <Component id="vTextField7" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
