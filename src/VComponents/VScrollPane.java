@@ -55,11 +55,7 @@ public class VScrollPane extends JScrollPane {
         setBorder(javax.swing.BorderFactory.createEmptyBorder());
         setOpaque(false);
         
-        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
-            public void propertyChange(java.beans.PropertyChangeEvent evt) {
-                repaint();
-            }
-        });
+        
         
         
     }

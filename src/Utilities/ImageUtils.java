@@ -18,8 +18,11 @@ package Utilities;
 
 import java.awt.Color;
 import java.awt.Graphics;
+import java.awt.Graphics2D;
+import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import javax.swing.Icon;
+import javax.swing.JLabel;
 
 /**
  *
@@ -37,24 +40,25 @@ public class ImageUtils {
         g.dispose();
         return bi;
     }
-    
-    public static BufferedImage Colorize(Icon icon,Color c){
+
+    public static BufferedImage Colorize(Icon icon, Color c) {
         BufferedImage i = Convert(icon);
         Colorizer.doRGB(c, i);
         return i;
     }
-    
-    public static BufferedImage Colorize(Icon icon,int r,int g,int b){
+
+    public static BufferedImage Colorize(Icon icon, int r, int g, int b) {
         BufferedImage i = Convert(icon);
-        Colorizer.doRGB(new Color(r,g,b), i);
+        Colorizer.doRGB(new Color(r, g, b), i);
         return i;
     }
-    
-    public static BufferedImage Colorize(Icon icon,int r,int g,int b,int a){
+
+    public static BufferedImage Colorize(Icon icon, int r, int g, int b, int a) {
         BufferedImage i = Convert(icon);
-        Colorizer.doRGB(new Color(r,g,b,a), i);
+        Colorizer.doRGB(new Color(r, g, b, a), i);
         return i;
     }
-   
+
+    
 
 }

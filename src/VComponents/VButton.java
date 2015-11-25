@@ -36,8 +36,6 @@ public class VButton extends JButton {
 
     private boolean visi = true;
     private boolean hov = false;
-    private BufferedImage i;
-    private boolean changed = false;
 
     public VButton() {
         setOpaque(true);
@@ -69,8 +67,7 @@ public class VButton extends JButton {
     
     @Override
     public void setIcon(Icon ii){
-        i = ImageUtils.Colorize(ii, VThemeManager.ButtonForeground);
-        super.setIcon(new ImageIcon(i));
+        super.setIcon(new ImageIcon(ImageUtils.Colorize(ii, VThemeManager.ButtonForeground)));
     }
 
     public void setButtonVisible(boolean b) {

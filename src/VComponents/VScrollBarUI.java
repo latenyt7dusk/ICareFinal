@@ -78,6 +78,7 @@ public class VScrollBarUI {
         };
 
         public VScrollbarUI() {
+            
             //imageThumb = FauxImage.create(32, 32, new Color(153,153,153));
             //imageTrack = FauxImage.create(32, 32, new Color(0,0,0,200));
         }

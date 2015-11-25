@@ -66,6 +66,13 @@ public class MainFrame extends javax.swing.JFrame {
         vButton8 = new VComponents.VButton();
         vButton10 = new VComponents.VButton();
         vShadowedPanel2 = new VComponents.VShadowedPanel();
+        vShadowedPanel3 = new VComponents.VShadowedPanel();
+        vHolderPanel1 = new VComponents.VHolderPanel();
+        jPanel3 = new javax.swing.JPanel();
+        vScrollPane1 = new VComponents.VScrollPane();
+        vTable2 = new VComponents.VTable();
+        vComboBox1 = new VComponents.VComboBox();
+        jPanel2 = new javax.swing.JPanel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Home Panel");
@@ -204,6 +211,76 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 201, Short.MAX_VALUE)
         );
 
+        vShadowedPanel3.setPreferredSize(new java.awt.Dimension(770, 7));
+
+        jPanel3.setOpaque(false);
+
+        vTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
+            },
+            new String [] {
+                "Title 1", "Title 2", "Title 3", "Title 4"
+            }
+        ));
+        vScrollPane1.setViewportView(vTable2);
+
+        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
+        jPanel3.setLayout(jPanel3Layout);
+        jPanel3Layout.setHorizontalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
+                    .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addComponent(vComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
+        );
+        jPanel3Layout.setVerticalGroup(
+            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel3Layout.createSequentialGroup()
+                .addGap(146, 146, 146)
+                .addComponent(vComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 459, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        vHolderPanel1.add(jPanel3, "card2");
+
+        jPanel2.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
+        jPanel2.setLayout(jPanel2Layout);
+        jPanel2Layout.setHorizontalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 771, Short.MAX_VALUE)
+        );
+        jPanel2Layout.setVerticalGroup(
+            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 650, Short.MAX_VALUE)
+        );
+
+        vHolderPanel1.add(jPanel2, "card3");
+
+        javax.swing.GroupLayout vShadowedPanel3Layout = new javax.swing.GroupLayout(vShadowedPanel3);
+        vShadowedPanel3.setLayout(vShadowedPanel3Layout);
+        vShadowedPanel3Layout.setHorizontalGroup(
+            vShadowedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addComponent(vHolderPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        vShadowedPanel3Layout.setVerticalGroup(
+            vShadowedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vShadowedPanel3Layout.createSequentialGroup()
+                .addGap(0, 0, Short.MAX_VALUE)
+                .addComponent(vHolderPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 650, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
         javax.swing.GroupLayout vPanel1Layout = new javax.swing.GroupLayout(vPanel1);
         vPanel1.setLayout(vPanel1Layout);
         vPanel1Layout.setHorizontalGroup(
@@ -214,15 +291,20 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(vPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(vShadowedPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(vShadowedPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                .addContainerGap(807, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(vShadowedPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 778, Short.MAX_VALUE)
+                .addContainerGap())
         );
         vPanel1Layout.setVerticalGroup(
             vPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vPanel1Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(vShadowedPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(vShadowedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGroup(vPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(vPanel1Layout.createSequentialGroup()
+                        .addComponent(vShadowedPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vShadowedPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vShadowedPanel3, javax.swing.GroupLayout.DEFAULT_SIZE, 689, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -270,6 +352,8 @@ public class MainFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel jPanel1;
+    private javax.swing.JPanel jPanel2;
+    private javax.swing.JPanel jPanel3;
     private VComponents.VButton vButton1;
     private VComponents.VButton vButton10;
     private VComponents.VButton vButton2;
@@ -279,8 +363,13 @@ public class MainFrame extends javax.swing.JFrame {
     private VComponents.VButton vButton6;
     private VComponents.VButton vButton7;
     private VComponents.VButton vButton8;
+    private VComponents.VComboBox vComboBox1;
+    private VComponents.VHolderPanel vHolderPanel1;
     private VComponents.VPanel vPanel1;
+    private VComponents.VScrollPane vScrollPane1;
     private VComponents.VShadowedPanel vShadowedPanel1;
     private VComponents.VShadowedPanel vShadowedPanel2;
+    private VComponents.VShadowedPanel vShadowedPanel3;
+    private VComponents.VTable vTable2;
     // End of variables declaration//GEN-END:variables
 }
