@@ -28,6 +28,7 @@ import java.awt.RenderingHints;
 import java.awt.Window;
 import java.awt.geom.GeneralPath;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 import javax.swing.JButton;
 import javax.swing.JComboBox;
 import javax.swing.JComponent;
@@ -66,7 +67,26 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
     private boolean autocomplete = false;
     
     private static VScrollBarStyle VScrollStyle = VScrollBarStyle.STYLE_ROUNDED;
+    
+    public VComboBox(Object[] obs) {
+        super(obs);
+        //AutoCompletion.enable(this);
+        setScrollBackground(getBackground());
+        setScrollTrackColor(new Color(35, 35, 35));
+        setScrollThumbNormalColor(new Color(153, 153, 153));
+        setScrollThumbHoverColor(new Color(51, 153, 255));
+        setUI(new ComboBox_UI());
+        setRenderer(new ItemRenderer());
+        //((JLabel) this.getRenderer()).setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
 
+        setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                repaint();
+            }
+        });
+    }
+    
     public VComboBox() {
         super(new Object[]{"item 1", "item 2", "item 3", "item 4"});
         //AutoCompletion.enable(this);
@@ -318,13 +338,11 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
                             ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER) {
 
                                 {
-
                                     VScrollBarUI su = new VScrollBarUI();
                                     getVerticalScrollBar().setUI(su.createVerticalScrollBar(ScrollBackground, ScrollTrackColor, ScrollThumbNormalColor, ScrollThumbHoverColor, VScrollStyle.Value()));//VScrollBarUI.SIMPLE_LINE
                                     getVerticalScrollBar().setPreferredSize(new Dimension(ScrollWidth, 0));
 
                                 }
-
                             };
                 }
 
@@ -333,17 +351,16 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
         }//end of method createPopup
     }//end of inner class myComboUI
 
-    private class ItemRenderer extends JPanel implements ListCellRenderer {
+    public class ItemRenderer extends JPanel implements ListCellRenderer {
 
-        private JLabel labelItem = new JLabel();
+        public JLabel labelItem = new JLabel();
 
         private ItemRenderer() {
             setLayout(new CardLayout());
 
             labelItem.setOpaque(true);
-            //labelItem.setHorizontalAlignment(JLabel.CENTER);
-            labelItem.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
-
+            labelItem.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 2, 1, 2));
+            
             add(labelItem);
             setBackground(ScrollBackground);
 
@@ -352,9 +369,20 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
         @Override
         public Component getListCellRendererComponent(JList list, Object value,
                 int index, boolean isSelected, boolean cellHasFocus) {
-            String Item = (String) value;
-
-            labelItem.setText(Item);
+            
+            if(value instanceof Object[]){
+                Object[] Item = (Object[])value;
+                labelItem.setText(Item[0].toString());
+                try{
+                    labelItem.setIcon(new ImageIcon(getClass().getResource(Item[1].toString())));
+                }catch(Exception er){
+                    labelItem.setIcon(null);
+                }
+                labelItem.setIconTextGap(7);
+            }else if(value instanceof String){
+                String Item = (String) value;
+                labelItem.setText(Item);
+            }
 
             //labelItem.setIcon(new ImageIcon(getClass().getResource(Item[1])));
             if (isSelected) {

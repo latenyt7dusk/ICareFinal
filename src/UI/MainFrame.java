@@ -95,63 +95,54 @@ public class MainFrame extends javax.swing.JFrame {
             .addGap(0, 20, Short.MAX_VALUE)
         );
 
-        vButton1.setForeground(new java.awt.Color(255, 255, 255));
         vButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/people.png"))); // NOI18N
         vButton1.setText("Patient");
         vButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton1.setIconTextGap(10);
 
-        vButton2.setForeground(new java.awt.Color(255, 255, 255));
         vButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/stock.png"))); // NOI18N
         vButton2.setText("Inventory");
         vButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton2.setIconTextGap(10);
 
-        vButton3.setForeground(new java.awt.Color(255, 255, 255));
         vButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/transaction.png"))); // NOI18N
         vButton3.setText("Transaction");
         vButton3.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton3.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton3.setIconTextGap(10);
 
-        vButton4.setForeground(new java.awt.Color(255, 255, 255));
         vButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/report.png"))); // NOI18N
         vButton4.setText("Reports");
         vButton4.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton4.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton4.setIconTextGap(10);
 
-        vButton5.setForeground(new java.awt.Color(255, 255, 255));
         vButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/users.png"))); // NOI18N
         vButton5.setText("Users");
         vButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton5.setIconTextGap(10);
 
-        vButton6.setForeground(new java.awt.Color(255, 255, 255));
         vButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/settings.png"))); // NOI18N
         vButton6.setText("Settings");
         vButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton6.setIconTextGap(10);
 
-        vButton7.setForeground(new java.awt.Color(255, 255, 255));
         vButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/about.png"))); // NOI18N
         vButton7.setText("About");
         vButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton7.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton7.setIconTextGap(10);
 
-        vButton8.setForeground(new java.awt.Color(255, 255, 255));
         vButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/usage.png"))); // NOI18N
         vButton8.setText("Usage");
         vButton8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton8.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton8.setIconTextGap(10);
 
-        vButton10.setForeground(new java.awt.Color(255, 255, 255));
         vButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/logout.png"))); // NOI18N
         vButton10.setText("Logout");
         vButton10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
