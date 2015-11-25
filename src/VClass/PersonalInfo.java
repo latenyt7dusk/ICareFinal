@@ -22,7 +22,7 @@ package VClass;
  */
 public abstract class PersonalInfo {
     
-    private String id,sname,fname,mname,age,gen,cstat,add,email,number;
+    private String id,sname,fname,mname,bdate,gen,cstat,add,email,number;
     
     public void setID(String i){
         this.id = i;
@@ -58,11 +58,11 @@ public abstract class PersonalInfo {
         return sname+", "+fname+" "+mname;
     }
     
-    public void setAge(String a){
-        this.age = a;
+    public void setBirthdate(String a){
+        this.bdate = a;
     }
-    public String getAge(){
-        return age;
+    public String getBirthdate(){
+        return bdate;
     }
     
     public void setGender(String g){
@@ -104,7 +104,7 @@ public abstract class PersonalInfo {
      * @return Entry context of elements where it is delimited by ","
      */
     public String getInfoEntry(){
-        return sname+","+fname+","+mname+","+age+","+gen+","+cstat+","+add+","+number+","+email;
+        return sname+","+fname+","+mname+","+bdate+","+gen+","+cstat+","+add+","+number+","+email;
     }
     
 }

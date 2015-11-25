@@ -77,6 +77,8 @@ public class VThemeManager {
     private static final Color VTextInfoground = fetchColorProps("VTextInfoground");//Default TextInfoG 200,200,200
     
     private static final Color VPanelBackground = fetchColorProps("VPanelBackground");//Default Panel Background 15,15,15,200
+    private static final Color VPanelFormBackground = fetchColorProps("VPanelFormBackground");//Default Button Color 102,102,102
+    
     private static final Color VButtonNormal = fetchColorProps("VButtonNormal");//Default Button Color 51,153,255
     private static final Color VButtonForegroundNormal = fetchColorProps("VButtonForegroundNormal");
     private static final Color VButtonHighlight = fetchColorProps("VButtonHighlight");
@@ -116,5 +118,6 @@ public class VThemeManager {
     
     //Panel Colors
     public static Color PanelBackgrounds = VPanelBackground;
+    public static Color PanelFormBackground = VPanelFormBackground;
     
 }
