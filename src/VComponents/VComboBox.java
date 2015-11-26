@@ -359,7 +359,7 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
             setLayout(new CardLayout());
 
             labelItem.setOpaque(true);
-            labelItem.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 2, 1, 2));
+            labelItem.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
             
             add(labelItem);
             setBackground(ScrollBackground);
@@ -369,7 +369,6 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
         @Override
         public Component getListCellRendererComponent(JList list, Object value,
                 int index, boolean isSelected, boolean cellHasFocus) {
-            
             if(value instanceof Object[]){
                 Object[] Item = (Object[])value;
                 labelItem.setText(Item[0].toString());

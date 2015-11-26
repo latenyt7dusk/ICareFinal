@@ -43,6 +43,7 @@ public class VTextField extends JTextField {
 
         setBackground(VThemeManager.TextBackground);
         setForeground(VThemeManager.TextForeground);
+        setDisabledTextColor(VThemeManager.TextForeground);
         putClientProperty("HasError", Boolean.FALSE);
         setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
 
@@ -60,6 +61,12 @@ public class VTextField extends JTextField {
 
     public boolean HasError() {
         return hasError;
+    }
+    
+    @Override
+    public void setText(String i){
+        super.setText(i);
+        setValue(i);
     }
 
     public void setValue(String i) {

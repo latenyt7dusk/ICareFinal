@@ -64,6 +64,12 @@ public class VPasswordField extends JPasswordField{
         return hasError;
     }
 
+    @Override
+    public void setText(String i){
+        super.setText(i);
+        setValue(i);
+    }
+    
     public void setValue(String i) {
         this.Value = i;
     }

@@ -18,6 +18,7 @@ package VComponents;
 
 import VComponents.VComboBox.ItemRenderer;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.util.Calendar;
@@ -33,14 +34,15 @@ import javax.swing.JPanel;
  */
 public class VDateChooser extends JPanel{
     
-    private static VComboBox MM = new VComboBox(new Object[]{"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"});
-    private static VComboBox DD = new VComboBox(new Object[]{"1"});
-    private static VComboBox YY = new VComboBox(new Object[]{"2015"});
-    private static Date selDate = new Date();
-    private static final Calendar curDate = Calendar.getInstance();
-    private static final long MILLI_SECONDS_YEAR = 31558464000L;
-    private static final long MILLI_SECONDS_DAY = 86400000L;
-    private static final ActionListener DAction = new VDateAction();
+    private VComboBox MM = new VComboBox(new Object[]{"Jan","Feb","Mar","Apr","May","Jun","Jul","Aug","Sep","Oct","Nov","Dec"});
+    private VComboBox DD = new VComboBox(new Object[]{"1"});
+    private VComboBox YY = new VComboBox(new Object[]{"2015"});
+    private Date selDate = new Date();
+    private final Calendar curDate = Calendar.getInstance();
+    private final long MILLI_SECONDS_YEAR = 31558464000L;
+    private final long MILLI_SECONDS_DAY = 86400000L;
+    private final ActionListener DAction = new VDateAction();
+    private VTextField Age;
     
     public VDateChooser(){
         setOpaque(false);
@@ -73,7 +75,42 @@ public class VDateChooser extends JPanel{
         YY.addActionListener(DAction);
     }
     
+    public VDateChooser(VTextField e){
+        Age = e;
+        setOpaque(false);
+        setLayout(new BoxLayout(this,BoxLayout.X_AXIS));
+        setPreferredSize(new Dimension(116,20));
+        MM.setMaximumRowCount(12);
+        MM.setPreferredSize(new Dimension(34,20));
+        DD.setPreferredSize(new Dimension(32,20));
+        YY.setPreferredSize(new Dimension(40,20));
+        
+        
+        
+        add(MM);
+        add(new JLabel(" "));
+        add(DD);
+        add(new JLabel(" "));
+        add(YY);
+        
+        MM.setNextFocusableComponent(DD);
+        DD.setNextFocusableComponent(YY);
+        
+        ((ItemRenderer) MM.getRenderer()).labelItem.setHorizontalAlignment(JLabel.CENTER);
+        ((ItemRenderer) DD.getRenderer()).labelItem.setHorizontalAlignment(JLabel.CENTER);
+        ((ItemRenderer) YY.getRenderer()).labelItem.setHorizontalAlignment(JLabel.CENTER);
+        
+        initStart(curDate.getTime());
+        setDate(Calendar.getInstance().getTime());
+        
+        MM.addActionListener(DAction);
+        YY.addActionListener(DAction);
+    }
     
+        
+    public void setAgeField(VTextField e){
+        Age = e;
+    }
 
     @Override
     public void setEnabled(boolean bln) {
@@ -83,7 +120,7 @@ public class VDateChooser extends JPanel{
         YY.setEnabled(bln);
     }
     
-    private static void MaxDays(int mm,int yy){
+    private void MaxDays(int mm,int yy){
         try{
             
             Date tmp = Calendar.getInstance().getTime();
@@ -128,7 +165,21 @@ public class VDateChooser extends JPanel{
         return selDate;
     }
     
-    private static class VDateAction implements ActionListener{
+    private int computeAge(Date sDate) {
+        Date dbDate = null;
+        try {
+            dbDate = sDate;
+            dbDate.setHours(0);
+            long timeDiff = ((System.currentTimeMillis() <= dbDate.getTime())? 0: System.currentTimeMillis() - dbDate.getTime());
+            int age = (int) (timeDiff / MILLI_SECONDS_YEAR);
+
+            return age;
+        } catch (Exception e) {
+            return 0;
+        }
+    }
+    
+    private class VDateAction implements ActionListener{
 
         @Override
         public void actionPerformed(ActionEvent e) {
@@ -141,6 +192,9 @@ public class VDateChooser extends JPanel{
             selDate.setMonth(MM.getSelectedIndex());
             selDate.setYear(YY.getSelectedIndex()+15);
             selDate.setDate(DD.getSelectedIndex()+1);
+            if(Age != null){
+                Age.setText(String.valueOf(computeAge(selDate)));
+            }
         }
         
     }
