@@ -16,6 +16,7 @@
  */
 package UI;
 
+import VComponents.VThemeManager;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -36,6 +37,7 @@ public class MainFrame extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
         MaximizeUsableBounds();
         System.gc();
+        vPhotoContainer2.Lock(true);
     }
     
     private void MaximizeUsableBounds() {
@@ -71,6 +73,8 @@ public class MainFrame extends javax.swing.JFrame {
         vScrollPane1 = new VComponents.VScrollPane();
         vTable1 = new VComponents.VTable();
         vComboBox1 = new VComponents.VComboBox();
+        jPanel1 = new javax.swing.JPanel();
+        vPhotoContainer2 = new VComponents.VPhotoContainer();
         jPanel2 = new javax.swing.JPanel();
         vShadowedPanel4 = new VComponents.VShadowedPanel();
         vButton11 = new VComponents.VButton();
@@ -244,6 +248,25 @@ public class MainFrame extends javax.swing.JFrame {
         vTable1.setRowHeight(19);
         vScrollPane1.setViewportView(vTable1);
 
+        jPanel1.setBackground(VThemeManager.PanelFormBackground);
+
+        javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
+        jPanel1.setLayout(jPanel1Layout);
+        jPanel1Layout.setHorizontalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(vPhotoContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 143, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel1Layout.setVerticalGroup(
+            jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(vPhotoContainer2, javax.swing.GroupLayout.DEFAULT_SIZE, 133, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
         jPanel3Layout.setHorizontalGroup(
@@ -251,6 +274,7 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 751, Short.MAX_VALUE)
                     .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                         .addGap(0, 0, Short.MAX_VALUE)
@@ -260,7 +284,9 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(jPanel3Layout.createSequentialGroup()
-                .addContainerGap(177, Short.MAX_VALUE)
+                .addContainerGap()
+                .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(vComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(vScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 424, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -402,6 +428,7 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private VComponents.VButton vButton1;
@@ -419,6 +446,7 @@ public class MainFrame extends javax.swing.JFrame {
     private VComponents.VHolderPanel vHolderPanel1;
     private VComponents.VPanel vPanel1;
     private VComponents.VPhotoContainer vPhotoContainer1;
+    private VComponents.VPhotoContainer vPhotoContainer2;
     private VComponents.VScrollPane vScrollPane1;
     private VComponents.VShadowedPanel vShadowedPanel1;
     private VComponents.VShadowedPanel vShadowedPanel2;

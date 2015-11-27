@@ -87,7 +87,7 @@ public class UserFrame extends javax.swing.JFrame {
         vTextField1.setEnabled(locked);
         vPasswordField1.setEnabled(locked);
         vComboBox2.setEnabled(locked);
-        vPhotoContainer2.Lock(locked);
+        vPhotoContainer2.Lock(b);
         vDateChooser1.setEnabled(locked);
         Component e[] = jPanel1.getComponents();
         for (Component c : e) {
@@ -133,7 +133,6 @@ public class UserFrame extends javax.swing.JFrame {
         jLabel11 = new javax.swing.JLabel();
         vTextField8 = new VComponents.VTextField();
         vButton2 = new VComponents.VButton();
-        vButton3 = new VComponents.VButton();
         vTextField1 = new VComponents.VTextField();
         vPasswordField1 = new VComponents.VPasswordField();
         vComboBox2 = new VComponents.VComboBox();
@@ -213,13 +212,6 @@ public class UserFrame extends javax.swing.JFrame {
             }
         });
 
-        vButton3.setText("Delete");
-        vButton3.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vButton3ActionPerformed(evt);
-            }
-        });
-
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
@@ -272,9 +264,7 @@ public class UserFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(vButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -324,10 +314,8 @@ public class UserFrame extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addGap(0, 0, 0)
                 .addComponent(vTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(26, 26, 26)
-                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(vButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addGap(21, 21, 21)
+                .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
         vTextField1.setText("username");
@@ -413,12 +401,8 @@ public class UserFrame extends javax.swing.JFrame {
 
     private void vButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton2ActionPerformed
         // TODO add your handling code here:
-        VOptionPane.showMessageDialog("Working");
+        
     }//GEN-LAST:event_vButton2ActionPerformed
-
-    private void vButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton3ActionPerformed
-        // TODO add your handling code here:
-    }//GEN-LAST:event_vButton3ActionPerformed
 
     private void vButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton4ActionPerformed
         // TODO add your handling code here:
@@ -475,7 +459,6 @@ public class UserFrame extends javax.swing.JFrame {
     private javax.swing.JPanel jPanel1;
     private VComponents.VButton vButton1;
     private VComponents.VButton vButton2;
-    private VComponents.VButton vButton3;
     private VComponents.VButton vButton4;
     private VComponents.VComboBox vComboBox1;
     private VComponents.VComboBox vComboBox2;

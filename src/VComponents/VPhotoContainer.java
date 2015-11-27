@@ -16,8 +16,10 @@
  */
 package VComponents;
 
+import UI.VOption.VOptionPane;
 import java.awt.Cursor;
 import java.awt.Image;
+import java.awt.event.MouseEvent;
 import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
@@ -27,8 +29,8 @@ import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
 import javax.swing.JFileChooser;
+import javax.swing.JFrame;
 import javax.swing.JLabel;
-import javax.swing.JOptionPane;
 import javax.swing.border.LineBorder;
 import javax.swing.filechooser.FileNameExtensionFilter;
 
@@ -52,6 +54,7 @@ public class VPhotoContainer extends JLabel {
             setFileFilter(jpg);
             setAcceptAllFileFilterUsed(false);
             setApproveButtonText("Select");
+
         }
     };
 
@@ -62,24 +65,28 @@ public class VPhotoContainer extends JLabel {
         setHorizontalAlignment(JLabel.CENTER);
         setText("No Picture");
         setCursor(new Cursor(Cursor.HAND_CURSOR));
-
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseClicked(java.awt.event.MouseEvent evt) {
+
                 if (lock != true) {
-                    int con = chooser.showDialog(null, "Select Image");
-                    if (con == JFileChooser.APPROVE_OPTION) {
-                        img = chooser.getSelectedFile();
-                        try {
-                            if (Files.size(img.toPath()) / 1000 > size) {
-                                JOptionPane.showMessageDialog(null, "File Size too Large (" + size + "Kb Limit).");
-                            } else {
-                                setPhoto(ImageIO.read(img));
+                    if (evt.getButton() == MouseEvent.BUTTON1) {
+                        int con = chooser.showDialog(VPhotoContainer.this.getTopLevelAncestor(), "Select Image");
+                        if (con == JFileChooser.APPROVE_OPTION) {
+                            img = chooser.getSelectedFile();
+                            try {
+                                if (Files.size(img.toPath()) / 1000 > size) {
+                                    VOptionPane.showMessageDialog((JFrame) VPhotoContainer.this.getTopLevelAncestor(), "File Size too Large (" + size + "Kb Limit).");
+                                } else {
+                                    setPhoto(ImageIO.read(img));
+                                }
+                            } catch (IOException ex) {
+                                Logger.getLogger(VPhotoContainer.class.getName()).log(Level.SEVERE, null, ex);
                             }
-                        } catch (IOException ex) {
-                            Logger.getLogger(VPhotoContainer.class.getName()).log(Level.SEVERE, null, ex);
+                        } else {
+                            img = null;
                         }
-                    } else {
-                        img = null;
+                    } else if (evt.getButton() == MouseEvent.BUTTON3) {
+                        clearContainer();
                     }
                 }
             }
@@ -117,16 +124,14 @@ public class VPhotoContainer extends JLabel {
     public int getSizeLimit() {
         return size;
     }
-    
-    public void Lock(boolean b){
-        this.lock = ((b)? false:true);
-        if(b){
-            setCursor(new Cursor(Cursor.HAND_CURSOR));
-        }else{
+
+    public void Lock(boolean b) {
+        this.lock = b;
+        if (b) {
             setCursor(Cursor.getDefaultCursor());
+        } else {
+            setCursor(new Cursor(Cursor.HAND_CURSOR));
         }
     }
-    
-    
 
 }
