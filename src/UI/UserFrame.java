@@ -16,6 +16,7 @@
  */
 package UI;
 
+import UI.VOption.VOptionPane;
 import VClass.User;
 import VComponents.VComboBox;
 import VComponents.VTextField;
@@ -24,7 +25,6 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Toolkit;
 import java.util.Calendar;
-import javax.swing.JOptionPane;
 
 /**
  *
@@ -110,7 +110,6 @@ public class UserFrame extends javax.swing.JFrame {
 
         vShadowedPanel1 = new VComponents.VShadowedPanel();
         vButton1 = new VComponents.VButton();
-        vButton2 = new VComponents.VButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
         vTextField2 = new VComponents.VTextField();
@@ -133,11 +132,13 @@ public class UserFrame extends javax.swing.JFrame {
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
         vTextField8 = new VComponents.VTextField();
+        vButton2 = new VComponents.VButton();
+        vButton3 = new VComponents.VButton();
         vTextField1 = new VComponents.VTextField();
         vPasswordField1 = new VComponents.VPasswordField();
         vComboBox2 = new VComponents.VComboBox();
-        vButton3 = new VComponents.VButton();
         vPhotoContainer2 = new VComponents.VPhotoContainer();
+        vButton4 = new VComponents.VButton();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("New User");
@@ -156,16 +157,9 @@ public class UserFrame extends javax.swing.JFrame {
             }
         });
 
-        vButton2.setText("Save");
-        vButton2.addActionListener(new java.awt.event.ActionListener() {
-            public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vButton2ActionPerformed(evt);
-            }
-        });
-
         jPanel1.setBackground(VThemeManager.PanelFormBackground);
 
-        jLabel1.setBackground(VThemeManager.HeaderBackgound);
+        jLabel1.setBackground(VThemeManager.HeaderBackground);
         jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel1.setText(" Personal Information");
         jLabel1.setOpaque(true);
@@ -211,6 +205,20 @@ public class UserFrame extends javax.swing.JFrame {
 
         jLabel11.setForeground(new java.awt.Color(255, 255, 255));
         jLabel11.setText("Email Address");
+
+        vButton2.setText("Save");
+        vButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton2ActionPerformed(evt);
+            }
+        });
+
+        vButton3.setText("Delete");
+        vButton3.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton3ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -262,6 +270,12 @@ public class UserFrame extends javax.swing.JFrame {
                     .addComponent(vTextField8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                     .addComponent(vTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(vButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 41, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -310,7 +324,10 @@ public class UserFrame extends javax.swing.JFrame {
                 .addComponent(jLabel11)
                 .addGap(0, 0, 0)
                 .addComponent(vTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addGap(41, 41, 41))
+                .addGap(26, 26, 26)
+                .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                    .addComponent(vButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         vTextField1.setText("username");
@@ -321,10 +338,10 @@ public class UserFrame extends javax.swing.JFrame {
 
         vComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "User", "Manager", "Admin" }));
 
-        vButton3.setText("Delete");
-        vButton3.addActionListener(new java.awt.event.ActionListener() {
+        vButton4.setText("Minimize");
+        vButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
-                vButton3ActionPerformed(evt);
+                vButton4ActionPerformed(evt);
             }
         });
 
@@ -338,19 +355,19 @@ public class UserFrame extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(vShadowedPanel1Layout.createSequentialGroup()
                         .addComponent(vPhotoContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(10, 10, 10)
                         .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                .addComponent(vTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                .addComponent(vPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-                            .addComponent(vButton3, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addGroup(vShadowedPanel1Layout.createSequentialGroup()
-                                .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(10, 10, 10)
+                                .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
+                                    .addComponent(vTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(vPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(vComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))))
+                                .addComponent(vComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addGroup(vShadowedPanel1Layout.createSequentialGroup()
+                                .addGap(203, 203, 203)
+                                .addComponent(vButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 66, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         vShadowedPanel1Layout.setVerticalGroup(
@@ -358,10 +375,9 @@ public class UserFrame extends javax.swing.JFrame {
             .addGroup(vShadowedPanel1Layout.createSequentialGroup()
                 .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vShadowedPanel1Layout.createSequentialGroup()
-                        .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(vButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(vButton3, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(vButton4, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE))
                         .addGap(27, 27, 27)
                         .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(vTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -397,11 +413,17 @@ public class UserFrame extends javax.swing.JFrame {
 
     private void vButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton2ActionPerformed
         // TODO add your handling code here:
+        VOptionPane.showMessageDialog("Working");
     }//GEN-LAST:event_vButton2ActionPerformed
 
     private void vButton3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton3ActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_vButton3ActionPerformed
+
+    private void vButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton4ActionPerformed
+        // TODO add your handling code here:
+        this.setExtendedState(UserFrame.ICONIFIED);
+    }//GEN-LAST:event_vButton4ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -454,6 +476,7 @@ public class UserFrame extends javax.swing.JFrame {
     private VComponents.VButton vButton1;
     private VComponents.VButton vButton2;
     private VComponents.VButton vButton3;
+    private VComponents.VButton vButton4;
     private VComponents.VComboBox vComboBox1;
     private VComponents.VComboBox vComboBox2;
     private VComponents.VComboBox vComboBox3;

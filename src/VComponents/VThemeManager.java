@@ -95,8 +95,7 @@ public class VThemeManager {
     public static VScrollBarUI.VScrollBarStyle VScrollStyle = VScrollBarUI.VScrollBarStyle.STYLE_ROUNDED;
     
     //Table UI Colors
-    public static Color HeaderBackgound = VThemeColor;
-    
+    public static Color HeaderBackground = VThemeColor;
     
     
     //TextField UI Colors

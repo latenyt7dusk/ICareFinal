@@ -16,7 +16,6 @@
  */
 package UI;
 
-import VComponents.VThemeManager;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
@@ -70,7 +69,7 @@ public class MainFrame extends javax.swing.JFrame {
         vHolderPanel1 = new VComponents.VHolderPanel();
         jPanel3 = new javax.swing.JPanel();
         vScrollPane1 = new VComponents.VScrollPane();
-        vTable2 = new VComponents.VTable();
+        vTable1 = new VComponents.VTable();
         vComboBox1 = new VComponents.VComboBox();
         jPanel2 = new javax.swing.JPanel();
         vShadowedPanel4 = new VComponents.VShadowedPanel();
@@ -205,8 +204,34 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel3.setOpaque(false);
 
-        vTable2.setModel(new javax.swing.table.DefaultTableModel(
+        vTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
                 {null, null, null, null},
@@ -216,7 +241,8 @@ public class MainFrame extends javax.swing.JFrame {
                 "Title 1", "Title 2", "Title 3", "Title 4"
             }
         ));
-        vScrollPane1.setViewportView(vTable2);
+        vTable1.setRowHeight(19);
+        vScrollPane1.setViewportView(vTable1);
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -262,7 +288,7 @@ public class MainFrame extends javax.swing.JFrame {
         vShadowedPanel3.setLayout(vShadowedPanel3Layout);
         vShadowedPanel3Layout.setHorizontalGroup(
             vShadowedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(vHolderPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 771, Short.MAX_VALUE)
+            .addComponent(vHolderPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         vShadowedPanel3Layout.setVerticalGroup(
             vShadowedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -398,6 +424,6 @@ public class MainFrame extends javax.swing.JFrame {
     private VComponents.VShadowedPanel vShadowedPanel2;
     private VComponents.VShadowedPanel vShadowedPanel3;
     private VComponents.VShadowedPanel vShadowedPanel4;
-    private VComponents.VTable vTable2;
+    private VComponents.VTable vTable1;
     // End of variables declaration//GEN-END:variables
 }

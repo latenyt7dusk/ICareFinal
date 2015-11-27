@@ -71,10 +71,12 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
     public VComboBox(Object[] obs) {
         super(obs);
         //AutoCompletion.enable(this);
-        setScrollBackground(getBackground());
-        setScrollTrackColor(new Color(35, 35, 35));
-        setScrollThumbNormalColor(new Color(153, 153, 153));
-        setScrollThumbHoverColor(new Color(51, 153, 255));
+        setBackground(VThemeManager.TextBackground);
+        setForeground(VThemeManager.TextForeground);
+        setScrollBackground(VThemeManager.ScrollBackground);
+        setScrollTrackColor(VThemeManager.ScrollTrackColor);
+        setScrollThumbNormalColor(VThemeManager.ScrollThumbNormalColor);
+        setScrollThumbHoverColor(VThemeManager.ScrollThumbHoverColor);
         setUI(new ComboBox_UI());
         setRenderer(new ItemRenderer());
         //((JLabel) this.getRenderer()).setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
@@ -90,10 +92,12 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
     public VComboBox() {
         super(new Object[]{"item 1", "item 2", "item 3", "item 4"});
         //AutoCompletion.enable(this);
-        setScrollBackground(getBackground());
-        setScrollTrackColor(new Color(35, 35, 35));
-        setScrollThumbNormalColor(new Color(153, 153, 153));
-        setScrollThumbHoverColor(new Color(51, 153, 255));
+        setBackground(VThemeManager.TextBackground);
+        setForeground(VThemeManager.TextForeground);
+        setScrollBackground(VThemeManager.ScrollBackground);
+        setScrollTrackColor(VThemeManager.ScrollTrackColor);
+        setScrollThumbNormalColor(VThemeManager.ScrollThumbNormalColor);
+        setScrollThumbHoverColor(VThemeManager.ScrollThumbHoverColor);
         setUI(new ComboBox_UI());
         setRenderer(new ItemRenderer());
         //((JLabel) this.getRenderer()).setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));

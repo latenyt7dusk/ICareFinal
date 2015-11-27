@@ -35,7 +35,7 @@ import javax.swing.table.DefaultTableModel;
  */
 public class VTable extends JTable {
     
-    private Color HeaderBackground = VThemeManager.HeaderBackgound;
+    private Color HeaderBackground = VThemeManager.HeaderBackground;
 
     public VTable() {
 

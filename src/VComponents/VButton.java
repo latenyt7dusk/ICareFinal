@@ -23,6 +23,7 @@ import java.awt.GradientPaint;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.Insets;
+import java.awt.Rectangle;
 import java.awt.RenderingHints;
 import javax.swing.Icon;
 import javax.swing.ImageIcon;
@@ -37,8 +38,9 @@ public class VButton extends JButton {
     private boolean visi = true;
     private boolean hov = false;
 
-    public VButton() {
-        setOpaque(true);
+    public VButton(String n) {
+        super(n);
+        setOpaque(false);
         setBorderPainted(false);
         setContentAreaFilled(false);
         setFocusPainted(false);
@@ -46,29 +48,66 @@ public class VButton extends JButton {
         setForeground(VThemeManager.ButtonForeground);
         setBackground(new Color(0, 0, 0, 0));
         setCursor(new Cursor(Cursor.HAND_CURSOR));
-        setMargin(new Insets(1,3,1,3));
+        setMargin(new Insets(1, 3, 1, 3));
 
         addMouseListener(new java.awt.event.MouseAdapter() {
             public void mouseEntered(java.awt.event.MouseEvent evt) {
                 hov = true;
             }
+
             public void mouseExited(java.awt.event.MouseEvent evt) {
                 hov = false;
             }
+
             public void mousePressed(java.awt.event.MouseEvent evt) {
                 hov = false;
             }
+
             public void mouseReleased(java.awt.event.MouseEvent evt) {
                 hov = true;
             }
         });
-        
-        
+
     }
     
+    public VButton() {
+        setOpaque(false);
+        setBorderPainted(false);
+        setContentAreaFilled(false);
+        setFocusPainted(false);
+        setFocusable(false);
+        setForeground(VThemeManager.ButtonForeground);
+        setBackground(new Color(0, 0, 0, 0));
+        setCursor(new Cursor(Cursor.HAND_CURSOR));
+        setMargin(new Insets(1, 3, 1, 3));
+
+        addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mouseEntered(java.awt.event.MouseEvent evt) {
+                hov = true;
+            }
+
+            public void mouseExited(java.awt.event.MouseEvent evt) {
+                hov = false;
+            }
+
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                hov = false;
+            }
+
+            public void mouseReleased(java.awt.event.MouseEvent evt) {
+                hov = true;
+            }
+        });
+
+    }
+
     @Override
-    public void setIcon(Icon ii){
-        super.setIcon(new ImageIcon(ImageUtils.Colorize(ii, VThemeManager.ButtonForeground)));
+    public void setIcon(Icon ii) {
+        if(ii != null){
+            super.setIcon(new ImageIcon(ImageUtils.Colorize(ii, VThemeManager.ButtonForeground)));
+        }else{
+            super.setIcon(null);
+        }
     }
 
     public void setButtonVisible(boolean b) {
@@ -81,10 +120,11 @@ public class VButton extends JButton {
 
     @Override
     protected void paintComponent(Graphics g) {
+        Graphics2D g2d = (Graphics2D) g;
+        g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
+        g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
+        
         if (visi) {
-            Graphics2D g2d = (Graphics2D) g;
-            g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
-            g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             g2d.setColor(VThemeManager.ButtonNormal);
             g2d.fillRect(0, 0, getWidth(), getHeight());
             if (hov) {
@@ -93,11 +133,15 @@ public class VButton extends JButton {
                 //g2d.setStroke(new BasicStroke(3,BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER));
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
-            
-            
+        }else{
+            if (hov) {
+                GradientPaint gp = new GradientPaint(getWidth(), 0, VThemeManager.ButtonNormal.brighter(), getWidth(), 27, VThemeManager.ButtonNormal, true);
+                g2d.setPaint(gp);
+                //g2d.setStroke(new BasicStroke(3,BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER));
+                g2d.fillRect(0, 0, getWidth(), getHeight());
+            }
         }
         super.paintComponent(g);
-
     }
 
 }
