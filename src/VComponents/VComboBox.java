@@ -22,6 +22,7 @@ import java.awt.CardLayout;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
 import java.awt.RenderingHints;
@@ -355,6 +356,8 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
         }//end of method createPopup
     }//end of inner class myComboUI
 
+    
+    
     public class ItemRenderer extends JPanel implements ListCellRenderer {
 
         public JLabel labelItem = new JLabel();
@@ -387,13 +390,16 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
                 labelItem.setText(Item);
             }
 
+            
             //labelItem.setIcon(new ImageIcon(getClass().getResource(Item[1])));
             if (isSelected) {
                 labelItem.setBackground(ThemeColor);
                 labelItem.setForeground(SubColor);
+                labelItem.setFont(getFont().deriveFont(Font.BOLD));
             } else {
                 labelItem.setForeground(myComboBox.getForeground());
                 labelItem.setBackground(myComboBox.getBackground());
+                labelItem.setFont(getFont().deriveFont(Font.PLAIN));
             }
 
             return this;

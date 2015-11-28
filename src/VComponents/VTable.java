@@ -35,7 +35,7 @@ import javax.swing.table.DefaultTableModel;
  * @author HERU
  */
 public class VTable extends JTable {
-    
+
     private Color HeaderBackground = VThemeManager.HeaderBackground;
 
     public VTable() {
@@ -46,12 +46,11 @@ public class VTable extends JTable {
         getTableHeader().setOpaque(false);
         setOpaque(false);
         setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        
+
         DefaultTableModel Model = (DefaultTableModel) getModel();
-        
+
         ((DefaultTableCellRenderer) getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
         setAutoCreateRowSorter(true);
-        
 
         addPropertyChangeListener(new java.beans.PropertyChangeListener() {
             public void propertyChange(java.beans.PropertyChangeEvent evt) {
@@ -60,25 +59,34 @@ public class VTable extends JTable {
                 getTableHeader().repaint();
             }
         });
-        
-        
+
     }
-    
+
+    @Override
+     public Class<?> getColumnClass(int column) {
+        if (getRowCount() > 0) {
+           Object value = getValueAt(0, column);
+           if (value != null) {
+              return getValueAt(0, column).getClass(); 
+           }
+        }
+        return super.getColumnClass(column);
+     }
 
     @Override
     public void setSelectionMode(int lsm) {
         super.setSelectionMode(lsm); //To change body of generated methods, choose Tools | Templates.
     }
-    
-    public void setHeaderBackground(Color c){
+
+    public void setHeaderBackground(Color c) {
         this.HeaderBackground = c;
         getTableHeader().setBackground(HeaderBackground);
     }
-    
-    public Color getHeaderBackground(){
+
+    public Color getHeaderBackground() {
         return HeaderBackground;
     }
-    
+
     public void ScrollTo(int rowIndex, int vColIndex) {
         if (!(this.getParent() instanceof JViewport)) {
             return;
@@ -184,7 +192,5 @@ public class VTable extends JTable {
             return null;
         }
     }
-    
-    
-    
+
 }

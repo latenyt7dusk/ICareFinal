@@ -16,10 +16,24 @@
  */
 package UI;
 
+import VComponents.VButtonColumn;
 import VComponents.VThemeManager;
+import java.awt.Button;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
+import java.awt.event.ActionEvent;
+import javax.swing.AbstractAction;
+import javax.swing.Action;
+import javax.swing.DefaultCellEditor;
+import javax.swing.ImageIcon;
+import javax.swing.JButton;
+import javax.swing.JComboBox;
+import javax.swing.JLabel;
+import javax.swing.JTable;
+import javax.swing.border.EmptyBorder;
+import javax.swing.table.DefaultTableModel;
+import javax.swing.table.TableCellRenderer;
 
 /**
  *
@@ -29,6 +43,16 @@ public class MainFrame extends javax.swing.JFrame {
 
     public static final GraphicsEnvironment GEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
     public static final Rectangle MaxBounds = GEnvironment.getMaximumWindowBounds().getBounds();
+    
+    Action delete = new AbstractAction() {
+        public void actionPerformed(ActionEvent e) {
+            JTable table = (JTable) e.getSource();
+            int modelRow = Integer.valueOf(e.getActionCommand());
+            ((DefaultTableModel) table.getModel()).removeRow(modelRow);
+        }
+    };
+    
+    
     /**
      * Creates new form MainFrame
      */
@@ -46,6 +70,8 @@ public class MainFrame extends javax.swing.JFrame {
         setExtendedState(MainFrame.MAXIMIZED_BOTH);
     }
 
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -72,8 +98,11 @@ public class MainFrame extends javax.swing.JFrame {
         jPanel3 = new javax.swing.JPanel();
         vScrollPane1 = new VComponents.VScrollPane();
         vTable1 = new VComponents.VTable();
-        vComboBox1 = new VComponents.VComboBox();
         vPhotoContainer3 = new VComponents.VPhotoContainer();
+        jLabel1 = new javax.swing.JLabel();
+        vButton12 = new VComponents.VButton();
+        jSeparator1 = new javax.swing.JSeparator();
+        vComboBox1 = new VComponents.VComboBox();
         jPanel2 = new javax.swing.JPanel();
         vShadowedPanel4 = new VComponents.VShadowedPanel();
         vButton11 = new VComponents.VButton();
@@ -178,6 +207,11 @@ public class MainFrame extends javax.swing.JFrame {
         );
 
         vButton9.setText("Name");
+        vButton9.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton9ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout vShadowedPanel2Layout = new javax.swing.GroupLayout(vShadowedPanel2);
         vShadowedPanel2.setLayout(vShadowedPanel2Layout);
@@ -191,7 +225,7 @@ public class MainFrame extends javax.swing.JFrame {
         vShadowedPanel2Layout.setVerticalGroup(
             vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vShadowedPanel2Layout.createSequentialGroup()
-                .addContainerGap(170, Short.MAX_VALUE)
+                .addContainerGap(117, Short.MAX_VALUE)
                 .addComponent(vButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -234,12 +268,40 @@ public class MainFrame extends javax.swing.JFrame {
                 {null, null, null, null}
             },
             new String [] {
-                "Title 1", "Title 2", "Title 3", "Title 4"
+                "Image", "Title 2", "Title 3", "Title 4"
             }
-        ));
-        vTable1.setRowHeight(19);
+        ) {
+            boolean[] canEdit = new boolean [] {
+                true, true, true, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        vTable1.setRowHeight(40);
+        vTable1.setShowHorizontalLines(false);
+        vTable1.setShowVerticalLines(false);
         vTable1.getTableHeader().setReorderingAllowed(false);
         vScrollPane1.setViewportView(vTable1);
+        if (vTable1.getColumnModel().getColumnCount() > 0) {
+            vTable1.getColumnModel().getColumn(0).setMinWidth(48);
+            vTable1.getColumnModel().getColumn(0).setMaxWidth(48);
+        }
+
+        jLabel1.setBackground(VThemeManager.ButtonNormal);
+        jLabel1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel1.setForeground(VThemeManager.ButtonForeground);
+        jLabel1.setText("Patient Name");
+        jLabel1.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jLabel1.setOpaque(true);
+
+        vButton12.setText("Add New Patient");
+
+        jSeparator1.setForeground(VThemeManager.ButtonNormal);
+
+        vComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Today", "Recent Week", "Recent Month", "Un Claimed", "Scheduled" }));
+        vComboBox1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
         jPanel3.setLayout(jPanel3Layout);
@@ -248,27 +310,35 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(jPanel3Layout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
                     .addGroup(jPanel3Layout.createSequentialGroup()
                         .addComponent(vPhotoContainer3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(jSeparator1)
                     .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
-                                .addComponent(vComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 141, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addGap(0, 0, Short.MAX_VALUE))
-                            .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE))
-                        .addContainerGap())))
+                        .addComponent(vComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, Short.MAX_VALUE)))
+                .addContainerGap())
         );
         jPanel3Layout.setVerticalGroup(
             jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addComponent(vPhotoContainer3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 431, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vPhotoContainer3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                        .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(vButton12, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
                 .addComponent(vComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 23, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 419, Short.MAX_VALUE)
+                .addGap(18, 18, 18))
         );
 
         vHolderPanel1.add(jPanel3, "card2");
@@ -370,6 +440,21 @@ public class MainFrame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_vButton11ActionPerformed
 
+    private void vButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton9ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) vTable1.getModel();
+        model.setRowCount(0);
+        ImageIcon e = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/paid.png")));
+        ImageIcon z = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/cash.png")));
+        
+        model.addRow(new Object[]{e,"test","test","asd"});
+        model.addRow(new Object[]{z,"test","test","test"});
+        
+        
+        
+        VButtonColumn buttonColumn = new VButtonColumn(vTable1, delete, 2);
+    }//GEN-LAST:event_vButton9ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -406,11 +491,14 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.JLabel jLabel1;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
+    private javax.swing.JSeparator jSeparator1;
     private VComponents.VButton vButton1;
     private VComponents.VButton vButton10;
     private VComponents.VButton vButton11;
+    private VComponents.VButton vButton12;
     private VComponents.VButton vButton2;
     private VComponents.VButton vButton3;
     private VComponents.VButton vButton4;
