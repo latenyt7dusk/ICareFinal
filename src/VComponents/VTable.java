@@ -25,6 +25,7 @@ import java.util.List;
 import javax.swing.Icon;
 import javax.swing.JTable;
 import javax.swing.JViewport;
+import javax.swing.ListSelectionModel;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
@@ -44,7 +45,8 @@ public class VTable extends JTable {
         getTableHeader().setFont(new Font("Sanserif", 1, 11));
         getTableHeader().setOpaque(false);
         setOpaque(false);
-
+        setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
+        
         DefaultTableModel Model = (DefaultTableModel) getModel();
         
         ((DefaultTableCellRenderer) getTableHeader().getDefaultRenderer()).setHorizontalAlignment(SwingConstants.CENTER);
@@ -59,7 +61,13 @@ public class VTable extends JTable {
             }
         });
         
+        
+    }
+    
 
+    @Override
+    public void setSelectionMode(int lsm) {
+        super.setSelectionMode(lsm); //To change body of generated methods, choose Tools | Templates.
     }
     
     public void setHeaderBackground(Color c){
