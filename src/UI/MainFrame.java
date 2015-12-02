@@ -27,6 +27,8 @@ import javax.swing.Action;
 import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 import javax.swing.JTable;
+import javax.swing.SwingConstants;
+import javax.swing.table.DefaultTableCellRenderer;
 import javax.swing.table.DefaultTableModel;
 
 /**
@@ -37,6 +39,15 @@ public class MainFrame extends javax.swing.JFrame {
 
     public static final GraphicsEnvironment GEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
     public static final Rectangle MaxBounds = GEnvironment.getMaximumWindowBounds().getBounds();
+    public static DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
+    public ImageIcon Paid = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/paid.png")));
+    public ImageIcon Balance = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/cash.png")));
+    public ImageIcon Item_warn = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_warn.png")));
+    public ImageIcon Item_ok = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_check.png")));
+    public ImageIcon Item_claimed = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_up.png")));
+    public ImageIcon Item_return = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_down.png")));
+    public ImageIcon Item_cancel = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_x.png")));
+    
     
     Action delete = new AbstractAction() {
         public void actionPerformed(ActionEvent e) {
@@ -57,13 +68,20 @@ public class MainFrame extends javax.swing.JFrame {
         System.gc();
         vPhotoContainer3.Lock(true);
         vTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        
+        centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
+        PatientInit();
     }
     
     private void MaximizeUsableBounds() {
         setMaximizedBounds(MaxBounds);
         setExtendedState(MainFrame.MAXIMIZED_BOTH);
     }
+    
+    private void PatientInit(){
+        vTable1.getColumn("Contact").setCellRenderer(centerRenderer);
+        vTable1.getColumn("Date").setCellRenderer(centerRenderer);
+        vTable1.getColumn("Due").setCellRenderer(centerRenderer);
+    } 
 
     
     
@@ -89,8 +107,8 @@ public class MainFrame extends javax.swing.JFrame {
         vShadowedPanel2 = new VComponents.VShadowedPanel();
         vButton9 = new VComponents.VButton();
         vShadowedPanel3 = new VComponents.VShadowedPanel();
-        vHolderPanel1 = new VComponents.VHolderPanel();
-        jPanel3 = new javax.swing.JPanel();
+        MainSlide = new VComponents.VHolderPanel();
+        PatientSlide = new javax.swing.JPanel();
         vScrollPane1 = new VComponents.VScrollPane();
         vTable1 = new VComponents.VTable();
         vPhotoContainer3 = new VComponents.VPhotoContainer();
@@ -115,6 +133,14 @@ public class MainFrame extends javax.swing.JFrame {
         vButton14 = new VComponents.VButton();
         vButton15 = new VComponents.VButton();
         jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
+        UserSlide = new javax.swing.JPanel();
         vShadowedPanel4 = new VComponents.VShadowedPanel();
         vButton11 = new VComponents.VButton();
         vButton10 = new VComponents.VButton();
@@ -141,6 +167,11 @@ public class MainFrame extends javax.swing.JFrame {
         vButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton1.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton1.setIconTextGap(10);
+        vButton1.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton1ActionPerformed(evt);
+            }
+        });
 
         vButton2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/stock.png"))); // NOI18N
         vButton2.setText("Inventory");
@@ -165,6 +196,11 @@ public class MainFrame extends javax.swing.JFrame {
         vButton5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton5.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton5.setIconTextGap(10);
+        vButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton5ActionPerformed(evt);
+            }
+        });
 
         vButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/settings.png"))); // NOI18N
         vButton6.setText("Settings");
@@ -249,47 +285,47 @@ public class MainFrame extends javax.swing.JFrame {
 
         vShadowedPanel3.setPreferredSize(new java.awt.Dimension(770, 7));
 
-        jPanel3.setOpaque(false);
+        PatientSlide.setOpaque(false);
 
         vTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null},
+                {null, null, null, null, null, null}
             },
             new String [] {
-                " ", "Name", "Contact", "Date", "Due"
+                " Stat", "Item", "Name", "Contact", "Date", "Due"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                true, true, true, false, false
+                false, false, false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
@@ -305,12 +341,14 @@ public class MainFrame extends javax.swing.JFrame {
         if (vTable1.getColumnModel().getColumnCount() > 0) {
             vTable1.getColumnModel().getColumn(0).setMinWidth(48);
             vTable1.getColumnModel().getColumn(0).setMaxWidth(48);
-            vTable1.getColumnModel().getColumn(2).setMinWidth(150);
-            vTable1.getColumnModel().getColumn(2).setMaxWidth(150);
-            vTable1.getColumnModel().getColumn(3).setMinWidth(120);
-            vTable1.getColumnModel().getColumn(3).setMaxWidth(120);
+            vTable1.getColumnModel().getColumn(1).setMinWidth(48);
+            vTable1.getColumnModel().getColumn(1).setMaxWidth(48);
+            vTable1.getColumnModel().getColumn(3).setMinWidth(150);
+            vTable1.getColumnModel().getColumn(3).setMaxWidth(150);
             vTable1.getColumnModel().getColumn(4).setMinWidth(120);
             vTable1.getColumnModel().getColumn(4).setMaxWidth(120);
+            vTable1.getColumnModel().getColumn(5).setMinWidth(120);
+            vTable1.getColumnModel().getColumn(5).setMaxWidth(120);
         }
 
         jLabel1.setBackground(VThemeManager.ButtonNormal);
@@ -460,19 +498,71 @@ public class MainFrame extends javax.swing.JFrame {
 
         vButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/rx.png"))); // NOI18N
 
-        javax.swing.GroupLayout jPanel3Layout = new javax.swing.GroupLayout(jPanel3);
-        jPanel3.setLayout(jPanel3Layout);
-        jPanel3Layout.setHorizontalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(jPanel3Layout.createSequentialGroup()
+        jPanel2.setOpaque(false);
+        jPanel2.setLayout(new java.awt.GridLayout());
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setForeground(VThemeManager.ButtonForeground);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/paid.png"))); // NOI18N
+        jLabel5.setText("Settled");
+        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel5);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setForeground(VThemeManager.ButtonForeground);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/cash.png"))); // NOI18N
+        jLabel6.setText("Unsettled");
+        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel6);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setForeground(VThemeManager.ButtonForeground);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_check.png"))); // NOI18N
+        jLabel7.setText("Available");
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel7);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setForeground(VThemeManager.ButtonForeground);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_warn.png"))); // NOI18N
+        jLabel8.setText("Defective");
+        jLabel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel8);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setForeground(VThemeManager.ButtonForeground);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_x.png"))); // NOI18N
+        jLabel9.setText("Canceled");
+        jLabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel9);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setForeground(VThemeManager.ButtonForeground);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_up.png"))); // NOI18N
+        jLabel10.setText("Claimed");
+        jLabel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel10);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setForeground(VThemeManager.ButtonForeground);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_down.png"))); // NOI18N
+        jLabel11.setText("Returned");
+        jLabel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel11);
+
+        javax.swing.GroupLayout PatientSlideLayout = new javax.swing.GroupLayout(PatientSlide);
+        PatientSlide.setLayout(PatientSlideLayout);
+        PatientSlideLayout.setHorizontalGroup(
+            PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(PatientSlideLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                .addGroup(PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(PatientSlideLayout.createSequentialGroup()
                         .addComponent(vPhotoContainer3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(jPanel3Layout.createSequentialGroup()
+                        .addGroup(PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addGroup(PatientSlideLayout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGap(0, 0, 0)
                                 .addComponent(vButton13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -482,21 +572,22 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(vButton14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
                     .addComponent(jSeparator1)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
+                    .addGroup(PatientSlideLayout.createSequentialGroup()
                         .addComponent(vComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE)))
+                        .addGap(0, 0, Short.MAX_VALUE))
+                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
-        jPanel3Layout.setVerticalGroup(
-            jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel3Layout.createSequentialGroup()
+        PatientSlideLayout.setVerticalGroup(
+            PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientSlideLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(vPhotoContainer3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addGroup(jPanel3Layout.createSequentialGroup()
-                        .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(PatientSlideLayout.createSequentialGroup()
+                        .addGroup(PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(vButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(vButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -506,40 +597,42 @@ public class MainFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addGroup(jPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                .addGroup(PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                     .addComponent(vComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                     .addComponent(vButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 413, Short.MAX_VALUE)
-                .addGap(18, 18, 18))
+                .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
         );
 
-        vHolderPanel1.add(jPanel3, "card2");
+        MainSlide.add(PatientSlide, "card2");
 
-        jPanel2.setOpaque(false);
+        UserSlide.setOpaque(false);
 
-        javax.swing.GroupLayout jPanel2Layout = new javax.swing.GroupLayout(jPanel2);
-        jPanel2.setLayout(jPanel2Layout);
-        jPanel2Layout.setHorizontalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        javax.swing.GroupLayout UserSlideLayout = new javax.swing.GroupLayout(UserSlide);
+        UserSlide.setLayout(UserSlideLayout);
+        UserSlideLayout.setHorizontalGroup(
+            UserSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 771, Short.MAX_VALUE)
         );
-        jPanel2Layout.setVerticalGroup(
-            jPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+        UserSlideLayout.setVerticalGroup(
+            UserSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGap(0, 646, Short.MAX_VALUE)
         );
 
-        vHolderPanel1.add(jPanel2, "card3");
+        MainSlide.add(UserSlide, "card3");
 
         javax.swing.GroupLayout vShadowedPanel3Layout = new javax.swing.GroupLayout(vShadowedPanel3);
         vShadowedPanel3.setLayout(vShadowedPanel3Layout);
         vShadowedPanel3Layout.setHorizontalGroup(
             vShadowedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(vHolderPanel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(MainSlide, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
         vShadowedPanel3Layout.setVerticalGroup(
             vShadowedPanel3Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(vHolderPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(MainSlide, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
         );
 
         vButton11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/power.png"))); // NOI18N
@@ -633,11 +726,10 @@ public class MainFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) vTable1.getModel();
         model.setRowCount(0);
-        ImageIcon e = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/paid.png")));
-        ImageIcon z = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/cash.png")));
         
-        model.addRow(new Object[]{e,"test","test","asd"});
-        model.addRow(new Object[]{z,"test","test","test"});
+        
+        model.addRow(new Object[]{Paid,Item_ok,"Nakpil, Kelvin Don Othello Gasic","09055550830","Nov 21, 2015","Dec 5, 2015"});
+        model.addRow(new Object[]{Balance,Item_warn,"Nakpil, Johanna Mae Beciril","09055550830","Nov 22, 2015","Dec 6, 2015"});
         
         
         
@@ -655,6 +747,16 @@ public class MainFrame extends javax.swing.JFrame {
             MaximizeUsableBounds();
         }
     }//GEN-LAST:event_formWindowStateChanged
+
+    private void vButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton1ActionPerformed
+        // TODO add your handling code here:
+        MainSlide.showPane(PatientSlide);
+    }//GEN-LAST:event_vButton1ActionPerformed
+
+    private void vButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton5ActionPerformed
+        // TODO add your handling code here:
+        MainSlide.showPane(UserSlide);
+    }//GEN-LAST:event_vButton5ActionPerformed
 
     /**
      * @param args the command line arguments
@@ -692,11 +794,20 @@ public class MainFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private VComponents.VHolderPanel MainSlide;
+    private javax.swing.JPanel PatientSlide;
+    private javax.swing.JPanel UserSlide;
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel10;
+    private javax.swing.JLabel jLabel11;
     private javax.swing.JLabel jLabel2;
+    private javax.swing.JLabel jLabel5;
+    private javax.swing.JLabel jLabel6;
+    private javax.swing.JLabel jLabel7;
+    private javax.swing.JLabel jLabel8;
+    private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel2;
-    private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
     private javax.swing.JPanel jPanel5;
     private javax.swing.JPanel jPanel6;
@@ -717,7 +828,6 @@ public class MainFrame extends javax.swing.JFrame {
     private VComponents.VButton vButton8;
     private VComponents.VButton vButton9;
     private VComponents.VComboBox vComboBox1;
-    private VComponents.VHolderPanel vHolderPanel1;
     private VComponents.VLabel vLabel1;
     private VComponents.VLabel vLabel2;
     private VComponents.VLabel vLabel3;
