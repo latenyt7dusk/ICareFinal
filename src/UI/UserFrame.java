@@ -33,6 +33,7 @@ import java.util.Calendar;
 public class UserFrame extends javax.swing.JFrame {
 
     private User cUser;
+    private MainFrame cFrame;
     private boolean locked = false;
 
     /**
@@ -54,6 +55,35 @@ public class UserFrame extends javax.swing.JFrame {
     public UserFrame(User user) {
         initComponents();
         this.cUser = user;
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
+        vComboBox1.removeAllItems();
+        vComboBox1.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
+        vComboBox1.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
+        vComboBox2.removeAllItems();
+        vComboBox2.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
+        vComboBox2.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
+        vComboBox2.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
+        vDateChooser1.setAgeField(vTextField5);
+    }
+    
+    public UserFrame(MainFrame mf) {
+        initComponents();
+        this.cFrame = mf;
+        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
+        vComboBox1.removeAllItems();
+        vComboBox1.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
+        vComboBox1.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
+        vComboBox2.removeAllItems();
+        vComboBox2.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
+        vComboBox2.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
+        vComboBox2.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
+        vDateChooser1.setAgeField(vTextField5);
+    }
+    
+    public UserFrame(User user,MainFrame mf) {
+        initComponents();
+        this.cUser = user;
+        this.cFrame = mf;
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
         vComboBox1.removeAllItems();
         vComboBox1.addItem(new Object[]{"Male", "/UI/Icons/male.png"});

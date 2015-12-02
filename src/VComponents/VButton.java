@@ -37,6 +37,7 @@ public class VButton extends JButton {
 
     private boolean visi = true;
     private boolean hov = false;
+    private boolean overpaint = true;
 
     public VButton(String n) {
         super(n);
@@ -100,11 +101,22 @@ public class VButton extends JButton {
         });
 
     }
+    
+    public void setOverpaint(boolean b){
+        this.overpaint = b;
+    }
+    public boolean isOverpaint(){
+        return overpaint;
+    }
 
     @Override
     public void setIcon(Icon ii) {
         if(ii != null){
+            if(overpaint){
             super.setIcon(new ImageIcon(ImageUtils.Colorize(ii, VThemeManager.ButtonForeground)));
+            }else{
+                super.setIcon(ii);
+            }
         }else{
             super.setIcon(null);
         }

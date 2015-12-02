@@ -18,9 +18,12 @@ package UI;
 
 import VComponents.VThemeManager;
 import java.awt.GraphicsEnvironment;
+import java.awt.Image;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.io.File;
+import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
@@ -41,13 +44,14 @@ public class MainFrame extends javax.swing.JFrame {
     public ImageIcon Paid = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/paid.png")));
     public ImageIcon Balance = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/cash.png")));
     public ImageIcon Canceled = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/canceled.png")));
-    public ImageIcon Item_proc = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item.png")));
+    public ImageIcon Item_proc = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_proc.png")));
     public ImageIcon Item_warn = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_warn.png")));
     public ImageIcon Item_ok = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_check.png")));
     public ImageIcon Item_claimed = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_up.png")));
     public ImageIcon Item_return = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_down2.png")));
     public ImageIcon Item_cancel = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_x.png")));
     public ImageIcon Item_hold = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_hold.png")));
+    private ImageIcon tst;
     
     Action delete = new AbstractAction() {
         public void actionPerformed(ActionEvent e) {
@@ -70,6 +74,12 @@ public class MainFrame extends javax.swing.JFrame {
         vTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
         PatientInit();
+        
+        try{
+            tst = new ImageIcon(ImageIO.read(new File("C:\\Documents and Settings\\HERU\\My Documents\\My Pictures\\IMG_20150104_112100.jpg")).getScaledInstance(62, 50, Image.SCALE_DEFAULT));
+        }catch(Exception er){
+            
+        }
     }
     
     private void MaximizeUsableBounds() {
@@ -113,8 +123,13 @@ public class MainFrame extends javax.swing.JFrame {
         vButton6 = new VComponents.VButton();
         vButton7 = new VComponents.VButton();
         vButton8 = new VComponents.VButton();
+        vButton23 = new VComponents.VButton();
         vShadowedPanel2 = new VComponents.VShadowedPanel();
         vButton9 = new VComponents.VButton();
+        vButton24 = new VComponents.VButton();
+        vButton25 = new VComponents.VButton();
+        vButton26 = new VComponents.VButton();
+        vButton28 = new VComponents.VButton();
         vShadowedPanel3 = new VComponents.VShadowedPanel();
         MainSlide = new VComponents.VHolderPanel();
         PatientSlide = new javax.swing.JPanel();
@@ -144,10 +159,19 @@ public class MainFrame extends javax.swing.JFrame {
         vButton16 = new VComponents.VButton();
         vButton17 = new VComponents.VButton();
         UserSlide = new javax.swing.JPanel();
+        vScrollPane2 = new VComponents.VScrollPane();
+        vTable2 = new VComponents.VTable();
+        vLabel10 = new VComponents.VLabel();
+        vButton18 = new VComponents.VButton();
+        vButton19 = new VComponents.VButton();
+        vButton20 = new VComponents.VButton();
+        vButton21 = new VComponents.VButton();
         vShadowedPanel4 = new VComponents.VShadowedPanel();
         vButton11 = new VComponents.VButton();
         vButton10 = new VComponents.VButton();
+        vButton22 = new VComponents.VButton();
         jLabel2 = new javax.swing.JLabel();
+        vButton27 = new VComponents.VButton();
 
         jPanel2.setOpaque(false);
         jPanel2.setLayout(new java.awt.GridLayout());
@@ -264,8 +288,8 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        vButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/settings.png"))); // NOI18N
-        vButton6.setText("Settings");
+        vButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/task.png"))); // NOI18N
+        vButton6.setText("Tasks");
         vButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton6.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton6.setIconTextGap(10);
@@ -282,6 +306,12 @@ public class MainFrame extends javax.swing.JFrame {
         vButton8.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton8.setIconTextGap(10);
 
+        vButton23.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/settings.png"))); // NOI18N
+        vButton23.setText("Settings");
+        vButton23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        vButton23.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        vButton23.setIconTextGap(10);
+
         javax.swing.GroupLayout vShadowedPanel1Layout = new javax.swing.GroupLayout(vShadowedPanel1);
         vShadowedPanel1.setLayout(vShadowedPanel1Layout);
         vShadowedPanel1Layout.setHorizontalGroup(
@@ -296,7 +326,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(vButton4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(vButton3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addComponent(vButton2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(vButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(vButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vButton23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
         vShadowedPanel1Layout.setVerticalGroup(
@@ -314,6 +345,8 @@ public class MainFrame extends javax.swing.JFrame {
                 .addComponent(vButton5, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(vButton6, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(vButton23, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(vButton8, javax.swing.GroupLayout.PREFERRED_SIZE, 30, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
@@ -321,12 +354,21 @@ public class MainFrame extends javax.swing.JFrame {
                 .addContainerGap())
         );
 
-        vButton9.setText("Name");
+        vButton9.setText("Kelvin G. Nakpil");
+        vButton9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton9.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vButton9ActionPerformed(evt);
             }
         });
+
+        vButton24.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/admin.png"))); // NOI18N
+
+        vButton25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/task16.png"))); // NOI18N
+
+        vButton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/mail.png"))); // NOI18N
+
+        vButton28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/report16.png"))); // NOI18N
 
         javax.swing.GroupLayout vShadowedPanel2Layout = new javax.swing.GroupLayout(vShadowedPanel2);
         vShadowedPanel2.setLayout(vShadowedPanel2Layout);
@@ -334,15 +376,29 @@ public class MainFrame extends javax.swing.JFrame {
             vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vShadowedPanel2Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(vButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                .addGroup(vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
+                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vShadowedPanel2Layout.createSequentialGroup()
+                        .addGap(0, 0, Short.MAX_VALUE)
+                        .addComponent(vButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vButton28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
         vShadowedPanel2Layout.setVerticalGroup(
             vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vShadowedPanel2Layout.createSequentialGroup()
-                .addContainerGap(117, Short.MAX_VALUE)
                 .addComponent(vButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 108, Short.MAX_VALUE)
+                .addGroup(vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(vButton24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vButton25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vButton26, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vButton28, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
         );
 
         vShadowedPanel3.setPreferredSize(new java.awt.Dimension(770, 7));
@@ -628,15 +684,93 @@ public class MainFrame extends javax.swing.JFrame {
 
         UserSlide.setOpaque(false);
 
+        vTable2.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null},
+                {null, null, null, null, null}
+            },
+            new String [] {
+                "Image", "Name", "Contact", "Role", "Last Logged"
+            }
+        ) {
+            boolean[] canEdit = new boolean [] {
+                false, false, false, false, false
+            };
+
+            public boolean isCellEditable(int rowIndex, int columnIndex) {
+                return canEdit [columnIndex];
+            }
+        });
+        vTable2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
+        vTable2.setRowHeight(50);
+        vTable2.setShowHorizontalLines(false);
+        vTable2.setShowVerticalLines(false);
+        vScrollPane2.setViewportView(vTable2);
+        if (vTable2.getColumnModel().getColumnCount() > 0) {
+            vTable2.getColumnModel().getColumn(0).setMinWidth(62);
+            vTable2.getColumnModel().getColumn(0).setMaxWidth(62);
+            vTable2.getColumnModel().getColumn(2).setMinWidth(150);
+            vTable2.getColumnModel().getColumn(2).setMaxWidth(150);
+            vTable2.getColumnModel().getColumn(3).setMinWidth(100);
+            vTable2.getColumnModel().getColumn(3).setMaxWidth(100);
+            vTable2.getColumnModel().getColumn(4).setMinWidth(120);
+            vTable2.getColumnModel().getColumn(4).setMaxWidth(120);
+        }
+
+        vLabel10.setBackground(VThemeManager.ButtonNormal);
+        vLabel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        vLabel10.setForeground(VThemeManager.ButtonForeground);
+        vLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/manager_admin.png"))); // NOI18N
+        vLabel10.setText("Users");
+        vLabel10.setOpaque(true);
+
+        vButton18.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/notes.png"))); // NOI18N
+
+        vButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/remove.png"))); // NOI18N
+
+        vButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/admin.png"))); // NOI18N
+
+        vButton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/addprofile.png"))); // NOI18N
+        vButton21.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton21ActionPerformed(evt);
+            }
+        });
+
         javax.swing.GroupLayout UserSlideLayout = new javax.swing.GroupLayout(UserSlide);
         UserSlide.setLayout(UserSlideLayout);
         UserSlideLayout.setHorizontalGroup(
             UserSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 771, Short.MAX_VALUE)
+            .addGroup(UserSlideLayout.createSequentialGroup()
+                .addGap(20, 20, 20)
+                .addGroup(UserSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(UserSlideLayout.createSequentialGroup()
+                        .addComponent(vLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, 0)
+                        .addComponent(vButton21, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(vButton20, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(vButton19, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(vButton18, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 731, Short.MAX_VALUE))
+                .addGap(20, 20, 20))
         );
         UserSlideLayout.setVerticalGroup(
             UserSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 646, Short.MAX_VALUE)
+            .addGroup(UserSlideLayout.createSequentialGroup()
+                .addGroup(UserSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(vLabel10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vButton18, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vButton19, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(vButton20, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                    .addComponent(vButton21, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE))
+                .addGap(18, 18, 18)
+                .addComponent(vScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 584, Short.MAX_VALUE)
+                .addGap(20, 20, 20))
         );
 
         MainSlide.add(UserSlide, "card3");
@@ -666,13 +800,18 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
+        vButton22.setText("ICare Optical System");
+        vButton22.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        vButton22.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
+        vButton22.setOverpaint(false);
+
         jLabel2.setBackground(VThemeManager.ButtonNormal);
-        jLabel2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel2.setForeground(VThemeManager.ButtonForeground);
         jLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/NSoftwares.png"))); // NOI18N
-        jLabel2.setText("ICare Optical System");
-        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jLabel2.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 3, 1, 4));
         jLabel2.setOpaque(true);
+
+        vButton27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/search.png"))); // NOI18N
+        vButton27.setText("Search");
 
         javax.swing.GroupLayout vShadowedPanel4Layout = new javax.swing.GroupLayout(vShadowedPanel4);
         vShadowedPanel4.setLayout(vShadowedPanel4Layout);
@@ -680,7 +819,11 @@ public class MainFrame extends javax.swing.JFrame {
             vShadowedPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vShadowedPanel4Layout.createSequentialGroup()
                 .addContainerGap()
-                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 300, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(jLabel2)
+                .addGap(0, 0, 0)
+                .addComponent(vButton22, javax.swing.GroupLayout.PREFERRED_SIZE, 260, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(vButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addComponent(vButton10, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(0, 0, 0)
@@ -693,7 +836,9 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(vShadowedPanel4Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(vButton10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addComponent(vButton11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vButton27, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(vButton22, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap())
         );
 
@@ -775,6 +920,14 @@ public class MainFrame extends javax.swing.JFrame {
         MainSlide.showPane(UserSlide);
     }//GEN-LAST:event_vButton5ActionPerformed
 
+    private void vButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton21ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) vTable2.getModel();
+        
+        model.setRowCount(0);
+        model.addRow(new Object[]{tst,"Nakpil, Kirstein Jonnah Beciril","09055550830","Admin","Dec 2, 2015"});
+    }//GEN-LAST:event_vButton21ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -839,7 +992,18 @@ public class MainFrame extends javax.swing.JFrame {
     private VComponents.VButton vButton15;
     private VComponents.VButton vButton16;
     private VComponents.VButton vButton17;
+    private VComponents.VButton vButton18;
+    private VComponents.VButton vButton19;
     private VComponents.VButton vButton2;
+    private VComponents.VButton vButton20;
+    private VComponents.VButton vButton21;
+    private VComponents.VButton vButton22;
+    private VComponents.VButton vButton23;
+    private VComponents.VButton vButton24;
+    private VComponents.VButton vButton25;
+    private VComponents.VButton vButton26;
+    private VComponents.VButton vButton27;
+    private VComponents.VButton vButton28;
     private VComponents.VButton vButton3;
     private VComponents.VButton vButton4;
     private VComponents.VButton vButton5;
@@ -849,6 +1013,7 @@ public class MainFrame extends javax.swing.JFrame {
     private VComponents.VButton vButton9;
     private VComponents.VComboBox vComboBox1;
     private VComponents.VLabel vLabel1;
+    private VComponents.VLabel vLabel10;
     private VComponents.VLabel vLabel2;
     private VComponents.VLabel vLabel3;
     private VComponents.VLabel vLabel4;
@@ -860,10 +1025,12 @@ public class MainFrame extends javax.swing.JFrame {
     private VComponents.VPanel vPanel1;
     private VComponents.VPhotoContainer vPhotoContainer3;
     private VComponents.VScrollPane vScrollPane1;
+    private VComponents.VScrollPane vScrollPane2;
     private VComponents.VShadowedPanel vShadowedPanel1;
     private VComponents.VShadowedPanel vShadowedPanel2;
     private VComponents.VShadowedPanel vShadowedPanel3;
     private VComponents.VShadowedPanel vShadowedPanel4;
     private VComponents.VTable vTable1;
+    private VComponents.VTable vTable2;
     // End of variables declaration//GEN-END:variables
 }
