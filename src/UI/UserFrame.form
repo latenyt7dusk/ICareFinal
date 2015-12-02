@@ -67,10 +67,10 @@
                                   <Component id="vComboBox2" max="32767" attributes="0"/>
                               </Group>
                               <Group type="102" attributes="0">
-                                  <EmptySpace min="-2" pref="203" max="-2" attributes="0"/>
-                                  <Component id="vButton4" min="-2" pref="66" max="-2" attributes="0"/>
+                                  <EmptySpace max="32767" attributes="0"/>
+                                  <Component id="vButton4" min="-2" max="-2" attributes="0"/>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="vButton1" max="32767" attributes="0"/>
+                                  <Component id="vButton1" min="-2" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -85,10 +85,10 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
                           <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="vButton1" min="-2" pref="15" max="-2" attributes="0"/>
-                              <Component id="vButton4" pref="0" max="32767" attributes="0"/>
+                              <Component id="vButton1" max="32767" attributes="0"/>
+                              <Component id="vButton4" max="32767" attributes="0"/>
                           </Group>
-                          <EmptySpace min="-2" pref="27" max="-2" attributes="0"/>
+                          <EmptySpace min="-2" pref="20" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Component id="vTextField1" min="-2" pref="25" max="-2" attributes="0"/>
                               <Component id="vComboBox2" min="-2" pref="25" max="-2" attributes="0"/>
@@ -111,7 +111,9 @@
       <SubComponents>
         <Component class="VComponents.VButton" name="vButton1">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Close"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/UI/Icons/power.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vButton1ActionPerformed"/>
@@ -406,7 +408,14 @@
             </Component>
             <Component class="VComponents.VButton" name="vButton2">
               <Properties>
+                <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+                  <Image iconType="3" name="/UI/Icons/save.png"/>
+                </Property>
                 <Property name="text" type="java.lang.String" value="Save"/>
+                <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
+                  <Font name="Tahoma" size="11" style="1"/>
+                </Property>
+                <Property name="iconTextGap" type="int" value="7"/>
               </Properties>
               <Events>
                 <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vButton2ActionPerformed"/>
@@ -445,7 +454,9 @@
         </Component>
         <Component class="VComponents.VButton" name="vButton4">
           <Properties>
-            <Property name="text" type="java.lang.String" value="Minimize"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/UI/Icons/minimize.png"/>
+            </Property>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vButton4ActionPerformed"/>
