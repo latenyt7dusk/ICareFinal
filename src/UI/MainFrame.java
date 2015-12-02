@@ -16,7 +16,6 @@
  */
 package UI;
 
-import VComponents.VButtonColumn;
 import VComponents.VThemeManager;
 import java.awt.GraphicsEnvironment;
 import java.awt.Rectangle;
@@ -25,7 +24,6 @@ import java.awt.event.ActionEvent;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -42,12 +40,14 @@ public class MainFrame extends javax.swing.JFrame {
     public static DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
     public ImageIcon Paid = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/paid.png")));
     public ImageIcon Balance = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/cash.png")));
+    public ImageIcon Canceled = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/canceled.png")));
+    public ImageIcon Item_proc = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item.png")));
     public ImageIcon Item_warn = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_warn.png")));
     public ImageIcon Item_ok = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_check.png")));
     public ImageIcon Item_claimed = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_up.png")));
-    public ImageIcon Item_return = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_down.png")));
+    public ImageIcon Item_return = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_down2.png")));
     public ImageIcon Item_cancel = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_x.png")));
-    
+    public ImageIcon Item_hold = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_hold.png")));
     
     Action delete = new AbstractAction() {
         public void actionPerformed(ActionEvent e) {
@@ -94,6 +94,15 @@ public class MainFrame extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jPanel2 = new javax.swing.JPanel();
+        jLabel5 = new javax.swing.JLabel();
+        jLabel12 = new javax.swing.JLabel();
+        jLabel6 = new javax.swing.JLabel();
+        jLabel7 = new javax.swing.JLabel();
+        jLabel8 = new javax.swing.JLabel();
+        jLabel9 = new javax.swing.JLabel();
+        jLabel10 = new javax.swing.JLabel();
+        jLabel11 = new javax.swing.JLabel();
         vPanel1 = new VComponents.VPanel();
         vShadowedPanel1 = new VComponents.VShadowedPanel();
         vButton1 = new VComponents.VButton();
@@ -132,19 +141,72 @@ public class MainFrame extends javax.swing.JFrame {
         vButton13 = new VComponents.VButton();
         vButton14 = new VComponents.VButton();
         vButton15 = new VComponents.VButton();
-        jPanel2 = new javax.swing.JPanel();
-        jLabel5 = new javax.swing.JLabel();
-        jLabel6 = new javax.swing.JLabel();
-        jLabel7 = new javax.swing.JLabel();
-        jLabel8 = new javax.swing.JLabel();
-        jLabel9 = new javax.swing.JLabel();
-        jLabel10 = new javax.swing.JLabel();
-        jLabel11 = new javax.swing.JLabel();
+        vButton16 = new VComponents.VButton();
+        vButton17 = new VComponents.VButton();
         UserSlide = new javax.swing.JPanel();
         vShadowedPanel4 = new VComponents.VShadowedPanel();
         vButton11 = new VComponents.VButton();
         vButton10 = new VComponents.VButton();
         jLabel2 = new javax.swing.JLabel();
+
+        jPanel2.setOpaque(false);
+        jPanel2.setLayout(new java.awt.GridLayout());
+
+        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel5.setForeground(VThemeManager.ButtonForeground);
+        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/paid.png"))); // NOI18N
+        jLabel5.setText("Settled");
+        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel5);
+
+        jLabel12.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel12.setForeground(VThemeManager.ButtonForeground);
+        jLabel12.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/canceled.png"))); // NOI18N
+        jLabel12.setText("Canceled");
+        jLabel12.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel12);
+
+        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel6.setForeground(VThemeManager.ButtonForeground);
+        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/cash.png"))); // NOI18N
+        jLabel6.setText("Unsettled");
+        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel6);
+
+        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel7.setForeground(VThemeManager.ButtonForeground);
+        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_check.png"))); // NOI18N
+        jLabel7.setText("Available");
+        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel7);
+
+        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel8.setForeground(VThemeManager.ButtonForeground);
+        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_warn.png"))); // NOI18N
+        jLabel8.setText("Defective");
+        jLabel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel8);
+
+        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel9.setForeground(VThemeManager.ButtonForeground);
+        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_x.png"))); // NOI18N
+        jLabel9.setText("Canceled");
+        jLabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel9);
+
+        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel10.setForeground(VThemeManager.ButtonForeground);
+        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_up.png"))); // NOI18N
+        jLabel10.setText("Claimed");
+        jLabel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel10);
+
+        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel11.setForeground(VThemeManager.ButtonForeground);
+        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_down2.png"))); // NOI18N
+        jLabel11.setText("Returned");
+        jLabel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        jPanel2.add(jLabel11);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("Home Panel");
@@ -492,63 +554,15 @@ public class MainFrame extends javax.swing.JFrame {
 
         jPanel1.add(jPanel6);
 
-        vButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/admin.png"))); // NOI18N
+        vButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/shop.png"))); // NOI18N
 
-        vButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/transaction16.png"))); // NOI18N
+        vButton14.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/notes.png"))); // NOI18N
 
-        vButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/rx.png"))); // NOI18N
+        vButton15.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/transaction16.png"))); // NOI18N
 
-        jPanel2.setOpaque(false);
-        jPanel2.setLayout(new java.awt.GridLayout());
+        vButton16.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/rx.png"))); // NOI18N
 
-        jLabel5.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel5.setForeground(VThemeManager.ButtonForeground);
-        jLabel5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/paid.png"))); // NOI18N
-        jLabel5.setText("Settled");
-        jLabel5.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        jPanel2.add(jLabel5);
-
-        jLabel6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel6.setForeground(VThemeManager.ButtonForeground);
-        jLabel6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/cash.png"))); // NOI18N
-        jLabel6.setText("Unsettled");
-        jLabel6.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        jPanel2.add(jLabel6);
-
-        jLabel7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel7.setForeground(VThemeManager.ButtonForeground);
-        jLabel7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_check.png"))); // NOI18N
-        jLabel7.setText("Available");
-        jLabel7.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        jPanel2.add(jLabel7);
-
-        jLabel8.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel8.setForeground(VThemeManager.ButtonForeground);
-        jLabel8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_warn.png"))); // NOI18N
-        jLabel8.setText("Defective");
-        jLabel8.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        jPanel2.add(jLabel8);
-
-        jLabel9.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel9.setForeground(VThemeManager.ButtonForeground);
-        jLabel9.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_x.png"))); // NOI18N
-        jLabel9.setText("Canceled");
-        jLabel9.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        jPanel2.add(jLabel9);
-
-        jLabel10.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel10.setForeground(VThemeManager.ButtonForeground);
-        jLabel10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_up.png"))); // NOI18N
-        jLabel10.setText("Claimed");
-        jLabel10.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        jPanel2.add(jLabel10);
-
-        jLabel11.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
-        jLabel11.setForeground(VThemeManager.ButtonForeground);
-        jLabel11.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/item_down.png"))); // NOI18N
-        jLabel11.setText("Returned");
-        jLabel11.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
-        jPanel2.add(jLabel11);
+        vButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/admin.png"))); // NOI18N
 
         javax.swing.GroupLayout PatientSlideLayout = new javax.swing.GroupLayout(PatientSlide);
         PatientSlide.setLayout(PatientSlideLayout);
@@ -557,13 +571,17 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(PatientSlideLayout.createSequentialGroup()
                 .addGap(20, 20, 20)
                 .addGroup(PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 741, Short.MAX_VALUE)
+                    .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PatientSlideLayout.createSequentialGroup()
                         .addComponent(vPhotoContainer3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PatientSlideLayout.createSequentialGroup()
                                 .addComponent(jLabel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                .addGap(0, 0, 0)
+                                .addComponent(vButton17, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addGap(0, 0, 0)
+                                .addComponent(vButton16, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(vButton13, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
@@ -576,8 +594,7 @@ public class MainFrame extends javax.swing.JFrame {
                         .addComponent(vComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vButton12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(0, 0, Short.MAX_VALUE))
-                    .addComponent(jPanel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGap(0, 0, Short.MAX_VALUE)))
                 .addContainerGap())
         );
         PatientSlideLayout.setVerticalGroup(
@@ -591,7 +608,9 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(vButton13, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(vButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(vButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(vButton15, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addComponent(vButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -601,10 +620,8 @@ public class MainFrame extends javax.swing.JFrame {
                     .addComponent(vComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, 23, Short.MAX_VALUE)
                     .addComponent(vButton12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 388, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                .addComponent(jPanel2, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addContainerGap())
+                .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, 410, Short.MAX_VALUE)
+                .addGap(21, 21, 21))
         );
 
         MainSlide.add(PatientSlide, "card2");
@@ -728,8 +745,8 @@ public class MainFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         
         
-        model.addRow(new Object[]{Paid,Item_ok,"Nakpil, Kelvin Don Othello Gasic","09055550830","Nov 21, 2015","Dec 5, 2015"});
-        model.addRow(new Object[]{Balance,Item_warn,"Nakpil, Johanna Mae Beciril","09055550830","Nov 22, 2015","Dec 6, 2015"});
+        model.addRow(new Object[]{Paid,Item_proc,"Nakpil, Kelvin Don Othello Gasic","09055550830","Nov 21, 2015","Dec 5, 2015"});
+        model.addRow(new Object[]{Balance,Item_hold,"Nakpil, Johanna Mae Beciril","09055550830","Nov 22, 2015","Dec 6, 2015"});
         
         
         
@@ -800,6 +817,7 @@ public class MainFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
+    private javax.swing.JLabel jLabel12;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel5;
     private javax.swing.JLabel jLabel6;
@@ -819,6 +837,8 @@ public class MainFrame extends javax.swing.JFrame {
     private VComponents.VButton vButton13;
     private VComponents.VButton vButton14;
     private VComponents.VButton vButton15;
+    private VComponents.VButton vButton16;
+    private VComponents.VButton vButton17;
     private VComponents.VButton vButton2;
     private VComponents.VButton vButton3;
     private VComponents.VButton vButton4;
