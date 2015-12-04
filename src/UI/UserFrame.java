@@ -359,7 +359,7 @@ public class UserFrame extends javax.swing.JFrame {
 
         vComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "User", "Manager", "Admin" }));
 
-        vButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/minimize.png"))); // NOI18N
+        vButton4.setText("__");
         vButton4.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vButton4ActionPerformed(evt);
@@ -387,8 +387,8 @@ public class UserFrame extends javax.swing.JFrame {
                             .addGroup(vShadowedPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(vButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vButton1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addGap(0, 0, 0)
+                                .addComponent(vButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
                 .addContainerGap())
         );
         vShadowedPanel1Layout.setVerticalGroup(

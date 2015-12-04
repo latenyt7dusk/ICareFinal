@@ -16,9 +16,17 @@
  */
 package UI;
 
+import Utilities.ImageUtils;
 import VComponents.VShadowBorder;
+import VComponents.VThemeManager;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -45,6 +53,7 @@ public class PatientFrame extends javax.swing.JFrame {
 
         vShadowedPanel1 = new VComponents.VShadowedPanel();
         jPanel1 = new javax.swing.JPanel();
+        jLabel2 = new javax.swing.JLabel();
         vButton1 = new VComponents.VButton();
         jLabel1 = new javax.swing.JLabel();
         vButton2 = new VComponents.VButton();
@@ -62,15 +71,23 @@ public class PatientFrame extends javax.swing.JFrame {
 
         jPanel1.setBackground(new java.awt.Color(250, 250, 250));
 
+        jLabel2.setText("jLabel2");
+
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
         jPanel1Layout.setHorizontalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 0, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(137, 137, 137)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 432, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel1Layout.setVerticalGroup(
             jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 640, Short.MAX_VALUE)
+            .addGroup(jPanel1Layout.createSequentialGroup()
+                .addGap(91, 91, 91)
+                .addComponent(jLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 295, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap(254, Short.MAX_VALUE))
         );
 
         vButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/power.png"))); // NOI18N
@@ -96,6 +113,11 @@ public class PatientFrame extends javax.swing.JFrame {
         vButton4.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/printer.png"))); // NOI18N
 
         vButton5.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/filex.png"))); // NOI18N
+        vButton5.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton5ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout vShadowedPanel1Layout = new javax.swing.GroupLayout(vShadowedPanel1);
         vShadowedPanel1.setLayout(vShadowedPanel1Layout);
@@ -108,13 +130,13 @@ public class PatientFrame extends javax.swing.JFrame {
                         .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                     .addGroup(vShadowedPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 360, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 306, Short.MAX_VALUE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 312, Short.MAX_VALUE)
                         .addComponent(vButton5, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addGap(0, 0, 0)
                         .addComponent(vButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addGap(5, 5, 5))
         );
@@ -157,6 +179,14 @@ public class PatientFrame extends javax.swing.JFrame {
         setState(PatientFrame.ICONIFIED);
     }//GEN-LAST:event_vButton2ActionPerformed
 
+    private void vButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton5ActionPerformed
+        try {
+            jLabel2.setIcon(ImageUtils.makeWatermark(ImageIO.read(getClass().getResource("/UI/Icons/NSoftwares ICO.png")),0.03f));
+        } catch (IOException ex) {
+            Logger.getLogger(PatientFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_vButton5ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -194,6 +224,7 @@ public class PatientFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JLabel jLabel1;
+    private javax.swing.JLabel jLabel2;
     private javax.swing.JPanel jPanel1;
     private VComponents.VButton vButton1;
     private VComponents.VButton vButton2;

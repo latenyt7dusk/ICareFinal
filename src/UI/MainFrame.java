@@ -799,7 +799,7 @@ public class MainFrame extends javax.swing.JFrame {
             }
         });
 
-        vButton10.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/minimize.png"))); // NOI18N
+        vButton10.setText("__");
         vButton10.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {
                 vButton10ActionPerformed(evt);

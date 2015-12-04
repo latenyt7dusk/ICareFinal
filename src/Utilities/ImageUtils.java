@@ -16,13 +16,13 @@
  */
 package Utilities;
 
+import java.awt.AlphaComposite;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
-import java.awt.RenderingHints;
 import java.awt.image.BufferedImage;
 import javax.swing.Icon;
-import javax.swing.JLabel;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -39,6 +39,19 @@ public class ImageUtils {
         icon.paintIcon(null, g, 0, 0);
         g.dispose();
         return bi;
+    }
+    
+    public static Icon makeWatermark(BufferedImage b,float o) {
+        Icon icon = new ImageIcon(b);
+        BufferedImage bi = new BufferedImage(
+                icon.getIconWidth(),
+                icon.getIconHeight(),
+                BufferedImage.TYPE_INT_ARGB);
+        Graphics2D g = bi.createGraphics();
+        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, o));
+        icon.paintIcon(null, g, 0, 0);
+        g.dispose();
+        return new javax.swing.ImageIcon(bi);
     }
 
     public static BufferedImage Colorize(Icon icon, Color c) {

@@ -69,8 +69,8 @@
                               <Group type="102" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
                                   <Component id="vButton4" min="-2" max="-2" attributes="0"/>
-                                  <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="vButton1" min="-2" max="-2" attributes="0"/>
+                                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                                  <Component id="vButton1" min="-2" pref="26" max="-2" attributes="0"/>
                               </Group>
                           </Group>
                       </Group>
@@ -454,9 +454,7 @@
         </Component>
         <Component class="VComponents.VButton" name="vButton4">
           <Properties>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/UI/Icons/minimize.png"/>
-            </Property>
+            <Property name="text" type="java.lang.String" value="__"/>
           </Properties>
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vButton4ActionPerformed"/>
