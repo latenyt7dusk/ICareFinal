@@ -50,22 +50,28 @@
         <DimensionLayout dim="0">
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" attributes="0">
+                  <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" attributes="0">
-                          <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
-                          <Component id="jPanel1" max="32767" attributes="0"/>
-                      </Group>
-                      <Group type="102" attributes="0">
-                          <Component id="jLabel1" min="-2" pref="360" max="-2" attributes="0"/>
-                          <EmptySpace pref="312" max="32767" attributes="0"/>
+                          <Component id="vButton3" min="-2" pref="220" max="-2" attributes="0"/>
+                          <EmptySpace max="-2" attributes="0"/>
+                          <Component id="vButton6" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="vButton10" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="vButton11" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                          <Component id="vButton12" min="-2" max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="vButton5" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="vButton4" min="-2" max="-2" attributes="0"/>
-                          <EmptySpace max="-2" attributes="0"/>
+                          <EmptySpace max="32767" attributes="0"/>
                           <Component id="vButton2" min="-2" max="-2" attributes="0"/>
                           <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                           <Component id="vButton1" min="-2" pref="22" max="-2" attributes="0"/>
                       </Group>
+                      <Component id="jPanel1" max="32767" attributes="0"/>
                   </Group>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               </Group>
@@ -75,13 +81,17 @@
           <Group type="103" groupAlignment="0" attributes="0">
               <Group type="102" alignment="1" attributes="0">
                   <Group type="103" groupAlignment="0" attributes="0">
-                      <Component id="jLabel1" min="-2" pref="26" max="-2" attributes="0"/>
                       <Component id="vButton4" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="vButton2" min="-2" max="-2" attributes="0"/>
                       <Component id="vButton5" min="-2" pref="20" max="-2" attributes="0"/>
                       <Component id="vButton1" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="vButton6" alignment="0" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="vButton10" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="vButton11" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="vButton12" min="-2" pref="20" max="-2" attributes="0"/>
+                      <Component id="vButton3" min="-2" max="-2" attributes="0"/>
                   </Group>
-                  <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
+                  <EmptySpace max="-2" attributes="0"/>
                   <Component id="jPanel1" max="32767" attributes="0"/>
                   <EmptySpace min="-2" pref="5" max="-2" attributes="0"/>
               </Group>
@@ -99,30 +109,15 @@
           <Layout>
             <DimensionLayout dim="0">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="137" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="432" max="-2" attributes="0"/>
-                      <EmptySpace max="32767" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="0" pref="775" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
             <DimensionLayout dim="1">
               <Group type="103" groupAlignment="0" attributes="0">
-                  <Group type="102" alignment="0" attributes="0">
-                      <EmptySpace min="-2" pref="91" max="-2" attributes="0"/>
-                      <Component id="jLabel2" min="-2" pref="295" max="-2" attributes="0"/>
-                      <EmptySpace pref="254" max="32767" attributes="0"/>
-                  </Group>
+                  <EmptySpace min="0" pref="625" max="32767" attributes="0"/>
               </Group>
             </DimensionLayout>
           </Layout>
-          <SubComponents>
-            <Component class="javax.swing.JLabel" name="jLabel2">
-              <Properties>
-                <Property name="text" type="java.lang.String" value="jLabel2"/>
-              </Properties>
-            </Component>
-          </SubComponents>
         </Container>
         <Component class="VComponents.VButton" name="vButton1">
           <Properties>
@@ -133,25 +128,6 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vButton1ActionPerformed"/>
           </Events>
-        </Component>
-        <Component class="javax.swing.JLabel" name="jLabel1">
-          <Properties>
-            <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
-              <Font name="Tahoma" size="11" style="1"/>
-            </Property>
-            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
-              <Color blue="ff" green="ff" red="ff" type="rgb"/>
-            </Property>
-            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
-              <Image iconType="3" name="/UI/Icons/NSoftwares.png"/>
-            </Property>
-            <Property name="text" type="java.lang.String" value="New Patient"/>
-            <Property name="border" type="javax.swing.border.Border" editor="org.netbeans.modules.form.editors2.BorderEditor">
-              <Border info="org.netbeans.modules.form.compat2.border.EmptyBorderInfo">
-                <EmptyBorder bottom="1" left="4" right="4" top="1"/>
-              </Border>
-            </Property>
-          </Properties>
         </Component>
         <Component class="VComponents.VButton" name="vButton2">
           <Properties>
@@ -177,6 +153,39 @@
           <Events>
             <EventHandler event="actionPerformed" listener="java.awt.event.ActionListener" parameters="java.awt.event.ActionEvent" handler="vButton5ActionPerformed"/>
           </Events>
+        </Component>
+        <Component class="VComponents.VButton" name="vButton12">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/UI/Icons/record.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="VComponents.VButton" name="vButton11">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/UI/Icons/transaction16.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="VComponents.VButton" name="vButton10">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/UI/Icons/rx.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="VComponents.VButton" name="vButton6">
+          <Properties>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/UI/Icons/user.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="VComponents.VButton" name="vButton3">
+          <Properties>
+            <Property name="text" type="java.lang.String" value="Kelvin Don Othello Gasic Nakpil"/>
+          </Properties>
         </Component>
       </SubComponents>
     </Container>
