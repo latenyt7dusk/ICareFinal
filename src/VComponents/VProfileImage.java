@@ -52,20 +52,20 @@ public class VProfileImage extends javax.swing.JPanel{
             g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
             g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
             Ellipse2D circ = new Ellipse2D.Float();
-            circ.setFrame(11, 11, getWidth()-22, getHeight()-22);
+            circ.setFrame(9, 9, getWidth()-18, getHeight()-18);
             g2d.clip(circ);
-            Image ig  = ImageIO.read(new File("C:\\Documents and Settings\\HERU\\My Documents\\My Pictures\\IMG_20150104_112110.jpg")).getScaledInstance(getWidth()-22, getHeight()-22, Image.SCALE_DEFAULT);//Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png"));
-            g2d.drawImage(ig, 11, 11, null);
+            Image ig  = ImageIO.read(new File("C:\\Documents and Settings\\HERU\\My Documents\\My Pictures\\IMG_20150104_112110.jpg")).getScaledInstance(getWidth()-18, getHeight()-18, Image.SCALE_DEFAULT);//Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png"));
+            g2d.drawImage(ig, 9, 9, null);
             g2d.draw(circ);
             g2d.setClip(null);
             
-            g2d.setStroke(new BasicStroke(8,BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER));
-            g2d.setColor(VThemeManager.ButtonNormal);
+            g2d.setStroke(new BasicStroke(4,BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER));
+            g2d.setColor(VThemeManager.ButtonForeground);
             g2d.drawOval(8, 8, getWidth()-16, getHeight()-16);
             
-            g2d.setStroke(new BasicStroke(2,BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER));
+            g2d.setStroke(new BasicStroke(1,BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER));
             g2d.setColor(VThemeManager.ButtonForeground);
-            g2d.drawOval(5, 5, getWidth()-10, getHeight()-10);
+            g2d.drawOval(2, 2, getWidth()-4, getHeight()-4);
         } catch (IOException ex) {
             Logger.getLogger(VProfileImage.class.getName()).log(Level.SEVERE, null, ex);
         }
