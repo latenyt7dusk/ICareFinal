@@ -54,8 +54,13 @@ public class VProfileImage extends javax.swing.JPanel{
             Ellipse2D circ = new Ellipse2D.Float();
             circ.setFrame(9, 9, getWidth()-18, getHeight()-18);
             g2d.clip(circ);
-            Image ig  = ImageIO.read(new File("C:\\Documents and Settings\\HERU\\My Documents\\My Pictures\\IMG_20150104_112110.jpg")).getScaledInstance(getWidth()-18, getHeight()-18, Image.SCALE_DEFAULT);//Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png"));
-            g2d.drawImage(ig, 9, 9, null);
+            if(img != null){
+                
+            }else{
+                Image ig  = ImageIO.read(getClass().getResource("/UI/Icons/noimage.png")).getScaledInstance(getWidth()-18, getHeight()-18, Image.SCALE_DEFAULT);//Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png"));
+                g2d.drawImage(ig, 9, 9, null);
+            }
+            
             g2d.draw(circ);
             g2d.setClip(null);
             
