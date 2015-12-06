@@ -16,6 +16,7 @@
  */
 package VComponents;
 
+import Utilities.ImageUtils;
 import java.awt.BasicStroke;
 import java.awt.Graphics;
 import java.awt.Graphics2D;
@@ -55,7 +56,7 @@ public class VProfileImage extends javax.swing.JPanel{
             circ.setFrame(9, 9, getWidth()-18, getHeight()-18);
             g2d.clip(circ);
             if(img != null){
-                
+                g2d.drawImage(ImageUtils.Convert(img).getScaledInstance(getWidth()-18, getHeight()-18, Image.SCALE_SMOOTH), 9, 9, null);
             }else{
                 Image ig  = ImageIO.read(getClass().getResource("/UI/Icons/noimage.png")).getScaledInstance(getWidth()-18, getHeight()-18, Image.SCALE_SMOOTH);//Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png"));
                 g2d.drawImage(ig, 9, 9, null);
