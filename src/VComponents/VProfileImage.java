@@ -57,7 +57,7 @@ public class VProfileImage extends javax.swing.JPanel{
             if(img != null){
                 
             }else{
-                Image ig  = ImageIO.read(getClass().getResource("/UI/Icons/noimage.png")).getScaledInstance(getWidth()-18, getHeight()-18, Image.SCALE_DEFAULT);//Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png"));
+                Image ig  = ImageIO.read(getClass().getResource("/UI/Icons/noimage.png")).getScaledInstance(getWidth()-18, getHeight()-18, Image.SCALE_SMOOTH);//Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png"));
                 g2d.drawImage(ig, 9, 9, null);
             }
             
