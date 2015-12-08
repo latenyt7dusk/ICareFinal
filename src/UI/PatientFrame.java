@@ -915,14 +915,22 @@ public class PatientFrame extends javax.swing.JFrame {
         vLabel18.setForeground(new java.awt.Color(255, 255, 255));
         vLabel18.setText("Category");
 
+        vTextField26.setEditable(false);
+
         vLabel20.setForeground(new java.awt.Color(255, 255, 255));
         vLabel20.setText("ID");
+
+        vTextField27.setEditable(false);
 
         vLabel21.setForeground(new java.awt.Color(255, 255, 255));
         vLabel21.setText("Name");
 
+        vTextField28.setEditable(false);
+
         vLabel22.setForeground(new java.awt.Color(255, 255, 255));
         vLabel22.setText("Description");
+
+        vTextField29.setEditable(false);
 
         vLabel23.setForeground(new java.awt.Color(255, 255, 255));
         vLabel23.setText("Quantity");
@@ -930,8 +938,12 @@ public class PatientFrame extends javax.swing.JFrame {
         vLabel24.setForeground(new java.awt.Color(255, 255, 255));
         vLabel24.setText("Price");
 
+        vTextField31.setEditable(false);
+
         vLabel25.setForeground(new java.awt.Color(255, 255, 255));
         vLabel25.setText("Total Amount");
+
+        vTextField32.setEditable(false);
 
         javax.swing.GroupLayout jPanel4Layout = new javax.swing.GroupLayout(jPanel4);
         jPanel4.setLayout(jPanel4Layout);

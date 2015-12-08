@@ -1759,6 +1759,9 @@
                           </Properties>
                         </Component>
                         <Component class="VComponents.VTextField" name="vTextField26">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                          </Properties>
                         </Component>
                         <Component class="VComponents.VLabel" name="vLabel20">
                           <Properties>
@@ -1769,6 +1772,9 @@
                           </Properties>
                         </Component>
                         <Component class="VComponents.VTextField" name="vTextField27">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                          </Properties>
                         </Component>
                         <Component class="VComponents.VLabel" name="vLabel21">
                           <Properties>
@@ -1779,6 +1785,9 @@
                           </Properties>
                         </Component>
                         <Component class="VComponents.VTextField" name="vTextField28">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                          </Properties>
                         </Component>
                         <Component class="VComponents.VLabel" name="vLabel22">
                           <Properties>
@@ -1789,6 +1798,9 @@
                           </Properties>
                         </Component>
                         <Component class="VComponents.VTextField" name="vTextField29">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                          </Properties>
                         </Component>
                         <Component class="VComponents.VLabel" name="vLabel23">
                           <Properties>
@@ -1809,6 +1821,9 @@
                           </Properties>
                         </Component>
                         <Component class="VComponents.VTextField" name="vTextField31">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                          </Properties>
                         </Component>
                         <Component class="VComponents.VLabel" name="vLabel25">
                           <Properties>
@@ -1819,6 +1834,9 @@
                           </Properties>
                         </Component>
                         <Component class="VComponents.VTextField" name="vTextField32">
+                          <Properties>
+                            <Property name="editable" type="boolean" value="false"/>
+                          </Properties>
                         </Component>
                       </SubComponents>
                     </Container>
