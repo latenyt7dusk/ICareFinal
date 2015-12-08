@@ -50,8 +50,8 @@ public class VDateChooser extends JPanel{
         setPreferredSize(new Dimension(116,20));
         MM.setMaximumRowCount(12);
         MM.setPreferredSize(new Dimension(34,20));
-        DD.setPreferredSize(new Dimension(32,20));
-        YY.setPreferredSize(new Dimension(40,20));
+        DD.setPreferredSize(new Dimension(28,20));
+        YY.setPreferredSize(new Dimension(44,20));
         
         
         
@@ -82,8 +82,8 @@ public class VDateChooser extends JPanel{
         setPreferredSize(new Dimension(116,20));
         MM.setMaximumRowCount(12);
         MM.setPreferredSize(new Dimension(34,20));
-        DD.setPreferredSize(new Dimension(32,20));
-        YY.setPreferredSize(new Dimension(40,20));
+        DD.setPreferredSize(new Dimension(28,20));
+        YY.setPreferredSize(new Dimension(44,20));
         
         
         

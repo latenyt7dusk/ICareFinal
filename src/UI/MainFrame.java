@@ -70,7 +70,7 @@ public class MainFrame extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
         MaximizeUsableBounds();
         System.gc();
-        vPhotoContainer3.Lock(true);
+        //vPhotoContainer3.Lock(true);
         vTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
         PatientInit();
@@ -131,12 +131,12 @@ public class MainFrame extends javax.swing.JFrame {
         vButton26 = new VComponents.VButton();
         vButton28 = new VComponents.VButton();
         vButton29 = new VComponents.VButton();
+        vProfileImage1 = new VComponents.VProfileImage();
         vShadowedPanel3 = new VComponents.VShadowedPanel();
         MainSlide = new VComponents.VHolderPanel();
         PatientSlide = new javax.swing.JPanel();
         vScrollPane1 = new VComponents.VScrollPane();
         vTable1 = new VComponents.VTable();
-        vPhotoContainer3 = new VComponents.VPhotoContainer();
         jLabel1 = new javax.swing.JLabel();
         vButton12 = new VComponents.VButton();
         jSeparator1 = new javax.swing.JSeparator();
@@ -159,6 +159,7 @@ public class MainFrame extends javax.swing.JFrame {
         vButton15 = new VComponents.VButton();
         vButton16 = new VComponents.VButton();
         vButton17 = new VComponents.VButton();
+        vProfileImage2 = new VComponents.VProfileImage();
         UserSlide = new javax.swing.JPanel();
         vScrollPane2 = new VComponents.VScrollPane();
         vTable2 = new VComponents.VTable();
@@ -373,23 +374,37 @@ public class MainFrame extends javax.swing.JFrame {
 
         vButton29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/save.png"))); // NOI18N
 
+        javax.swing.GroupLayout vProfileImage1Layout = new javax.swing.GroupLayout(vProfileImage1);
+        vProfileImage1.setLayout(vProfileImage1Layout);
+        vProfileImage1Layout.setHorizontalGroup(
+            vProfileImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 75, Short.MAX_VALUE)
+        );
+        vProfileImage1Layout.setVerticalGroup(
+            vProfileImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 75, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout vShadowedPanel2Layout = new javax.swing.GroupLayout(vShadowedPanel2);
         vShadowedPanel2.setLayout(vShadowedPanel2Layout);
         vShadowedPanel2Layout.setHorizontalGroup(
             vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vShadowedPanel2Layout.createSequentialGroup()
-                .addContainerGap()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(vButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
                     .addGroup(vShadowedPanel2Layout.createSequentialGroup()
-                        .addComponent(vButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vButton28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGroup(vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addComponent(vProfileImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                            .addGroup(vShadowedPanel2Layout.createSequentialGroup()
+                                .addComponent(vButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vButton28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addComponent(vButton29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
                 .addContainerGap())
         );
@@ -397,7 +412,9 @@ public class MainFrame extends javax.swing.JFrame {
             vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vShadowedPanel2Layout.createSequentialGroup()
                 .addComponent(vButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 101, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(vProfileImage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addGroup(vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(vButton24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(vButton25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -626,6 +643,17 @@ public class MainFrame extends javax.swing.JFrame {
 
         vButton17.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/admin.png"))); // NOI18N
 
+        javax.swing.GroupLayout vProfileImage2Layout = new javax.swing.GroupLayout(vProfileImage2);
+        vProfileImage2.setLayout(vProfileImage2Layout);
+        vProfileImage2Layout.setHorizontalGroup(
+            vProfileImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 152, Short.MAX_VALUE)
+        );
+        vProfileImage2Layout.setVerticalGroup(
+            vProfileImage2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGap(0, 0, Short.MAX_VALUE)
+        );
+
         javax.swing.GroupLayout PatientSlideLayout = new javax.swing.GroupLayout(PatientSlide);
         PatientSlide.setLayout(PatientSlideLayout);
         PatientSlideLayout.setHorizontalGroup(
@@ -635,7 +663,7 @@ public class MainFrame extends javax.swing.JFrame {
                 .addGroup(PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(vScrollPane1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(PatientSlideLayout.createSequentialGroup()
-                        .addComponent(vPhotoContainer3, javax.swing.GroupLayout.PREFERRED_SIZE, 152, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(vProfileImage2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                         .addGroup(PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(PatientSlideLayout.createSequentialGroup()
@@ -650,7 +678,7 @@ public class MainFrame extends javax.swing.JFrame {
                                 .addComponent(vButton15, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
                                 .addComponent(vButton14, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, 0, Short.MAX_VALUE)))
+                            .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, 583, Short.MAX_VALUE)))
                     .addComponent(jSeparator1)
                     .addGroup(PatientSlideLayout.createSequentialGroup()
                         .addComponent(vComboBox1, javax.swing.GroupLayout.PREFERRED_SIZE, 153, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -664,7 +692,6 @@ public class MainFrame extends javax.swing.JFrame {
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, PatientSlideLayout.createSequentialGroup()
                 .addGap(17, 17, 17)
                 .addGroup(PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(vPhotoContainer3, javax.swing.GroupLayout.PREFERRED_SIZE, 142, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addGroup(PatientSlideLayout.createSequentialGroup()
                         .addGroup(PatientSlideLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -674,7 +701,8 @@ public class MainFrame extends javax.swing.JFrame {
                             .addComponent(vButton16, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
                             .addComponent(vButton17, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vProfileImage2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addComponent(jSeparator1, javax.swing.GroupLayout.PREFERRED_SIZE, 10, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
@@ -1030,7 +1058,8 @@ public class MainFrame extends javax.swing.JFrame {
     private VComponents.VLabel vLabel8;
     private VComponents.VLabel vLabel9;
     private VComponents.VPanel vPanel1;
-    private VComponents.VPhotoContainer vPhotoContainer3;
+    private VComponents.VProfileImage vProfileImage1;
+    private VComponents.VProfileImage vProfileImage2;
     private VComponents.VScrollPane vScrollPane1;
     private VComponents.VScrollPane vScrollPane2;
     private VComponents.VShadowedPanel vShadowedPanel1;

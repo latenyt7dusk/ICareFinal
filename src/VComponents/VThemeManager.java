@@ -86,7 +86,7 @@ public class VThemeManager {
     
     
     //Scroll UI Colors
-    public static Color ScrollBackground = VTransparent;
+    public static Color ScrollBackground = VTransparent;//Color.WHITE;//
     public static Color ScrollTrackColor = VTrackground;
     public static Color ScrollThumbNormalColor = VNormalground;
     public static Color ScrollThumbHoverColor = VThemeColor;
