@@ -138,6 +138,25 @@ public class PatientFrame extends javax.swing.JFrame {
         vTextField12 = new VComponents.VTextField();
         vLabel4 = new VComponents.VLabel();
         vLabel1 = new VComponents.VLabel();
+        Medical = new javax.swing.JPanel();
+        jLabel21 = new javax.swing.JLabel();
+        vButton25 = new VComponents.VButton();
+        vButton26 = new VComponents.VButton();
+        jPanel11 = new javax.swing.JPanel();
+        vScrollPane7 = new VComponents.VScrollPane(Color.WHITE)
+        ;
+        vButton27 = new VComponents.VButton();
+        jPanel12 = new javax.swing.JPanel();
+        jCheckBox14 = new javax.swing.JCheckBox();
+        jCheckBox16 = new javax.swing.JCheckBox();
+        jCheckBox17 = new javax.swing.JCheckBox();
+        jCheckBox18 = new javax.swing.JCheckBox();
+        jCheckBox19 = new javax.swing.JCheckBox();
+        jLabel23 = new javax.swing.JLabel();
+        jCheckBox21 = new javax.swing.JCheckBox();
+        jCheckBox27 = new javax.swing.JCheckBox();
+        jCheckBox28 = new javax.swing.JCheckBox();
+        vLabel46 = new VComponents.VLabel();
         Transaction = new javax.swing.JPanel();
         jLabel14 = new javax.swing.JLabel();
         vScrollPane3 = new VComponents.VScrollPane();
@@ -912,6 +931,202 @@ public class PatientFrame extends javax.swing.JFrame {
         );
 
         Records.add(Optalmic, "card3");
+
+        Medical.setBackground(new java.awt.Color(25, 25, 25));
+
+        jLabel21.setBackground(VThemeManager.ButtonNormal);
+        jLabel21.setFont(new java.awt.Font("Tahoma", 1, 18)); // NOI18N
+        jLabel21.setForeground(VThemeManager.ButtonForeground);
+        jLabel21.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel21.setText("Medical Record");
+        jLabel21.setOpaque(true);
+
+        vButton25.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/arrow_left.png"))); // NOI18N
+
+        vButton26.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/arrow_right.png"))); // NOI18N
+
+        jPanel11.setBorder(javax.swing.BorderFactory.createLineBorder(VThemeManager.ButtonNormal));
+        jPanel11.setOpaque(false);
+
+        vButton27.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/save.png"))); // NOI18N
+        vButton27.setText("Save");
+        vButton27.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        vButton27.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton27ActionPerformed(evt);
+            }
+        });
+
+        jPanel12.setBorder(javax.swing.BorderFactory.createLineBorder(VThemeManager.ButtonNormal));
+        jPanel12.setOpaque(false);
+
+        jCheckBox14.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox14.setText("Diabetic");
+        jCheckBox14.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jCheckBox14.setFocusPainted(false);
+        jCheckBox14.setOpaque(false);
+
+        jCheckBox16.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox16.setText("Dizziness");
+        jCheckBox16.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jCheckBox16.setFocusPainted(false);
+        jCheckBox16.setOpaque(false);
+
+        jCheckBox17.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox17.setText("Hypertensive");
+        jCheckBox17.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jCheckBox17.setFocusPainted(false);
+        jCheckBox17.setOpaque(false);
+
+        jCheckBox18.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox18.setText("Itchiness");
+        jCheckBox18.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jCheckBox18.setFocusPainted(false);
+        jCheckBox18.setOpaque(false);
+
+        jCheckBox19.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox19.setText("Anemic");
+        jCheckBox19.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jCheckBox19.setFocusPainted(false);
+        jCheckBox19.setOpaque(false);
+
+        jLabel23.setBackground(VThemeManager.ButtonNormal);
+        jLabel23.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        jLabel23.setForeground(new java.awt.Color(255, 255, 255));
+        jLabel23.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        jLabel23.setText("Health Condition");
+        jLabel23.setOpaque(true);
+
+        jCheckBox21.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox21.setText("Nausea / Vomitting");
+        jCheckBox21.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jCheckBox21.setFocusPainted(false);
+        jCheckBox21.setOpaque(false);
+
+        jCheckBox27.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox27.setText("Dizziness");
+        jCheckBox27.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jCheckBox27.setFocusPainted(false);
+        jCheckBox27.setOpaque(false);
+
+        jCheckBox28.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox28.setText("Itchiness");
+        jCheckBox28.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
+        jCheckBox28.setFocusPainted(false);
+        jCheckBox28.setOpaque(false);
+
+        javax.swing.GroupLayout jPanel12Layout = new javax.swing.GroupLayout(jPanel12);
+        jPanel12.setLayout(jPanel12Layout);
+        jPanel12Layout.setHorizontalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jCheckBox17, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox14, javax.swing.GroupLayout.PREFERRED_SIZE, 98, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(jCheckBox21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox19, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox16, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox18, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addComponent(jCheckBox27, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(jCheckBox28, javax.swing.GroupLayout.PREFERRED_SIZE, 84, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(87, Short.MAX_VALUE))
+            .addComponent(jLabel23, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+        );
+        jPanel12Layout.setVerticalGroup(
+            jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel12Layout.createSequentialGroup()
+                .addComponent(jLabel23)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBox17)
+                            .addComponent(jCheckBox19)
+                            .addComponent(jCheckBox16))
+                        .addGap(0, 0, 0)
+                        .addGroup(jPanel12Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                            .addComponent(jCheckBox14)
+                            .addComponent(jCheckBox21)
+                            .addComponent(jCheckBox18)))
+                    .addGroup(jPanel12Layout.createSequentialGroup()
+                        .addComponent(jCheckBox27)
+                        .addGap(0, 0, 0)
+                        .addComponent(jCheckBox28)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+        );
+
+        javax.swing.GroupLayout jPanel11Layout = new javax.swing.GroupLayout(jPanel11);
+        jPanel11.setLayout(jPanel11Layout);
+        jPanel11Layout.setHorizontalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGroup(jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                    .addComponent(vScrollPane7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 505, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vButton27, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel11Layout.createSequentialGroup()
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addContainerGap())
+        );
+        jPanel11Layout.setVerticalGroup(
+            jPanel11Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(jPanel11Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(218, 218, 218)
+                .addComponent(vScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                .addGap(17, 17, 17)
+                .addComponent(vButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+        );
+
+        vLabel46.setBackground(VThemeManager.ButtonNormal);
+        vLabel46.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 5, 1, 5));
+        vLabel46.setForeground(VThemeManager.ButtonForeground);
+        vLabel46.setText("Record");
+        vLabel46.setOpaque(true);
+
+        javax.swing.GroupLayout MedicalLayout = new javax.swing.GroupLayout(Medical);
+        Medical.setLayout(MedicalLayout);
+        MedicalLayout.setHorizontalGroup(
+            MedicalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MedicalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(MedicalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addGroup(MedicalLayout.createSequentialGroup()
+                        .addComponent(vButton25, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addGap(0, 0, 0)
+                        .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                        .addGap(0, 0, 0)
+                        .addComponent(vButton26, javax.swing.GroupLayout.PREFERRED_SIZE, 27, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vLabel46, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jPanel11, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap())
+        );
+        MedicalLayout.setVerticalGroup(
+            MedicalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(MedicalLayout.createSequentialGroup()
+                .addContainerGap()
+                .addGroup(MedicalLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                    .addComponent(vButton25, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jLabel21, javax.swing.GroupLayout.DEFAULT_SIZE, 30, Short.MAX_VALUE)
+                    .addComponent(vButton26, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                .addGap(34, 34, 34)
+                .addComponent(vLabel46, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jPanel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addContainerGap())
+        );
+
+        Records.add(Medical, "card3");
 
         vHolderPanel1.add(Records, "card4");
 
@@ -1716,6 +1931,10 @@ public class PatientFrame extends javax.swing.JFrame {
         System.out.println(jTextArea1.getText());
     }//GEN-LAST:event_vButton14ActionPerformed
 
+    private void vButton27ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton27ActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_vButton27ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -1753,6 +1972,7 @@ public class PatientFrame extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JPanel Logs;
+    private javax.swing.JPanel Medical;
     private javax.swing.JPanel Optalmic;
     private javax.swing.JPanel Profile;
     private VComponents.VHolderPanel Records;
@@ -1762,7 +1982,15 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JCheckBox jCheckBox11;
     private javax.swing.JCheckBox jCheckBox12;
     private javax.swing.JCheckBox jCheckBox13;
+    private javax.swing.JCheckBox jCheckBox14;
+    private javax.swing.JCheckBox jCheckBox16;
+    private javax.swing.JCheckBox jCheckBox17;
+    private javax.swing.JCheckBox jCheckBox18;
+    private javax.swing.JCheckBox jCheckBox19;
     private javax.swing.JCheckBox jCheckBox2;
+    private javax.swing.JCheckBox jCheckBox21;
+    private javax.swing.JCheckBox jCheckBox27;
+    private javax.swing.JCheckBox jCheckBox28;
     private javax.swing.JCheckBox jCheckBox3;
     private javax.swing.JCheckBox jCheckBox4;
     private javax.swing.JCheckBox jCheckBox5;
@@ -1783,6 +2011,8 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel19;
     private javax.swing.JLabel jLabel2;
     private javax.swing.JLabel jLabel20;
+    private javax.swing.JLabel jLabel21;
+    private javax.swing.JLabel jLabel23;
     private javax.swing.JLabel jLabel3;
     private javax.swing.JLabel jLabel4;
     private javax.swing.JLabel jLabel5;
@@ -1792,6 +2022,8 @@ public class PatientFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
     private javax.swing.JPanel jPanel10;
+    private javax.swing.JPanel jPanel11;
+    private javax.swing.JPanel jPanel12;
     private javax.swing.JPanel jPanel2;
     private javax.swing.JPanel jPanel3;
     private javax.swing.JPanel jPanel4;
@@ -1826,6 +2058,9 @@ public class PatientFrame extends javax.swing.JFrame {
     private VComponents.VButton vButton22;
     private VComponents.VButton vButton23;
     private VComponents.VButton vButton24;
+    private VComponents.VButton vButton25;
+    private VComponents.VButton vButton26;
+    private VComponents.VButton vButton27;
     private VComponents.VButton vButton3;
     private VComponents.VButton vButton4;
     private VComponents.VButton vButton5;
@@ -1864,6 +2099,7 @@ public class PatientFrame extends javax.swing.JFrame {
     private VComponents.VLabel vLabel31;
     private VComponents.VLabel vLabel32;
     private VComponents.VLabel vLabel4;
+    private VComponents.VLabel vLabel46;
     private VComponents.VLabel vLabel5;
     private VComponents.VLabel vLabel6;
     private VComponents.VLabel vLabel7;
@@ -1875,6 +2111,7 @@ public class PatientFrame extends javax.swing.JFrame {
     private VComponents.VScrollPane vScrollPane3;
     private VComponents.VScrollPane vScrollPane4;
     private VComponents.VScrollPane vScrollPane5;
+    private VComponents.VScrollPane vScrollPane7;
     private VComponents.VShadowedPanel vShadowedPanel1;
     private VComponents.VTable vTable1;
     private VComponents.VTable vTable2;
