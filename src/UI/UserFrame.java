@@ -16,7 +16,6 @@
  */
 package UI;
 
-import UI.VOption.VOptionPane;
 import VClass.User;
 import VComponents.VComboBox;
 import VComponents.VTextField;

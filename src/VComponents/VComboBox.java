@@ -111,6 +111,27 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
         });
     }
     
+    public VComboBox(int i) {
+        super(new Object[]{"item 1", "item 2", "item 3", "item 4"});
+        //AutoCompletion.enable(this);
+        setBackground(VThemeManager.TextBackground);
+        setForeground(VThemeManager.TextForeground);
+        setScrollBackground(VThemeManager.ScrollBackground);
+        setScrollTrackColor(VThemeManager.ScrollTrackColor);
+        setScrollThumbNormalColor(VThemeManager.ScrollThumbNormalColor);
+        setScrollThumbHoverColor(VThemeManager.ScrollThumbHoverColor);
+        setUI(new ComboBox_UI());
+        setRenderer(new ItemRenderer(i));
+        //((JLabel) this.getRenderer()).setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
+
+        setBorder(javax.swing.BorderFactory.createEmptyBorder());
+        addPropertyChangeListener(new java.beans.PropertyChangeListener() {
+            public void propertyChange(java.beans.PropertyChangeEvent evt) {
+                repaint();
+            }
+        });
+    }
+    
     public void setAutoCompletion(boolean b){
         this.autocomplete = b;
     }
@@ -372,7 +393,20 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
             setBackground(ScrollBackground);
 
         }
+        
+        private ItemRenderer(int i) {
+            setLayout(new CardLayout());
 
+            labelItem.setOpaque(true);
+            labelItem.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 4, 1, 4));
+            
+            labelItem.setHorizontalAlignment(i);
+            
+            add(labelItem);
+            setBackground(ScrollBackground);
+
+        }
+        
         @Override
         public Component getListCellRendererComponent(JList list, Object value,
                 int index, boolean isSelected, boolean cellHasFocus) {
