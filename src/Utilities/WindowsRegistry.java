@@ -20,7 +20,9 @@ import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -50,7 +52,8 @@ public class WindowsRegistry {
         try {
             WindowsRegistry wr = new WindowsRegistry();
             //wr.setSubKey(WindowsRegistry.HKCU,"SOFTWARE\\NakpilSoftwares\\ICare","REG_EXPAND_SZ","InstallDate","%USERPROFILE%\\Potang ina mo gaga ka\\tae");
-            wr.getSubKeys(WindowsRegistry.HKCU,"SOFTWARE\\NakpilSoftwares");
+            //wr.getSubKeys(WindowsRegistry.HKCU,"SOFTWARE\\NakpilSoftwares");
+            JOptionPane.showMessageDialog(null, wr.getValues(WindowsRegistry.HKCU,"SOFTWARE\\NakpilSoftwares\\ICare"));
         } catch (IOException ex) {
             Logger.getLogger(WindowsRegistry.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -70,8 +73,7 @@ public class WindowsRegistry {
                 return true;
             }
             return false;
-        }catch(Exception er){
-            er.printStackTrace();
+        }catch(IOException | InterruptedException er){
             process.destroy();
             return false;
         }finally{
@@ -97,8 +99,7 @@ public class WindowsRegistry {
                 return true;
             }
             return false;
-        }catch(Exception er){
-            er.printStackTrace();
+        }catch(IOException | InterruptedException er){
             process.destroy();
             return false;
         }finally{
@@ -125,8 +126,30 @@ public class WindowsRegistry {
             result = process.waitFor();
             return keys;       
             
-        }catch(Exception er){
-            er.printStackTrace();
+        }catch(IOException | InterruptedException er){
+            process.destroy();
+            return keys;
+        }finally{
+            if(stream != null){
+                stream.close();
+            }
+        }
+    }
+    
+    public Map<String,String> getValues(String root,String key) throws IOException{
+        Map<String,String> keys = new HashMap();
+        try{
+            process = runtime.exec("REG QUERY "+root+"\\"+key+" /s");
+            stream = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            
+            while((line = stream.readLine()) != null){
+                    //keys.add(line);
+            }
+            result = process.waitFor();
+            return keys;       
+            
+        }catch(IOException | InterruptedException er){
             process.destroy();
             return keys;
         }finally{
@@ -139,29 +162,24 @@ public class WindowsRegistry {
     public String parseVariable(String var,char en){
         try{
             char chars[] = var.toCharArray();
-            List<String> vars = new ArrayList();
             int enclose = 0;
             String tmp = "";
             boolean read = false;
             for(int i = 0;i < chars.length;i++){
                 if(chars[i] == en){
                     read = true;
-                    en++;
+                    enclose++;
                 }
                 if(read){
                     tmp = tmp.concat(String.valueOf(chars[i]));
+                    System.out.println(tmp);
                 }
-                if(en == 2){
-                    en = 0;
-                    tmp = "";
-                    read = false;
-                    vars.add(tmp);
+                if(enclose == 2){
+                    break;
                 }
             }
-            
-            JOptionPane.showMessageDialog(null, vars);
-            
-            return "";
+            System.out.println("end");
+            return tmp;
         }catch(Exception er){
             er.printStackTrace();
             return "";
