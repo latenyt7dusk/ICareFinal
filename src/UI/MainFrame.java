@@ -503,7 +503,7 @@ public class MainFrame extends javax.swing.JFrame {
 
         jSeparator1.setForeground(VThemeManager.ButtonNormal);
 
-        vComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Today", "Recent Week", "Recent Month", "Un Claimed", "Scheduled" }));
+        vComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Recent Month", "Recent Week", "Today", "Un Claimed", "Scheduled" }));
         vComboBox1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         jPanel1.setOpaque(false);
