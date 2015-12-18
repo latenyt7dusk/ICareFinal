@@ -23,6 +23,7 @@ import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
+import java.util.Set;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JOptionPane;
@@ -32,159 +33,180 @@ import javax.swing.JOptionPane;
  * @author HERU
  */
 public class WindowsRegistry {
-    
-    private Runtime runtime;
+
+    private final Runtime runtime;
     private Process process;
     private int result;
     private BufferedReader stream;
-    
+
     public static String HKCR = "HKEY_CLASSES_ROOT";
     public static String HKCU = "HKEY_CURRENT_USER";
     public static String HKLM = "HKEY_LOCAL_MACHINE";
     public static String HKU = "HKEY_USERS";
     public static String HKCC = "HKEY_CURRENT_CONFIG";
     
-    public WindowsRegistry(){
+    public static String STRING = "REG_SZ";
+    public static String BINARY = "REG_BINARY";
+
+    public WindowsRegistry() {
         runtime = Runtime.getRuntime();
     }
-    
-    public static void main(String args[]){
+
+    public static void main(String args[]) {
         try {
             WindowsRegistry wr = new WindowsRegistry();
-            //wr.setSubKey(WindowsRegistry.HKCU,"SOFTWARE\\NakpilSoftwares\\ICare","REG_EXPAND_SZ","InstallDate","%USERPROFILE%\\Potang ina mo gaga ka\\tae");
-            //wr.getSubKeys(WindowsRegistry.HKCU,"SOFTWARE\\NakpilSoftwares");
-            JOptionPane.showMessageDialog(null, wr.getValues(WindowsRegistry.HKCU,"SOFTWARE\\NakpilSoftwares\\ICare"));
+            wr.setSubKey(WindowsRegistry.HKCU, "SOFTWARE\\NakpilSoftwares\\ICare", "REG_BINARY", "Install", wr.reverse(wr.StringtoHex("Pak you ka")));
+            wr.getSubKeys(WindowsRegistry.HKCU,"SOFTWARE\\NakpilSoftwares");
+            Map<String, String> vals = wr.getValues(WindowsRegistry.HKCU, "SOFTWARE\\NakpilSoftwares\\ICare");
+            Set<String> e = vals.keySet();
+            for (String name : e) {
+                if (name.equals("Install")) {
+                    JOptionPane.showMessageDialog(null, vals.get(name));
+                    break;
+                }
+            }
+            
+            System.out.println(wr.reverse("50616b20796f75206b61"));
+            System.out.println(wr.reverse("49383b79203f24793b38"));
         } catch (IOException ex) {
             Logger.getLogger(WindowsRegistry.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public boolean newKey(String root,String key) throws IOException{
-        try{
-            process = runtime.exec("REG ADD "+root+"\\"+key);
+    public String reverse(String text){
+        char[] x = "9876543210".toCharArray();
+        char[] chText = text.toCharArray();
+        for(int i = 0;i < chText.length;i++){
+            for(int z = 0;z < x.length;z++){
+                if(chText[i] == x[z]){
+                    chText[i] = x[Character.getNumericValue(chText[i])];
+                    break;
+                }
+            }
+        }
+        return String.valueOf(chText);
+    }
+
+    public String StringtoHex(String text) {
+        byte[] buf = text.getBytes();
+        char[] HEX_CHARS = "0123456789abcdef".toCharArray();
+        char[] chars = new char[2 * buf.length];
+        for (int i = 0; i < buf.length; ++i) {
+            chars[2 * i] = HEX_CHARS[(buf[i] & 0xF0) >>> 4];
+            chars[2 * i + 1] = HEX_CHARS[buf[i] & 0x0F];
+        }
+        return new String(chars);
+    }
+
+    public String HextoString(String txtInHex) {
+        byte[] txtInByte = new byte[txtInHex.length() / 2];
+        int j = 0;
+        for (int i = 0; i < txtInHex.length(); i += 2) {
+            txtInByte[j++] = Byte.parseByte(txtInHex.substring(i, i + 2), 16);
+        }
+        return new String(txtInByte);
+    }
+
+    public boolean newKey(String root, String key) throws IOException {
+        try {
+            process = runtime.exec("REG ADD " + root + "\\" + key);
             stream = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
-            while((line = stream.readLine()) != null){
+            while ((line = stream.readLine()) != null) {
                 System.out.println(line);
             }
             result = process.waitFor();
-            
-            if(result == 0){
+
+            if (result == 0) {
                 return true;
             }
             return false;
-        }catch(IOException | InterruptedException er){
+        } catch (IOException | InterruptedException er) {
             process.destroy();
             return false;
-        }finally{
-            if(stream != null){
+        } finally {
+            if (stream != null) {
                 stream.close();
             }
         }
     }
-    
-    public boolean setSubKey(String root,String key,String type,String name,String val) throws IOException{
-        try{
-            val = val.replaceAll(" ", "\" \"");
+
+    public boolean setSubKey(String root, String key, String type, String name, String val) throws IOException {
+        try {
+            val = ((type.equalsIgnoreCase("REG_BINARY")) ? val : val.replaceAll(" ", "\" \""));
             System.out.print(val);
-            process = runtime.exec("REG ADD "+root+"\\"+key+" /v "+name+" /t "+type+" /d "+val+" /f");
+            process = runtime.exec("REG ADD " + root + "\\" + key + " /v " + name + " /t " + type + " /d " + val + " /f");
             stream = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
-            while((line = stream.readLine()) != null){
+            while ((line = stream.readLine()) != null) {
                 System.out.println(line);
             }
             result = process.waitFor();
-            
-            if(result == 0){
+
+            if (result == 0) {
                 return true;
             }
             return false;
-        }catch(IOException | InterruptedException er){
+        } catch (IOException | InterruptedException er) {
             process.destroy();
             return false;
-        }finally{
-            if(stream != null){
+        } finally {
+            if (stream != null) {
                 stream.close();
             }
         }
     }
-    
-    
-    public List<String> getSubKeys(String root,String key) throws IOException{
+
+    public List<String> getSubKeys(String root, String key) throws IOException {
         List<String> keys = new ArrayList();
-        try{
-            process = runtime.exec("REG QUERY "+root+"\\"+key);
+        try {
+            process = runtime.exec("REG QUERY " + root + "\\" + key);
             stream = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
-            
-            while((line = stream.readLine()) != null){
-                if(line.contains(root+"\\"+key+"\\")){
-                    line = line.replace(root+"\\"+key+"\\", "");
+
+            while ((line = stream.readLine()) != null) {
+                if (line.contains(root + "\\" + key + "\\")) {
+                    line = line.replace(root + "\\" + key + "\\", "");
                     keys.add(line);
                 }
             }
             result = process.waitFor();
-            return keys;       
-            
-        }catch(IOException | InterruptedException er){
+            return keys;
+
+        } catch (IOException | InterruptedException er) {
             process.destroy();
             return keys;
-        }finally{
-            if(stream != null){
+        } finally {
+            if (stream != null) {
                 stream.close();
             }
         }
     }
-    
-    public Map<String,String> getValues(String root,String key) throws IOException{
-        Map<String,String> keys = new HashMap();
-        try{
-            process = runtime.exec("REG QUERY "+root+"\\"+key+" /s");
+
+    public Map<String, String> getValues(String root, String key) throws IOException {
+        Map<String, String> keys = new HashMap();
+        try {
+            process = runtime.exec("REG QUERY " + root + "\\" + key + " /s");
             stream = new BufferedReader(new InputStreamReader(process.getInputStream()));
             String line;
-            
-            while((line = stream.readLine()) != null){
-                    //keys.add(line);
+            while ((line = stream.readLine()) != null) {
+                if (!line.isEmpty() && !line.contains(root + "\\" + key) && !line.contains("REG.EXE")) {
+                    String tmp[] = line.split("\t");
+                    tmp[0] = tmp[0].trim();
+                    keys.put(tmp[0], tmp[2]);
+                }
             }
             result = process.waitFor();
-            return keys;       
-            
-        }catch(IOException | InterruptedException er){
+            return keys;
+
+        } catch (IOException | InterruptedException er) {
             process.destroy();
             return keys;
-        }finally{
-            if(stream != null){
+        } finally {
+            if (stream != null) {
                 stream.close();
             }
         }
     }
-    
-    public String parseVariable(String var,char en){
-        try{
-            char chars[] = var.toCharArray();
-            int enclose = 0;
-            String tmp = "";
-            boolean read = false;
-            for(int i = 0;i < chars.length;i++){
-                if(chars[i] == en){
-                    read = true;
-                    enclose++;
-                }
-                if(read){
-                    tmp = tmp.concat(String.valueOf(chars[i]));
-                    System.out.println(tmp);
-                }
-                if(enclose == 2){
-                    break;
-                }
-            }
-            System.out.println("end");
-            return tmp;
-        }catch(Exception er){
-            er.printStackTrace();
-            return "";
-        }
-    }
-   
-    
+
 }
