@@ -1,5 +1,5 @@
 /*
- * Copyright (C) 2015 HERU
+ * Copyright (C) 2015 Late7dusk
  *
  * This program is free software: you can redistribute it and/or modify
  * it under the terms of the GNU General Public License as published by
@@ -18,46 +18,40 @@ package VClass;
 
 /**
  *
- * @author HERU
+ * @author Late7dusk
  */
-public class User extends PersonalInfo{
+public class Log {
     
-    private String uname,upass,role;
+    private final String logger,description,date,time;
     
-    public User(){
-        this(null,null,null);
-    }
-    public User(String u,String p,String r){
-        this.uname = u;
-        this.upass = p;
-        this.role = r;
+    public Log(String log,String desc,String date,String time){
+        this(log,desc,date,time,false);
     }
     
-    public void setUsername(String u){
-        this.uname = u;
-    }
-    public String getUsername(){
-        return uname;
-    }
-    
-    public void setPassword(String p){
-        this.upass = p;
-    }
-    public String getPassword(){
-        return upass;
+    public Log(String log,String desc,String date,String time,boolean save){
+        this.date = date;
+        this.time = time;
+        this.logger = log;
+        this.description = desc;
+        
+        if(save){
+            
+        }
     }
     
-    public void setRole(String r){
-        this.role = r;
-    }
-    public String getRole(){
-        return role;
+    public String getLogger(){
+        return logger;
     }
     
-    public String getUserEntry(){
-        return getID()+","+uname+","+upass+","+role;
+    public String getDescription(){
+        return description;
     }
     
+    public String getDate(){
+        return date;
+    }
     
-    
+    public String getTime(){
+        return time;
+    }
 }

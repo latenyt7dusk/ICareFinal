@@ -16,6 +16,7 @@
  */
 package Utilities;
 
+import VClass.ClassManager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -32,9 +33,9 @@ import javax.swing.JOptionPane;
  *
  * @author HERU
  */
-public class WindowsRegistry {
+public class Registry {
 
-    private final Runtime runtime;
+    private Runtime runtime;
     private Process process;
     private int result;
     private BufferedReader stream;
@@ -44,41 +45,44 @@ public class WindowsRegistry {
     public static String HKLM = "HKEY_LOCAL_MACHINE";
     public static String HKU = "HKEY_USERS";
     public static String HKCC = "HKEY_CURRENT_CONFIG";
-    
+
     public static String STRING = "REG_SZ";
     public static String BINARY = "REG_BINARY";
 
-    public WindowsRegistry() {
-        runtime = Runtime.getRuntime();
+    public static Map<String, String> LOG_DATA;
+
+    public Registry() {
+        this.runtime = Runtime.getRuntime();
     }
 
     public static void main(String args[]) {
         try {
-            WindowsRegistry wr = new WindowsRegistry();
-            wr.setSubKey(WindowsRegistry.HKCU, "SOFTWARE\\NakpilSoftwares\\ICare", "REG_BINARY", "Install", wr.reverse(wr.StringtoHex("Pak you ka")));
-            wr.getSubKeys(WindowsRegistry.HKCU,"SOFTWARE\\NakpilSoftwares");
-            Map<String, String> vals = wr.getValues(WindowsRegistry.HKCU, "SOFTWARE\\NakpilSoftwares\\ICare");
+            Registry wr = new Registry();
+            new ClassManager(wr);
+            //wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Data\\Log", Registry.BINARY, "Logger", reverse(StringtoHex("LOGGER")));
+            //wr.getSubKeys(Registry.HKCU, "SOFTWARE\\NakpilSoftwares");
+            Map<String, String> vals = wr.getREG_BINARY(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Data\\Log");
             Set<String> e = vals.keySet();
             for (String name : e) {
-                if (name.equals("Install")) {
-                    JOptionPane.showMessageDialog(null, vals.get(name));
-                    break;
-                }
+              if (name.equals("Logger")) {
+                //JOptionPane.showMessageDialog(null, vals.get(name));
+              break;
             }
-            
-            System.out.println(wr.reverse("50616b20796f75206b61"));
-            System.out.println(wr.reverse("49383b79203f24793b38"));
-        } catch (IOException ex) {
-            Logger.getLogger(WindowsRegistry.class.getName()).log(Level.SEVERE, null, ex);
+            }
+
+            //System.out.println(reverse("50616b20796f75206b61"));
+            //System.out.println(reverse("49383b79203f24793b38"));
+        } catch (Exception ex) {
+            Logger.getLogger(Registry.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public String reverse(String text){
+
+    public static String reverse(String text) {
         char[] x = "9876543210".toCharArray();
         char[] chText = text.toCharArray();
-        for(int i = 0;i < chText.length;i++){
-            for(int z = 0;z < x.length;z++){
-                if(chText[i] == x[z]){
+        for (int i = 0; i < chText.length; i++) {
+            for (int z = 0; z < x.length; z++) {
+                if (chText[i] == x[z]) {
                     chText[i] = x[Character.getNumericValue(chText[i])];
                     break;
                 }
@@ -87,7 +91,7 @@ public class WindowsRegistry {
         return String.valueOf(chText);
     }
 
-    public String StringtoHex(String text) {
+    public static String StringtoHex(String text) {
         byte[] buf = text.getBytes();
         char[] HEX_CHARS = "0123456789abcdef".toCharArray();
         char[] chars = new char[2 * buf.length];
@@ -191,7 +195,8 @@ public class WindowsRegistry {
             String line;
             while ((line = stream.readLine()) != null) {
                 if (!line.isEmpty() && !line.contains(root + "\\" + key) && !line.contains("REG.EXE")) {
-                    String tmp[] = line.split("\t");
+                    String tmp[] = line.split("[\t]");
+                    System.out.println(tmp[0]);
                     tmp[0] = tmp[0].trim();
                     keys.put(tmp[0], tmp[2]);
                 }
@@ -207,6 +212,41 @@ public class WindowsRegistry {
                 stream.close();
             }
         }
+    }
+
+    public Map<String, String> getREG_BINARY(String root, String key) throws IOException {
+        Map<String, String> keys = new HashMap();
+        try {
+            process = runtime.exec("REG QUERY " + root + "\\" + key + " /s");
+            stream = new BufferedReader(new InputStreamReader(process.getInputStream()));
+            String line;
+            while ((line = stream.readLine()) != null) {
+                if (!line.isEmpty() && !line.contains(root + "\\" + key) && !line.contains("REG.EXE")) {
+                    String tmp[] = line.trim().split("REG_BINARY");
+                    keys.put(tmp[0].trim(), tmp[1].trim());
+                }
+            }
+            result = process.waitFor();
+            return keys;
+
+        } catch (IOException | InterruptedException er) {
+            process.destroy();
+            return keys;
+        } finally {
+            if (stream != null) {
+                stream.close();
+            }
+        }
+    }
+
+    public static class Log {
+
+        public static String LOGGER;
+
+        public static void Load() {
+            LOGGER = LOG_DATA.get("Logger");
+        }
+
     }
 
 }
