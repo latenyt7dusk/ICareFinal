@@ -16,7 +16,7 @@
  */
 package Utilities;
 
-import VClass.ClassManager;
+import VClass.Manager;
 import java.io.BufferedReader;
 import java.io.IOException;
 import java.io.InputStreamReader;
@@ -49,7 +49,6 @@ public class Registry {
     public static String STRING = "REG_SZ";
     public static String BINARY = "REG_BINARY";
 
-    public static Map<String, String> LOG_DATA;
 
     public Registry() {
         this.runtime = Runtime.getRuntime();
@@ -58,18 +57,18 @@ public class Registry {
     public static void main(String args[]) {
         try {
             Registry wr = new Registry();
-            new ClassManager(wr);
-            //wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Data\\Log", Registry.BINARY, "Logger", reverse(StringtoHex("LOGGER")));
+            
+            //wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings", Registry.BINARY, Manager.LOCAL_USER, reverse(StringtoHex("root")));
             //wr.getSubKeys(Registry.HKCU, "SOFTWARE\\NakpilSoftwares");
-            Map<String, String> vals = wr.getREG_BINARY(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Data\\Log");
-            Set<String> e = vals.keySet();
-            for (String name : e) {
-              if (name.equals("Logger")) {
+            Map<String, String> vals = wr.getREG_BINARY(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings");
+            //Set<String> e = vals.keySet();
+           // for (String name : e) {
+           //   if (name.equals("Logger")) {
                 //JOptionPane.showMessageDialog(null, vals.get(name));
-              break;
-            }
-            }
-
+            //  break;
+           // }
+           // }
+            System.out.println("Value = "+vals.get(Manager.LOCAL_USER));
             //System.out.println(reverse("50616b20796f75206b61"));
             //System.out.println(reverse("49383b79203f24793b38"));
         } catch (Exception ex) {
@@ -223,7 +222,7 @@ public class Registry {
             while ((line = stream.readLine()) != null) {
                 if (!line.isEmpty() && !line.contains(root + "\\" + key) && !line.contains("REG.EXE")) {
                     String tmp[] = line.trim().split("REG_BINARY");
-                    keys.put(tmp[0].trim(), tmp[1].trim());
+                    keys.put(tmp[0].trim(), HextoString(reverse(tmp[1].trim())));
                 }
             }
             result = process.waitFor();
@@ -239,14 +238,6 @@ public class Registry {
         }
     }
 
-    public static class Log {
-
-        public static String LOGGER;
-
-        public static void Load() {
-            LOGGER = LOG_DATA.get("Logger");
-        }
-
-    }
+    
 
 }
