@@ -59,7 +59,7 @@
                   <Group type="103" groupAlignment="1" attributes="0">
                       <Component id="jPanel1" max="32767" attributes="0"/>
                       <Group type="102" attributes="0">
-                          <Component id="vPhotoContainer2" min="-2" pref="134" max="-2" attributes="0"/>
+                          <Component id="photo_tf" min="-2" pref="134" max="-2" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" attributes="0">
                                   <EmptySpace max="32767" attributes="0"/>
@@ -75,9 +75,9 @@
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="vPasswordField1" min="-2" pref="190" max="-2" attributes="0"/>
-                                      <Component id="vComboBox2" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
-                                      <Component id="vTextField1" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                                      <Component id="pass_tf" min="-2" pref="190" max="-2" attributes="0"/>
+                                      <Component id="role_tf" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
+                                      <Component id="user_tf" alignment="0" min="-2" pref="190" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
                               </Group>
@@ -94,7 +94,7 @@
                   <Group type="103" groupAlignment="0" attributes="0">
                       <Group type="102" alignment="0" attributes="0">
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="vPhotoContainer2" min="-2" pref="124" max="-2" attributes="0"/>
+                          <Component id="photo_tf" min="-2" pref="124" max="-2" attributes="0"/>
                           <EmptySpace pref="10" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
@@ -105,17 +105,17 @@
                           <EmptySpace max="32767" attributes="0"/>
                           <Group type="103" groupAlignment="0" attributes="0">
                               <Group type="102" alignment="1" attributes="0">
-                                  <Group type="103" groupAlignment="3" attributes="0">
-                                      <Component id="vTextField1" alignment="3" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Group type="103" groupAlignment="0" attributes="0">
                                       <Component id="vLabel1" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="user_tf" min="-2" pref="20" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="vPasswordField1" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="pass_tf" min="-2" pref="20" max="-2" attributes="0"/>
                               </Group>
                               <Component id="vLabel2" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
                           <EmptySpace max="-2" attributes="0"/>
-                          <Component id="vComboBox2" min="-2" pref="20" max="-2" attributes="0"/>
+                          <Component id="role_tf" min="-2" pref="20" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -162,35 +162,35 @@
                                       <Component id="jLabel7" min="-2" pref="44" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" alignment="0" attributes="0">
-                                      <Component id="vDateChooser1" min="-2" pref="122" max="-2" attributes="0"/>
+                                      <Component id="birthdate_tf" min="-2" pref="122" max="-2" attributes="0"/>
                                       <EmptySpace max="-2" attributes="0"/>
                                       <Component id="vTextField5" min="-2" pref="44" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="103" alignment="0" groupAlignment="1" max="-2" attributes="0">
                                       <Component id="jLabel2" alignment="0" pref="172" max="32767" attributes="0"/>
-                                      <Component id="vTextField2" alignment="0" max="32767" attributes="0"/>
+                                      <Component id="firstname_tf" alignment="0" max="32767" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="vTextField3" max="32767" attributes="0"/>
+                                  <Component id="middlename_tf" max="32767" attributes="0"/>
                                   <Component id="jLabel3" max="32767" attributes="0"/>
-                                  <Component id="vComboBox1" max="32767" attributes="0"/>
+                                  <Component id="gender_tf" max="32767" attributes="0"/>
                                   <Component id="jLabel8" alignment="0" min="-2" pref="110" max="-2" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" attributes="0">
                                   <Component id="jLabel4" max="32767" attributes="0"/>
                                   <Component id="jLabel9" alignment="0" max="32767" attributes="0"/>
-                                  <Component id="vComboBox3" alignment="1" pref="151" max="32767" attributes="0"/>
-                                  <Component id="vTextField4" alignment="1" max="32767" attributes="0"/>
+                                  <Component id="civilstatus_tf" alignment="1" pref="151" max="32767" attributes="0"/>
+                                  <Component id="surname_tf" alignment="1" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace min="-2" pref="10" max="-2" attributes="0"/>
                           </Group>
                           <Group type="102" attributes="0">
                               <Group type="103" groupAlignment="1" attributes="0">
                                   <Component id="jLabel5" max="32767" attributes="0"/>
-                                  <Component id="vTextField6" max="32767" attributes="0"/>
+                                  <Component id="address_tf" max="32767" attributes="0"/>
                               </Group>
                               <EmptySpace max="-2" attributes="0"/>
                           </Group>
@@ -201,8 +201,8 @@
                       <Group type="103" groupAlignment="1" max="-2" attributes="0">
                           <Component id="jLabel10" alignment="0" pref="173" max="32767" attributes="0"/>
                           <Component id="jLabel11" max="32767" attributes="0"/>
-                          <Component id="vTextField8" alignment="0" pref="173" max="32767" attributes="0"/>
-                          <Component id="vTextField7" alignment="0" max="32767" attributes="0"/>
+                          <Component id="email_tf" alignment="0" pref="173" max="32767" attributes="0"/>
+                          <Component id="contactnumber_tf" alignment="0" max="32767" attributes="0"/>
                       </Group>
                       <EmptySpace max="32767" attributes="0"/>
                   </Group>
@@ -225,12 +225,12 @@
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel2" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="vTextField2" min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Component id="firstname_tf" min="-2" pref="24" max="-2" attributes="0"/>
                                   </Group>
                                   <Group type="102" attributes="0">
                                       <Component id="jLabel4" min="-2" max="-2" attributes="0"/>
                                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                                      <Component id="vTextField4" min="-2" pref="24" max="-2" attributes="0"/>
+                                      <Component id="surname_tf" min="-2" pref="24" max="-2" attributes="0"/>
                                   </Group>
                               </Group>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
@@ -241,33 +241,33 @@
                               </Group>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
                               <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                                  <Component id="vComboBox3" pref="24" max="32767" attributes="0"/>
+                                  <Component id="civilstatus_tf" pref="24" max="32767" attributes="0"/>
                                   <Component id="vTextField5" pref="24" max="32767" attributes="0"/>
-                                  <Component id="vDateChooser1" pref="24" max="32767" attributes="0"/>
+                                  <Component id="birthdate_tf" pref="24" max="32767" attributes="0"/>
                               </Group>
                           </Group>
                           <Group type="102" attributes="0">
                               <Component id="jLabel3" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                              <Component id="vTextField3" min="-2" pref="24" max="-2" attributes="0"/>
+                              <Component id="middlename_tf" min="-2" pref="24" max="-2" attributes="0"/>
                               <EmptySpace type="unrelated" max="-2" attributes="0"/>
                               <Component id="jLabel8" min="-2" max="-2" attributes="0"/>
                               <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                              <Component id="vComboBox1" max="32767" attributes="0"/>
+                              <Component id="gender_tf" max="32767" attributes="0"/>
                           </Group>
                       </Group>
                       <EmptySpace min="-2" pref="48" max="-2" attributes="0"/>
                       <Component id="jLabel5" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="vTextField6" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="address_tf" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace pref="11" max="32767" attributes="0"/>
                       <Component id="jLabel10" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="vTextField7" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="contactnumber_tf" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace type="separate" max="-2" attributes="0"/>
                       <Component id="jLabel11" min="-2" max="-2" attributes="0"/>
                       <EmptySpace min="0" pref="0" max="-2" attributes="0"/>
-                      <Component id="vTextField8" min="-2" pref="24" max="-2" attributes="0"/>
+                      <Component id="email_tf" min="-2" pref="24" max="-2" attributes="0"/>
                       <EmptySpace min="-2" pref="21" max="-2" attributes="0"/>
                       <Component id="vButton2" min="-2" max="-2" attributes="0"/>
                   </Group>
@@ -287,7 +287,7 @@
                 <Property name="opaque" type="boolean" value="true"/>
               </Properties>
             </Component>
-            <Component class="VComponents.VTextField" name="vTextField2">
+            <Component class="VComponents.VTextField" name="firstname_tf">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel2">
               <Properties>
@@ -305,7 +305,7 @@
                 <Property name="text" type="java.lang.String" value="Middlename"/>
               </Properties>
             </Component>
-            <Component class="VComponents.VTextField" name="vTextField3">
+            <Component class="VComponents.VTextField" name="middlename_tf">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel4">
               <Properties>
@@ -315,9 +315,9 @@
                 <Property name="text" type="java.lang.String" value="Surname"/>
               </Properties>
             </Component>
-            <Component class="VComponents.VTextField" name="vTextField4">
+            <Component class="VComponents.VTextField" name="surname_tf">
             </Component>
-            <Component class="VComponents.VDateChooser" name="vDateChooser1">
+            <Component class="VComponents.VDateChooser" name="birthdate_tf">
               <Properties>
                 <Property name="font" type="java.awt.Font" editor="org.netbeans.beaninfo.editors.FontEditor">
                   <Font name="Tahoma" size="11" style="1"/>
@@ -354,7 +354,7 @@
                 <Property name="text" type="java.lang.String" value="Age"/>
               </Properties>
             </Component>
-            <Component class="VComponents.VComboBox" name="vComboBox1">
+            <Component class="VComponents.VComboBox" name="gender_tf">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="2">
@@ -364,7 +364,7 @@
                 </Property>
               </Properties>
             </Component>
-            <Component class="VComponents.VComboBox" name="vComboBox3">
+            <Component class="VComponents.VComboBox" name="civilstatus_tf">
               <Properties>
                 <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
                   <StringArray count="5">
@@ -393,7 +393,7 @@
                 <Property name="text" type="java.lang.String" value="Civil Status"/>
               </Properties>
             </Component>
-            <Component class="VComponents.VTextField" name="vTextField6">
+            <Component class="VComponents.VTextField" name="address_tf">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel5">
               <Properties>
@@ -403,7 +403,7 @@
                 <Property name="text" type="java.lang.String" value="Address"/>
               </Properties>
             </Component>
-            <Component class="VComponents.VTextField" name="vTextField7">
+            <Component class="VComponents.VTextField" name="contactnumber_tf">
             </Component>
             <Component class="javax.swing.JLabel" name="jLabel10">
               <Properties>
@@ -421,7 +421,7 @@
                 <Property name="text" type="java.lang.String" value="Email Address"/>
               </Properties>
             </Component>
-            <Component class="VComponents.VTextField" name="vTextField8">
+            <Component class="VComponents.VTextField" name="email_tf">
             </Component>
             <Component class="VComponents.VButton" name="vButton2">
               <Properties>
@@ -440,17 +440,17 @@
             </Component>
           </SubComponents>
         </Container>
-        <Component class="VComponents.VTextField" name="vTextField1">
+        <Component class="VComponents.VTextField" name="user_tf">
           <Properties>
             <Property name="text" type="java.lang.String" value="username"/>
           </Properties>
         </Component>
-        <Component class="VComponents.VPasswordField" name="vPasswordField1">
+        <Component class="VComponents.VPasswordField" name="pass_tf">
           <Properties>
             <Property name="text" type="java.lang.String" value="password"/>
           </Properties>
         </Component>
-        <Component class="VComponents.VComboBox" name="vComboBox2">
+        <Component class="VComponents.VComboBox" name="role_tf">
           <Properties>
             <Property name="model" type="javax.swing.ComboBoxModel" editor="org.netbeans.modules.form.editors2.ComboBoxModelEditor">
               <StringArray count="3">
@@ -461,7 +461,7 @@
             </Property>
           </Properties>
         </Component>
-        <Component class="VComponents.VPhotoContainer" name="vPhotoContainer2">
+        <Component class="VComponents.VPhotoContainer" name="photo_tf">
         </Component>
         <Component class="VComponents.VButton" name="vButton4">
           <Properties>

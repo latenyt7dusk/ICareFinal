@@ -61,10 +61,12 @@ public class Registry {
             Map<String,String> map = emg.SETTINGS;
             Set<String> ee = map.keySet();
             for(String z:ee){
-                wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings", Registry.BINARY, z, ((map.get(z).isEmpty())? "":reverse(StringtoHex(map.get(z)))));
+                wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings", Registry.BINARY, z, reverse(StringtoHex(map.get(z))));
             }
             wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings", Registry.BINARY, Manager.LOCAL_TYPE_KEY, reverse(StringtoHex("3")));
-            //wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings", Registry.BINARY, Manager.LOCAL_USER, reverse(StringtoHex("root")));
+             wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings", Registry.BINARY, Manager.LOCAL_DB_KEY, reverse(StringtoHex("jdbc:h2:tcp://localhost/~/NakpilSoftwares/EyeCare/database")));//
+
+//wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings", Registry.BINARY, Manager.LOCAL_USER, reverse(StringtoHex("root")));
             //wr.getSubKeys(Registry.HKCU, "SOFTWARE\\NakpilSoftwares");
             //Map<String, String> vals = wr.getREG_BINARY(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings");
             //Set<String> e = vals.keySet();

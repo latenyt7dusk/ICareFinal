@@ -43,42 +43,42 @@ public class UserFrame extends javax.swing.JFrame {
     public UserFrame() {
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
-        vComboBox1.removeAllItems();
-        vComboBox1.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
-        vComboBox1.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
-        vComboBox2.removeAllItems();
-        vComboBox2.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
-        vComboBox2.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
-        vComboBox2.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
-        vDateChooser1.setAgeField(vTextField5);
+        gender_tf.removeAllItems();
+        gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
+        gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
+        role_tf.removeAllItems();
+        role_tf.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
+        role_tf.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
+        role_tf.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
+        birthdate_tf.setAgeField(vTextField5);
     }
 
     public UserFrame(User user) {
         initComponents();
         this.cUser = user;
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
-        vComboBox1.removeAllItems();
-        vComboBox1.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
-        vComboBox1.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
-        vComboBox2.removeAllItems();
-        vComboBox2.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
-        vComboBox2.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
-        vComboBox2.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
-        vDateChooser1.setAgeField(vTextField5);
+        gender_tf.removeAllItems();
+        gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
+        gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
+        role_tf.removeAllItems();
+        role_tf.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
+        role_tf.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
+        role_tf.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
+        birthdate_tf.setAgeField(vTextField5);
     }
     
     public UserFrame(MainFrame mf) {
         initComponents();
         this.cFrame = mf;
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
-        vComboBox1.removeAllItems();
-        vComboBox1.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
-        vComboBox1.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
-        vComboBox2.removeAllItems();
-        vComboBox2.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
-        vComboBox2.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
-        vComboBox2.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
-        vDateChooser1.setAgeField(vTextField5);
+        gender_tf.removeAllItems();
+        gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
+        gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
+        role_tf.removeAllItems();
+        role_tf.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
+        role_tf.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
+        role_tf.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
+        birthdate_tf.setAgeField(vTextField5);
     }
     
     public UserFrame(User user,MainFrame mf) {
@@ -86,23 +86,23 @@ public class UserFrame extends javax.swing.JFrame {
         this.cUser = user;
         this.cFrame = mf;
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
-        vComboBox1.removeAllItems();
-        vComboBox1.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
-        vComboBox1.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
-        vComboBox2.removeAllItems();
-        vComboBox2.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
-        vComboBox2.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
-        vComboBox2.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
-        vDateChooser1.setAgeField(vTextField5);
+        gender_tf.removeAllItems();
+        gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
+        gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
+        role_tf.removeAllItems();
+        role_tf.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
+        role_tf.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
+        role_tf.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
+        birthdate_tf.setAgeField(vTextField5);
     }
 
     public void ClearData() {
 
-        vTextField1.setText("username");
-        vPasswordField1.setText("password");
-        vComboBox2.setSelectedIndex(0);
-        vPhotoContainer2.clearContainer();
-        vDateChooser1.setDate(Calendar.getInstance().getTime());
+        user_tf.setText("username");
+        pass_tf.setText("password");
+        role_tf.setSelectedIndex(0);
+        photo_tf.clearContainer();
+        birthdate_tf.setDate(Calendar.getInstance().getTime());
         Component e[] = jPanel1.getComponents();
         for (Component c : e) {
             if (c instanceof VTextField) {
@@ -115,11 +115,11 @@ public class UserFrame extends javax.swing.JFrame {
 
     private void Lock(boolean b) {
         this.locked = ((b) ? false : true);
-        vTextField1.setEnabled(locked);
-        vPasswordField1.setEnabled(locked);
-        vComboBox2.setEnabled(locked);
-        vPhotoContainer2.Lock(b);
-        vDateChooser1.setEnabled(locked);
+        user_tf.setEnabled(locked);
+        pass_tf.setEnabled(locked);
+        role_tf.setEnabled(locked);
+        photo_tf.Lock(b);
+        birthdate_tf.setEnabled(locked);
         Component e[] = jPanel1.getComponents();
         for (Component c : e) {
             if (c instanceof VTextField) {
@@ -127,6 +127,20 @@ public class UserFrame extends javax.swing.JFrame {
             } else if (c instanceof VComboBox) {
                 ((VComboBox) c).setEnabled(locked);
             }
+        }
+    }
+    
+    public boolean buildUser(){
+        try{
+            cUser = new User();
+            
+            
+            
+            
+            return true;
+        }catch(Exception er){
+            System.out.println(er);
+            return false;
         }
     }
 
@@ -143,31 +157,31 @@ public class UserFrame extends javax.swing.JFrame {
         vButton1 = new VComponents.VButton();
         jPanel1 = new javax.swing.JPanel();
         jLabel1 = new javax.swing.JLabel();
-        vTextField2 = new VComponents.VTextField();
+        firstname_tf = new VComponents.VTextField();
         jLabel2 = new javax.swing.JLabel();
         jLabel3 = new javax.swing.JLabel();
-        vTextField3 = new VComponents.VTextField();
+        middlename_tf = new VComponents.VTextField();
         jLabel4 = new javax.swing.JLabel();
-        vTextField4 = new VComponents.VTextField();
-        vDateChooser1 = new VComponents.VDateChooser(vTextField5);
+        surname_tf = new VComponents.VTextField();
+        birthdate_tf = new VComponents.VDateChooser(vTextField5);
         jLabel6 = new javax.swing.JLabel();
         vTextField5 = new VComponents.VTextField();
         jLabel7 = new javax.swing.JLabel();
-        vComboBox1 = new VComponents.VComboBox();
-        vComboBox3 = new VComponents.VComboBox();
+        gender_tf = new VComponents.VComboBox();
+        civilstatus_tf = new VComponents.VComboBox();
         jLabel8 = new javax.swing.JLabel();
         jLabel9 = new javax.swing.JLabel();
-        vTextField6 = new VComponents.VTextField();
+        address_tf = new VComponents.VTextField();
         jLabel5 = new javax.swing.JLabel();
-        vTextField7 = new VComponents.VTextField();
+        contactnumber_tf = new VComponents.VTextField();
         jLabel10 = new javax.swing.JLabel();
         jLabel11 = new javax.swing.JLabel();
-        vTextField8 = new VComponents.VTextField();
+        email_tf = new VComponents.VTextField();
         vButton2 = new VComponents.VButton();
-        vTextField1 = new VComponents.VTextField();
-        vPasswordField1 = new VComponents.VPasswordField();
-        vComboBox2 = new VComponents.VComboBox();
-        vPhotoContainer2 = new VComponents.VPhotoContainer();
+        user_tf = new VComponents.VTextField();
+        pass_tf = new VComponents.VPasswordField();
+        role_tf = new VComponents.VComboBox();
+        photo_tf = new VComponents.VPhotoContainer();
         vButton4 = new VComponents.VButton();
         vLabel1 = new VComponents.VLabel();
         vLabel2 = new VComponents.VLabel();
@@ -215,7 +229,7 @@ public class UserFrame extends javax.swing.JFrame {
         jLabel4.setForeground(new java.awt.Color(255, 255, 255));
         jLabel4.setText("Surname");
 
-        vDateChooser1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        birthdate_tf.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
 
         jLabel6.setForeground(new java.awt.Color(255, 255, 255));
         jLabel6.setText("Birth Date");
@@ -229,9 +243,9 @@ public class UserFrame extends javax.swing.JFrame {
         jLabel7.setForeground(new java.awt.Color(255, 255, 255));
         jLabel7.setText("Age");
 
-        vComboBox1.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
+        gender_tf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Male", "Female" }));
 
-        vComboBox3.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Single", "Married", "Separated", "Widdow", "Widdower" }));
+        civilstatus_tf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "Single", "Married", "Separated", "Widdow", "Widdower" }));
 
         jLabel8.setForeground(new java.awt.Color(255, 255, 255));
         jLabel8.setText("Gender");
@@ -276,37 +290,37 @@ public class UserFrame extends javax.swing.JFrame {
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(jLabel7, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createSequentialGroup()
-                                .addComponent(vDateChooser1, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(birthdate_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 122, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                                 .addComponent(vTextField5, javax.swing.GroupLayout.PREFERRED_SIZE, 44, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(javax.swing.GroupLayout.Alignment.LEADING, jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                 .addComponent(jLabel2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 172, Short.MAX_VALUE)
-                                .addComponent(vTextField2, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                .addComponent(firstname_tf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(vTextField3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(middlename_tf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(vComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                            .addComponent(gender_tf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel8, javax.swing.GroupLayout.PREFERRED_SIZE, 110, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addGap(10, 10, 10)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel9, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(vComboBox3, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
-                            .addComponent(vTextField4, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(civilstatus_tf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
+                            .addComponent(surname_tf, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addGap(10, 10, 10))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                             .addComponent(jLabel5, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(vTextField6, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                            .addComponent(address_tf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                         .addContainerGap())))
             .addGroup(jPanel1Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                     .addComponent(jLabel10, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
                     .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(vTextField8, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
-                    .addComponent(vTextField7, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(email_tf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, 173, Short.MAX_VALUE)
+                    .addComponent(contactnumber_tf, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -325,11 +339,11 @@ public class UserFrame extends javax.swing.JFrame {
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel2)
                                 .addGap(0, 0, 0)
-                                .addComponent(vTextField2, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(firstname_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addGroup(jPanel1Layout.createSequentialGroup()
                                 .addComponent(jLabel4)
                                 .addGap(0, 0, 0)
-                                .addComponent(vTextField4, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
+                                .addComponent(surname_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jLabel6)
@@ -337,38 +351,38 @@ public class UserFrame extends javax.swing.JFrame {
                             .addComponent(jLabel9))
                         .addGap(0, 0, 0)
                         .addGroup(jPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(vComboBox3, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
+                            .addComponent(civilstatus_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
                             .addComponent(vTextField5, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)
-                            .addComponent(vDateChooser1, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)))
+                            .addComponent(birthdate_tf, javax.swing.GroupLayout.DEFAULT_SIZE, 24, Short.MAX_VALUE)))
                     .addGroup(jPanel1Layout.createSequentialGroup()
                         .addComponent(jLabel3)
                         .addGap(0, 0, 0)
-                        .addComponent(vTextField3, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(middlename_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                         .addComponent(jLabel8)
                         .addGap(0, 0, 0)
-                        .addComponent(vComboBox1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                        .addComponent(gender_tf, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addGap(48, 48, 48)
                 .addComponent(jLabel5)
                 .addGap(0, 0, 0)
-                .addComponent(vTextField6, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(address_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                 .addComponent(jLabel10)
                 .addGap(0, 0, 0)
-                .addComponent(vTextField7, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(contactnumber_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(18, 18, 18)
                 .addComponent(jLabel11)
                 .addGap(0, 0, 0)
-                .addComponent(vTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(email_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 24, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(21, 21, 21)
                 .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
 
-        vTextField1.setText("username");
+        user_tf.setText("username");
 
-        vPasswordField1.setText("password");
+        pass_tf.setText("password");
 
-        vComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "User", "Manager", "Admin" }));
+        role_tf.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "User", "Manager", "Admin" }));
 
         vButton4.setText("__");
         vButton4.addActionListener(new java.awt.event.ActionListener() {
@@ -394,7 +408,7 @@ public class UserFrame extends javax.swing.JFrame {
                 .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(vShadowedPanel1Layout.createSequentialGroup()
-                        .addComponent(vPhotoContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(photo_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(vShadowedPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -408,9 +422,9 @@ public class UserFrame extends javax.swing.JFrame {
                                     .addComponent(vLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(vPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(vComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(vTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(pass_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(role_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(user_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
@@ -420,7 +434,7 @@ public class UserFrame extends javax.swing.JFrame {
                 .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vShadowedPanel1Layout.createSequentialGroup()
                         .addContainerGap()
-                        .addComponent(vPhotoContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(photo_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE))
                     .addGroup(vShadowedPanel1Layout.createSequentialGroup()
                         .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
@@ -429,14 +443,14 @@ public class UserFrame extends javax.swing.JFrame {
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vShadowedPanel1Layout.createSequentialGroup()
-                                .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                                    .addComponent(vTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(vLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(vLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(user_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addComponent(pass_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                             .addComponent(vLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(vComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addComponent(role_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -521,6 +535,13 @@ public class UserFrame extends javax.swing.JFrame {
     }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private VComponents.VTextField address_tf;
+    private VComponents.VDateChooser birthdate_tf;
+    private VComponents.VComboBox civilstatus_tf;
+    private VComponents.VTextField contactnumber_tf;
+    private VComponents.VTextField email_tf;
+    private VComponents.VTextField firstname_tf;
+    private VComponents.VComboBox gender_tf;
     private javax.swing.JLabel jLabel1;
     private javax.swing.JLabel jLabel10;
     private javax.swing.JLabel jLabel11;
@@ -533,25 +554,18 @@ public class UserFrame extends javax.swing.JFrame {
     private javax.swing.JLabel jLabel8;
     private javax.swing.JLabel jLabel9;
     private javax.swing.JPanel jPanel1;
+    private VComponents.VTextField middlename_tf;
+    private VComponents.VPasswordField pass_tf;
+    private VComponents.VPhotoContainer photo_tf;
+    private VComponents.VComboBox role_tf;
+    private VComponents.VTextField surname_tf;
+    private VComponents.VTextField user_tf;
     private VComponents.VButton vButton1;
     private VComponents.VButton vButton2;
     private VComponents.VButton vButton4;
-    private VComponents.VComboBox vComboBox1;
-    private VComponents.VComboBox vComboBox2;
-    private VComponents.VComboBox vComboBox3;
-    private VComponents.VDateChooser vDateChooser1;
     private VComponents.VLabel vLabel1;
     private VComponents.VLabel vLabel2;
-    private VComponents.VPasswordField vPasswordField1;
-    private VComponents.VPhotoContainer vPhotoContainer2;
     private VComponents.VShadowedPanel vShadowedPanel1;
-    private VComponents.VTextField vTextField1;
-    private VComponents.VTextField vTextField2;
-    private VComponents.VTextField vTextField3;
-    private VComponents.VTextField vTextField4;
     private VComponents.VTextField vTextField5;
-    private VComponents.VTextField vTextField6;
-    private VComponents.VTextField vTextField7;
-    private VComponents.VTextField vTextField8;
     // End of variables declaration//GEN-END:variables
 }

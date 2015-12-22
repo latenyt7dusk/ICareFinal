@@ -16,6 +16,8 @@
  */
 package VClass;
 
+import Utilities.DataBridge;
+
 /**
  *
  * @author HERU
@@ -69,5 +71,21 @@ public class User extends PersonalInfo{
         return tmp;
     }
     
+    public void LoadPersonalInfo(DataBridge DB){
+        try{
+            java.util.List<String> data = DB.FetchRowData(Manager.PERSONAL_TABLE_NAME, Manager.ID, getID());
+            setSurname(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.SURNAME)));
+            setFirstname(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.FIRSTNAME)));
+            setMiddlename(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.MIDDLENAME)));
+            setBirthdate(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.BIRTHDATE)));
+            setGender(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.GENDER)));
+            setCivilStatus(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.CIVILSTATUS)));
+            setContactNumber(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.CONTACT)));
+            setEmail(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.EMAIL)));
+            setAddress(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.ADDRESS)));
+        }catch(Exception er){
+            
+        }
+    }
     
 }

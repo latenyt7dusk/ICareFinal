@@ -88,6 +88,7 @@ public class Engine {
             DB.RunScript(MANAGER.USER_TABLE_DEFAULT);
             DB.RunScript(MANAGER.PERSONAL_TABLE_DEFAULT);
             DB.RunScript(MANAGER.LOG_TABLE_DEFAULT);
+            DB.RunScript(MANAGER.IMAGE_TABLE_DEFAULT);
         } catch (SQLException ex) {
             Logger.getLogger(Engine.class.getName()).log(Level.SEVERE, null, ex);
         }

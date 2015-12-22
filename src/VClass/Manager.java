@@ -110,14 +110,36 @@ public class Manager {
             +CIVILSTATUS+" VARCHAR(255),"+CONTACT+" VARCHAR(255),"+EMAIL+" VARCHAR(255),"+ADDRESS+" VARCHAR(255))";
     
     //Logger
+    public static final Map<String,String> LOG_TABLE_MAP = new HashMap(){
+        {
+            put(ID,0);
+            put(LOGGER,1);
+            put(DESCRIPTION,2);
+            put(TYPE,3);
+            put(DATE,4);
+            put(TIME,5);
+        }
+    };
     public static final String LOG_TABLE_NAME = "Logs";
-    public static final String LOGGER = "Logger";
-    public static final String DESCRIPTION = "Description";
-    public static final String DATE = "Date";
-    public static final String TIME = "Time";
-    public static final String TYPE = "Type";
+    public static final String LOGGER = "Logger";//1
+    public static final String DESCRIPTION = "Description";//2
+    public static final String TYPE = "Type";//3
+    public static final String DATE = "Date";//4
+    public static final String TIME = "Time";//5
     public final String LOG_TABLE_DEFAULT = "CREATE TABLE IF NOT EXISTS "+LOG_TABLE_NAME+" ("+ID+" VARCHAR(255),"+DESCRIPTION+
             " VARCHAR(255),"+LOGGER+" VARCHAR(255),"+TYPE+" VARCHAR(255),"+DATE+" VARCHAR(255),"+TIME+" VARCHAR(255))";
+    
+    //Image
+    public static final Map<String,Integer> IMAGE_TABLE_MAP = new HashMap(){
+        {
+            put(ID,0);
+            put(DATA,1);
+        }  
+    };
+    public static final String IMAGE_TABLE_NAME = "Image";
+    public static final String DATA = "Data";
+    public final String IMAGE_TABLE_DEFAULT = "CREATE TABLE IF NOT EXISTS "+IMAGE_TABLE_NAME+" ("+ID+" VARCHAR(255),IMAGE BLOB)";
+    
     
     public Map<String,String> SETTINGS = new HashMap(){
         {
