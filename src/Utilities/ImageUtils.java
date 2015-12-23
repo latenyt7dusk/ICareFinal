@@ -76,6 +76,13 @@ public class ImageUtils {
         Colorizer.doRGB(new Color(r, g, b, a), i);
         return i;
     }
+    
+    public static String RGBtoHex(Color col){
+       String r =  String.valueOf(Integer.valueOf(String.valueOf(col.getRed()), 16));
+       String g =  String.valueOf(Integer.valueOf(String.valueOf(col.getGreen()), 16));
+       String b =  String.valueOf(Integer.valueOf(String.valueOf(col.getBlue()), 16));
+       return "#"+r+g+b;
+    }
 
     public static ByteArrayOutputStream crop(ByteArrayInputStream bais, int width, int height) throws IOException {
         BufferedImage src = ImageIO.read(bais);

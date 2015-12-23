@@ -228,7 +228,7 @@ public class VOptionPane {
             } else {
                 dialog = new JDialog((Frame) parent, true);
             }
-            body = new VOptionBody(Msg, icon);
+            body = new VOptionBody(Msg,icon);
             title.setText(t);
             boption = new VButtonContainer();
 
@@ -999,6 +999,35 @@ public class VOptionPane {
                         };
                         ((JTextField) e).addKeyListener(kl);
                         cont.add(((JTextField) e));
+                        add(cont);
+                    } else if (e instanceof JPasswordField) {
+                        JPanel cont = new JPanel();
+                        cont.setOpaque(false);
+                        cont.setLayout(new CardLayout());
+                        cont.setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 10, 0, 10));
+                        KeyListener kl = new KeyListener() {
+                            @Override
+                            public void keyReleased(KeyEvent ke) {
+                                value = ((JPasswordField) e).getText();
+                            }
+
+                            @Override
+                            public void keyTyped(KeyEvent ke) {
+
+                            }
+
+                            @Override
+                            public void keyPressed(KeyEvent ke) {
+                                if (ke.getKeyCode() == KeyEvent.VK_ENTER) {
+                                    ok.doClick();
+                                } else if (ke.getKeyCode() == KeyEvent.VK_ESCAPE) {
+                                    cancel.doClick();
+                                }
+                            }
+
+                        };
+                        ((JPasswordField) e).addKeyListener(kl);
+                        cont.add(((JPasswordField) e));
                         add(cont);
                     } else {
                         add(((Component) e), BorderLayout.CENTER);

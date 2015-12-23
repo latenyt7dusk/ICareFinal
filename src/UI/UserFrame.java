@@ -576,18 +576,22 @@ public class UserFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         Calendar cal = new GregorianCalendar();
         System.out.println(cal.get(Calendar.MONTH) +1);
+        String Color = String.format("#%02x%02x%02x", VThemeManager.ButtonForeground.getRed(),
+                   VThemeManager.ButtonForeground.getGreen(), VThemeManager.ButtonForeground.getBlue());
+            System.out.println(String.format("#%06X", VThemeManager.ButtonForeground.getRGB()));
+            
         if(buildUser()){
-            //String Color = String.format("#%02x%02x%02x", VThemeManager.ButtonForeground.getRed(),
-            //       VThemeManager.ButtonForeground.getGreen(), VThemeManager.ButtonForeground.getBlue());
+            
             String msg = "<html><br>Name     : "+cUser.getFirstname()+" "+cUser.getSurname()+"<br>"+
                     "Username : "+cUser.getUsername()+"<br>"+"Role     : "+cUser.getRole()
                     +"<br><br>"+"Enter your password</html>";
             String pass = VOptionPane.showMaskedInputDialog(this, msg, "Registration Confirmation");
             if(pass.equals(cUser.getPassword())){
                 Engine.MANAGER.saveNewUser(cUser, Engine.DB);
-                VOptionPane.showMaskedInputDialog(this, "New User Registered", "Successful");
-                this.ClearData();
                 System.gc();
+                VOptionPane.showMessageDialog(this, "New User Registered", "Successful");
+                this.ClearData();
+                
             }else{
                 VOptionPane.showMessageDialog(this, "Password does not match", "Warning",VOptionPane.WARNING_MESSAGE);
             }
