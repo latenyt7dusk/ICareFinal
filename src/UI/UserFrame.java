@@ -66,7 +66,7 @@ public class UserFrame extends javax.swing.JFrame {
         gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
         birthdate_tf.setAgeField(vTextField5);
     }
-    
+
     public UserFrame(MainFrame mf) {
         initComponents();
         this.cFrame = mf;
@@ -76,8 +76,8 @@ public class UserFrame extends javax.swing.JFrame {
         gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
         birthdate_tf.setAgeField(vTextField5);
     }
-    
-    public UserFrame(User user,MainFrame mf) {
+
+    public UserFrame(User user, MainFrame mf) {
         initComponents();
         this.cUser = user;
         this.cFrame = mf;
@@ -122,9 +122,9 @@ public class UserFrame extends javax.swing.JFrame {
             }
         }
     }
-    
-    public boolean buildUser(){
-        try{
+
+    public boolean buildUser() {
+        try {
             cUser = new User();
             cUser.setID(Manager.getNewID("USR"));
             cUser.setUsername(user_tf.getText());
@@ -139,93 +139,90 @@ public class UserFrame extends javax.swing.JFrame {
             cUser.setContactNumber(contactnumber_tf.getText());
             cUser.setEmail(email_tf.getText());
             cUser.setAddress(address_tf.getText());
-            
+
             List<String> msgs = new ArrayList();
-            if(checkEmptyValues()){
+            if (checkEmptyValues()) {
                 msgs.add("- Please fill all fields correctly");
             }
-            if(checkIfRegistered()){
+            if (checkIfRegistered()) {
                 msgs.add("- User has been already registered");
             }
-            if(msgs.size() > 0){
+            if (msgs.size() > 0) {
                 VOptionPane.showListMessageDialog(this, "Registration Failed", "Warning", msgs.toArray(), VOptionPane.WARNING_MESSAGE);
                 return false;
             }
-            
+
             return true;
-        }catch(Exception er){
+        } catch (Exception er) {
             System.out.println(er);
             return false;
         }
     }
-    
-    
-    public boolean checkEmptyValues(){
-        try{
+
+    public boolean checkEmptyValues() {
+        try {
             Component[] e = jPanel1.getComponents();
             boolean hasEr = false;
-            for(Component tmp:e){
-                if(tmp instanceof VTextField){
-                    if(((VTextField)tmp).getText().isEmpty()){
+            for (Component tmp : e) {
+                if (tmp instanceof VTextField) {
+                    if (((VTextField) tmp).getText().isEmpty()) {
                         hasEr = true;
-                        ((VTextField)tmp).setHasError(true);
+                        ((VTextField) tmp).setHasError(true);
                     }
                 }
             }
             Component[] e1 = vShadowedPanel1.getComponents();
-            for(Component tmp:e1){
-                if(tmp instanceof VTextField){
-                    if(((VTextField)tmp).getText().isEmpty()){
+            for (Component tmp : e1) {
+                if (tmp instanceof VTextField) {
+                    if (((VTextField) tmp).getText().isEmpty()) {
                         hasEr = true;
-                        ((VTextField)tmp).setHasError(true);
+                        ((VTextField) tmp).setHasError(true);
                     }
-                }else if(tmp instanceof VPasswordField){
-                    if(((VPasswordField)tmp).getText().isEmpty()){
+                } else if (tmp instanceof VPasswordField) {
+                    if (((VPasswordField) tmp).getText().isEmpty()) {
                         hasEr = true;
-                        ((VPasswordField)tmp).setHasError(true);
+                        ((VPasswordField) tmp).setHasError(true);
                     }
                 }
             }
             return hasEr;
-        }catch(Exception er){
+        } catch (Exception er) {
             return false;
         }
     }
-    
-    public boolean checkIfRegistered(){
-        try{
+
+    public boolean checkIfRegistered() {
+        try {
             boolean hasEr = false;
             updateUsers();
-            for(User e:Users){
-                if(cUser.getUsername().equalsIgnoreCase(e.getUsername())){
-                    
+            for (User e : Users) {
+                if (cUser.getUsername().equalsIgnoreCase(e.getUsername())) {
+
                     user_tf.setHasError(true);
                     hasEr = true;
                 }
-                if((cUser.getFirstname().equalsIgnoreCase(e.getFirstname())) && (cUser.getMiddlename().equalsIgnoreCase(e.getMiddlename()))
-                        && (cUser.getSurname().equalsIgnoreCase(e.getSurname()))){
+                if ((cUser.getFirstname().equalsIgnoreCase(e.getFirstname())) && (cUser.getMiddlename().equalsIgnoreCase(e.getMiddlename()))
+                        && (cUser.getSurname().equalsIgnoreCase(e.getSurname()))) {
                     firstname_tf.setHasError(true);
                     middlename_tf.setHasError(true);
                     surname_tf.setHasError(true);
                     hasEr = true;
                 }
             }
-            
+
             return hasEr;
-        }catch(Exception er){
+        } catch (Exception er) {
             return false;
         }
     }
-    
-    public void updateUsers(){
-        try{
-            System.out.println("enter");
+
+    public void updateUsers() {
+        try {
             Users = Engine.MANAGER.getUsers(Engine.DB);
-            for(User e : Users){
-                System.out.println("user"+e.getID());
+            for (User e : Users) {
                 e.LoadPersonalInfo(Engine.DB);
             }
-        }catch(Exception er){
+        } catch (Exception er) {
             System.out.println(er);
         }
     }
@@ -574,26 +571,21 @@ public class UserFrame extends javax.swing.JFrame {
 
     private void vButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton2ActionPerformed
         // TODO add your handling code here:
-        Calendar cal = new GregorianCalendar();
-        System.out.println(cal.get(Calendar.MONTH) +1);
-        String Color = String.format("#%02x%02x%02x", VThemeManager.ButtonForeground.getRed(),
-                   VThemeManager.ButtonForeground.getGreen(), VThemeManager.ButtonForeground.getBlue());
-            System.out.println(String.format("#%06X", VThemeManager.ButtonForeground.getRGB()));
-            
-        if(buildUser()){
-            
-            String msg = "<html><br>Name     : "+cUser.getFirstname()+" "+cUser.getSurname()+"<br>"+
-                    "Username : "+cUser.getUsername()+"<br>"+"Role     : "+cUser.getRole()
-                    +"<br><br>"+"Enter your password</html>";
+
+        if (buildUser()) {
+
+            String msg = "<html><br>Name     : " + cUser.getFirstname() + " " + cUser.getSurname() + "<br>"
+                    + "Username : " + cUser.getUsername() + "<br>" + "Role     : " + cUser.getRole()
+                    + "<br><br>" + "Enter your password</html>";
             String pass = VOptionPane.showMaskedInputDialog(this, msg, "Registration Confirmation");
-            if(pass.equals(cUser.getPassword())){
+            if (pass.equals(cUser.getPassword())) {
                 Engine.MANAGER.saveNewUser(cUser, Engine.DB);
                 System.gc();
                 VOptionPane.showMessageDialog(this, "New User Registered", "Successful");
                 this.ClearData();
-                
-            }else{
-                VOptionPane.showMessageDialog(this, "Password does not match", "Warning",VOptionPane.WARNING_MESSAGE);
+
+            } else {
+                VOptionPane.showMessageDialog(this, "Password does not match", "Warning", VOptionPane.WARNING_MESSAGE);
             }
         }
     }//GEN-LAST:event_vButton2ActionPerformed
@@ -607,7 +599,7 @@ public class UserFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         int x = evt.getXOnScreen();
         int y = evt.getYOnScreen();
-        
+
         this.setLocation(x - xM, y - yM);
     }//GEN-LAST:event_vShadowedPanel1MouseDragged
 
