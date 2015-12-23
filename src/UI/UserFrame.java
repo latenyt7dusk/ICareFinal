@@ -16,14 +16,21 @@
  */
 package UI;
 
+import UI.VOption.VOptionPane;
+import VClass.Manager;
 import VClass.User;
 import VComponents.VComboBox;
+import VComponents.VPasswordField;
 import VComponents.VTextField;
 import VComponents.VThemeManager;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.util.ArrayList;
 import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.List;
+import javax.swing.JLabel;
 
 /**
  *
@@ -32,6 +39,7 @@ import java.util.Calendar;
 public class UserFrame extends javax.swing.JFrame {
 
     private User cUser;
+    private List<User> Users = new ArrayList();
     private MainFrame cFrame;
     private boolean locked = false;
     int xM;
@@ -46,10 +54,6 @@ public class UserFrame extends javax.swing.JFrame {
         gender_tf.removeAllItems();
         gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
         gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
-        role_tf.removeAllItems();
-        role_tf.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
-        role_tf.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
-        role_tf.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
         birthdate_tf.setAgeField(vTextField5);
     }
 
@@ -60,10 +64,6 @@ public class UserFrame extends javax.swing.JFrame {
         gender_tf.removeAllItems();
         gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
         gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
-        role_tf.removeAllItems();
-        role_tf.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
-        role_tf.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
-        role_tf.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
         birthdate_tf.setAgeField(vTextField5);
     }
     
@@ -74,10 +74,6 @@ public class UserFrame extends javax.swing.JFrame {
         gender_tf.removeAllItems();
         gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
         gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
-        role_tf.removeAllItems();
-        role_tf.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
-        role_tf.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
-        role_tf.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
         birthdate_tf.setAgeField(vTextField5);
     }
     
@@ -89,10 +85,6 @@ public class UserFrame extends javax.swing.JFrame {
         gender_tf.removeAllItems();
         gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
         gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
-        role_tf.removeAllItems();
-        role_tf.addItem(new Object[]{"User", "/UI/Icons/user_admin.png"});
-        role_tf.addItem(new Object[]{"Manager", "/UI/Icons/manager_admin.png"});
-        role_tf.addItem(new Object[]{"Admin", "/UI/Icons/admin.png"});
         birthdate_tf.setAgeField(vTextField5);
     }
 
@@ -107,6 +99,7 @@ public class UserFrame extends javax.swing.JFrame {
         for (Component c : e) {
             if (c instanceof VTextField) {
                 ((VTextField) c).setText("");
+                ((VTextField) c).setHasError(false);
             } else if (c instanceof VComboBox) {
                 ((VComboBox) c).setSelectedIndex(0);
             }
@@ -133,14 +126,107 @@ public class UserFrame extends javax.swing.JFrame {
     public boolean buildUser(){
         try{
             cUser = new User();
+            cUser.setID(Manager.getNewID("USR"));
+            cUser.setUsername(user_tf.getText());
+            cUser.setPassword(pass_tf.getText());
+            cUser.setRole(role_tf.getSelectedItem().toString());
+            cUser.setFirstname(firstname_tf.getText());
+            cUser.setMiddlename(middlename_tf.getText());
+            cUser.setSurname(surname_tf.getText());
+            cUser.setBirthdate(birthdate_tf.getFormattedDate(Manager.DEFAULT_DATE_FORMAT));
+            cUser.setGender(gender_tf.getSelectedValue());
+            cUser.setCivilStatus(civilstatus_tf.getSelectedItem().toString());
+            cUser.setContactNumber(contactnumber_tf.getText());
+            cUser.setEmail(email_tf.getText());
+            cUser.setAddress(address_tf.getText());
             
-            
-            
+            List<String> msgs = new ArrayList();
+            if(checkEmptyValues()){
+                msgs.add("- Please fill all fields correctly");
+            }
+            if(checkIfRegistered()){
+                msgs.add("- User has been already registered");
+            }
+            if(msgs.size() > 0){
+                VOptionPane.showListMessageDialog(this, "Registration Failed", "Warning", msgs.toArray(), VOptionPane.WARNING_MESSAGE);
+                return false;
+            }
             
             return true;
         }catch(Exception er){
             System.out.println(er);
             return false;
+        }
+    }
+    
+    
+    public boolean checkEmptyValues(){
+        try{
+            Component[] e = jPanel1.getComponents();
+            boolean hasEr = false;
+            for(Component tmp:e){
+                if(tmp instanceof VTextField){
+                    if(((VTextField)tmp).getText().isEmpty()){
+                        hasEr = true;
+                        ((VTextField)tmp).setHasError(true);
+                    }
+                }
+            }
+            Component[] e1 = vShadowedPanel1.getComponents();
+            for(Component tmp:e1){
+                if(tmp instanceof VTextField){
+                    if(((VTextField)tmp).getText().isEmpty()){
+                        hasEr = true;
+                        ((VTextField)tmp).setHasError(true);
+                    }
+                }else if(tmp instanceof VPasswordField){
+                    if(((VPasswordField)tmp).getText().isEmpty()){
+                        hasEr = true;
+                        ((VPasswordField)tmp).setHasError(true);
+                    }
+                }
+            }
+            return hasEr;
+        }catch(Exception er){
+            return false;
+        }
+    }
+    
+    public boolean checkIfRegistered(){
+        try{
+            boolean hasEr = false;
+            updateUsers();
+            for(User e:Users){
+                if(cUser.getUsername().equalsIgnoreCase(e.getUsername())){
+                    
+                    user_tf.setHasError(true);
+                    hasEr = true;
+                }
+                if((cUser.getFirstname().equalsIgnoreCase(e.getFirstname())) && (cUser.getMiddlename().equalsIgnoreCase(e.getMiddlename()))
+                        && (cUser.getSurname().equalsIgnoreCase(e.getSurname()))){
+                    firstname_tf.setHasError(true);
+                    middlename_tf.setHasError(true);
+                    surname_tf.setHasError(true);
+                    hasEr = true;
+                }
+            }
+            
+            return hasEr;
+        }catch(Exception er){
+            return false;
+        }
+    }
+    
+    public void updateUsers(){
+        try{
+            System.out.println("enter");
+            Users = Engine.MANAGER.getUsers(Engine.DB);
+            for(User e : Users){
+                System.out.println("user"+e.getID());
+                e.LoadPersonalInfo(Engine.DB);
+            }
+        }catch(Exception er){
+            System.out.println(er);
         }
     }
 
@@ -185,6 +271,7 @@ public class UserFrame extends javax.swing.JFrame {
         vButton4 = new VComponents.VButton();
         vLabel1 = new VComponents.VLabel();
         vLabel2 = new VComponents.VLabel();
+        vLabel3 = new VComponents.VLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("New User");
@@ -399,6 +486,10 @@ public class UserFrame extends javax.swing.JFrame {
         vLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
         vLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/lock.png"))); // NOI18N
 
+        vLabel3.setForeground(new java.awt.Color(255, 255, 255));
+        vLabel3.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        vLabel3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/manager_admin.png"))); // NOI18N
+
         javax.swing.GroupLayout vShadowedPanel1Layout = new javax.swing.GroupLayout(vShadowedPanel1);
         vShadowedPanel1.setLayout(vShadowedPanel1Layout);
         vShadowedPanel1Layout.setHorizontalGroup(
@@ -419,7 +510,8 @@ public class UserFrame extends javax.swing.JFrame {
                                 .addGap(12, 12, 12)
                                 .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
                                     .addComponent(vLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(vLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(vLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(vLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                                     .addComponent(pass_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
@@ -437,20 +529,25 @@ public class UserFrame extends javax.swing.JFrame {
                         .addComponent(photo_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE))
                     .addGroup(vShadowedPanel1Layout.createSequentialGroup()
-                        .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                            .addComponent(vButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                            .addComponent(vButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vShadowedPanel1Layout.createSequentialGroup()
+                        .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                            .addGroup(vShadowedPanel1Layout.createSequentialGroup()
+                                .addGap(0, 0, Short.MAX_VALUE)
+                                .addComponent(vLabel3, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(vShadowedPanel1Layout.createSequentialGroup()
+                                .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
+                                    .addComponent(vButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(vButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(vLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(user_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vShadowedPanel1Layout.createSequentialGroup()
+                                        .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                            .addComponent(vLabel1, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                            .addComponent(user_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                        .addComponent(pass_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                    .addComponent(vLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(pass_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                            .addComponent(vLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                        .addComponent(role_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                .addComponent(role_tf, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)))
                         .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
@@ -477,7 +574,24 @@ public class UserFrame extends javax.swing.JFrame {
 
     private void vButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton2ActionPerformed
         // TODO add your handling code here:
-        
+        Calendar cal = new GregorianCalendar();
+        System.out.println(cal.get(Calendar.MONTH) +1);
+        if(buildUser()){
+            //String Color = String.format("#%02x%02x%02x", VThemeManager.ButtonForeground.getRed(),
+            //       VThemeManager.ButtonForeground.getGreen(), VThemeManager.ButtonForeground.getBlue());
+            String msg = "<html><br>Name     : "+cUser.getFirstname()+" "+cUser.getSurname()+"<br>"+
+                    "Username : "+cUser.getUsername()+"<br>"+"Role     : "+cUser.getRole()
+                    +"<br><br>"+"Enter your password</html>";
+            String pass = VOptionPane.showMaskedInputDialog(this, msg, "Registration Confirmation");
+            if(pass.equals(cUser.getPassword())){
+                Engine.MANAGER.saveNewUser(cUser, Engine.DB);
+                VOptionPane.showMaskedInputDialog(this, "New User Registered", "Successful");
+                this.ClearData();
+                System.gc();
+            }else{
+                VOptionPane.showMessageDialog(this, "Password does not match", "Warning",VOptionPane.WARNING_MESSAGE);
+            }
+        }
     }//GEN-LAST:event_vButton2ActionPerformed
 
     private void vButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton4ActionPerformed
@@ -565,6 +679,7 @@ public class UserFrame extends javax.swing.JFrame {
     private VComponents.VButton vButton4;
     private VComponents.VLabel vLabel1;
     private VComponents.VLabel vLabel2;
+    private VComponents.VLabel vLabel3;
     private VComponents.VShadowedPanel vShadowedPanel1;
     private VComponents.VTextField vTextField5;
     // End of variables declaration//GEN-END:variables

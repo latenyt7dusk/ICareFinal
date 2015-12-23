@@ -276,6 +276,10 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
     public boolean isVSubVisible() {
         return SubVisible;
     }
+    
+    public String getSelectedValue(){
+        return ((Object[])getSelectedItem())[0].toString();
+    }
 
     private static class ComboBox_UI extends BasicComboBoxUI {
 

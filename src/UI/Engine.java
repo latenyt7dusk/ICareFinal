@@ -19,11 +19,9 @@ package UI;
 import Utilities.DataBridge;
 import Utilities.Registry;
 import VClass.Manager;
-import VClass.User;
 import java.sql.SQLException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.JOptionPane;
 import javax.swing.UIManager;
 import javax.swing.UnsupportedLookAndFeelException;
 
@@ -54,23 +52,7 @@ public class Engine {
             LoadDefaults();
             LoginUI = new Login();
             LoginUI.setVisible(true);
-            User e = new User();
-            e.setID("0000");
-            e.setUsername("admin");
-            e.setPassword("admin");
-            e.setRole("Admin");
-            e.setSurname("Nakpil");
-            e.setFirstname("Kelvin Don Othello");
-            e.setMiddlename("Gasic");
-            e.setBirthdate("Jan 24, 1991");
-            e.setGender("Male");
-            e.setCivilStatus("Single");
-            e.setContactNumber("09055550830");
-            e.setEmail("kelvin.nakpil.heru@gmail.com");
-            e.setAddress("Naic Cavite");
-            JOptionPane.showMessageDialog(null, e.getBatch());
            
-            System.out.println(MANAGER.saveNewUser(e, DB));
 
         } catch (SQLException er) {
 

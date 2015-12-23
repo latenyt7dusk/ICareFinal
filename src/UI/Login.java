@@ -16,10 +16,13 @@
  */
 package UI;
 
+import VClass.User;
 import VComponents.VShadowBorder;
 import VComponents.VThemeManager;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.util.ArrayList;
+import java.util.List;
 
 /**
  *
@@ -28,6 +31,7 @@ import java.awt.Toolkit;
 public class Login extends javax.swing.JFrame {
 
     private MainFrame MainUI = Engine.MainUI;
+    private List<User> Users = new ArrayList();
     /**
      * Creates new form Login
      */
@@ -48,6 +52,19 @@ public class Login extends javax.swing.JFrame {
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
     }
     
+    public void updateUserList(){
+        try{
+            Users = Engine.MANAGER.getUsers(Engine.DB);
+        }catch(Exception er){
+            System.out.println(er);
+        }
+    }
+
+    @Override
+    public void setVisible(boolean bln) {
+        super.setVisible(bln); //To change body of generated methods, choose Tools | Templates.
+        updateUserList();
+    }
     
 
     /**
@@ -235,7 +252,9 @@ public class Login extends javax.swing.JFrame {
 
     private void vButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton1ActionPerformed
         // TODO add your handling code here:
-        MainUI.setVisible(true);
+        //MainUI.setVisible(true);
+        UserFrame e = new UserFrame();
+        e.setVisible(true);
         dispose();
     }//GEN-LAST:event_vButton1ActionPerformed
 

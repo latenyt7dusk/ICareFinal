@@ -21,6 +21,7 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
@@ -43,6 +44,7 @@ public class VDateChooser extends JPanel{
     private final long MILLI_SECONDS_DAY = 86400000L;
     private final ActionListener DAction = new VDateAction();
     private VTextField Age;
+    private SimpleDateFormat SDF;
     
     public VDateChooser(){
         setOpaque(false);
@@ -163,6 +165,11 @@ public class VDateChooser extends JPanel{
     
     public Date getDate(){
         return selDate;
+    }
+    
+    public String getFormattedDate(String format){
+        SDF = new SimpleDateFormat(format);
+        return SDF.format(selDate);
     }
     
     private int computeAge(Date sDate) {

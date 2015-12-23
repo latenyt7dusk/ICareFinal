@@ -285,7 +285,7 @@ public class VOptionPane {
         }
     }
 
-    public static void showListMessageDialog(Window parent, String Msg, String t, String[] ls, int icon) {
+    public static void showListMessageDialog(Window parent, String Msg, String t, Object[] ls, int icon) {
         try {
             if (parent instanceof Dialog) {
                 dialog = new JDialog((Dialog) parent, true);
@@ -317,7 +317,7 @@ public class VOptionPane {
         }
     }
 
-    public static void showListMessageDialog(Window parent, String Msg, String t, String[] ls, Image icon) {
+    public static void showListMessageDialog(Window parent, String Msg, String t, Object[] ls, Image icon) {
         try {
             if (parent instanceof Dialog) {
                 dialog = new JDialog((Dialog) parent, true);
@@ -839,7 +839,7 @@ public class VOptionPane {
             setOpaque(true);
             setBackground(TT_Color);
             setForeground(VThemeManager.ButtonForeground);
-            setHorizontalAlignment(JLabel.RIGHT);
+            setHorizontalAlignment(JLabel.CENTER);
             setText("Message");
             setMinimumSize(new Dimension(350, 22));
 
@@ -899,7 +899,7 @@ public class VOptionPane {
         private VOptionBody(String m, Object e, int icon) {
             this(m, e, icon, LIST_SELECTION);
         }
-
+        
         private VOptionBody(String m, Object e, Image icon) {
             this(m, e, icon, NO_SELECTION);
         }
@@ -910,13 +910,25 @@ public class VOptionPane {
             msg.setText(m);
             setBackground(BG_Color);
             if (e != null) {
-                if (e instanceof String[]) {
+                if (e instanceof Object[]) {
                     JPanel cont = new JPanel();
-                    int count = ((String[]) e).length;
-                    String opts[] = (String[]) e;
+                    int count = 0;
+                    String opts[] = {};
+                    if(selection == LIST_SELECTION){
+                        Object[] t = (Object[])e;
+                        opts = new String[t.length];
+                        count = t.length;
+                        for(int i = 0;i < count;i++){
+                            opts[i] = t[i].toString();
+                        }
+                    }else{
+                        count = ((String[]) e).length;
+                        opts = (String[]) e;
+                    }
+                    
                     cont.setOpaque(false);
                     cont.setLayout(new GridLayout(count, 0));
-                    cont.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 0));
+                    cont.setBorder(javax.swing.BorderFactory.createEmptyBorder(0, 0, 10, 30));
                     if (selection == MULTI_SELECTION) {
                         JCheckBox cb[] = new JCheckBox[count];
                         for (int i = 0; i < opts.length; i++) {
@@ -950,7 +962,7 @@ public class VOptionPane {
                         JLabel lbs[] = new JLabel[count];
                         for (int i = 0; i < opts.length; i++) {
                             lbs[i] = new JLabel(opts[i]);
-                            lbs[i].setBorder(javax.swing.BorderFactory.createEmptyBorder(10, 60, 0, 0));
+                            lbs[i].setBorder(javax.swing.BorderFactory.createEmptyBorder(2, 60, 0, 0));
                             lbs[i].setBackground(new Color(0, 0, 0, 0));
                             lbs[i].setFont(new Font("Tahoma", 0, 11));
                             lbs[i].setForeground(Color.WHITE.darker());

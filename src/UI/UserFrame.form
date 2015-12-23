@@ -72,6 +72,7 @@
                                   <Group type="103" groupAlignment="1" attributes="0">
                                       <Component id="vLabel1" min="-2" pref="20" max="-2" attributes="0"/>
                                       <Component id="vLabel2" min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Component id="vLabel3" min="-2" pref="20" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace type="unrelated" max="-2" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
@@ -98,24 +99,32 @@
                           <EmptySpace pref="10" max="32767" attributes="0"/>
                       </Group>
                       <Group type="102" attributes="0">
-                          <Group type="103" groupAlignment="0" max="-2" attributes="0">
-                              <Component id="vButton1" max="32767" attributes="0"/>
-                              <Component id="vButton4" max="32767" attributes="0"/>
-                          </Group>
-                          <EmptySpace max="32767" attributes="0"/>
-                          <Group type="103" groupAlignment="0" attributes="0">
-                              <Group type="102" alignment="1" attributes="0">
+                          <Group type="103" groupAlignment="1" attributes="0">
+                              <Group type="102" attributes="0">
+                                  <EmptySpace min="0" pref="0" max="32767" attributes="0"/>
+                                  <Component id="vLabel3" min="-2" pref="20" max="-2" attributes="0"/>
+                              </Group>
+                              <Group type="102" attributes="0">
+                                  <Group type="103" groupAlignment="0" max="-2" attributes="0">
+                                      <Component id="vButton1" max="32767" attributes="0"/>
+                                      <Component id="vButton4" max="32767" attributes="0"/>
+                                  </Group>
+                                  <EmptySpace max="32767" attributes="0"/>
                                   <Group type="103" groupAlignment="0" attributes="0">
-                                      <Component id="vLabel1" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
-                                      <Component id="user_tf" min="-2" pref="20" max="-2" attributes="0"/>
+                                      <Group type="102" alignment="1" attributes="0">
+                                          <Group type="103" groupAlignment="0" attributes="0">
+                                              <Component id="vLabel1" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
+                                              <Component id="user_tf" min="-2" pref="20" max="-2" attributes="0"/>
+                                          </Group>
+                                          <EmptySpace max="-2" attributes="0"/>
+                                          <Component id="pass_tf" min="-2" pref="20" max="-2" attributes="0"/>
+                                      </Group>
+                                      <Component id="vLabel2" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
                                   </Group>
                                   <EmptySpace max="-2" attributes="0"/>
-                                  <Component id="pass_tf" min="-2" pref="20" max="-2" attributes="0"/>
+                                  <Component id="role_tf" min="-2" pref="20" max="-2" attributes="0"/>
                               </Group>
-                              <Component id="vLabel2" alignment="1" min="-2" pref="20" max="-2" attributes="0"/>
                           </Group>
-                          <EmptySpace max="-2" attributes="0"/>
-                          <Component id="role_tf" min="-2" pref="20" max="-2" attributes="0"/>
                           <EmptySpace max="32767" attributes="0"/>
                       </Group>
                   </Group>
@@ -490,6 +499,17 @@
             <Property name="horizontalAlignment" type="int" value="0"/>
             <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
               <Image iconType="3" name="/UI/Icons/lock.png"/>
+            </Property>
+          </Properties>
+        </Component>
+        <Component class="VComponents.VLabel" name="vLabel3">
+          <Properties>
+            <Property name="foreground" type="java.awt.Color" editor="org.netbeans.beaninfo.editors.ColorEditor">
+              <Color blue="ff" green="ff" red="ff" type="rgb"/>
+            </Property>
+            <Property name="horizontalAlignment" type="int" value="0"/>
+            <Property name="icon" type="javax.swing.Icon" editor="org.netbeans.modules.form.editors2.IconEditor">
+              <Image iconType="3" name="/UI/Icons/manager_admin.png"/>
             </Property>
           </Properties>
         </Component>

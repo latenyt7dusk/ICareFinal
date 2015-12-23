@@ -19,6 +19,8 @@ package VClass;
 import Utilities.DataBridge;
 import Utilities.Registry;
 import java.io.IOException;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -32,6 +34,7 @@ import java.util.logging.Logger;
 public class Manager {
 
     private Registry myRegistry;
+    public static final String DEFAULT_DATE_FORMAT = "MMM dd, yyyy";
     public static final String SYSTEM = "SOFTWARE\\NakpilSoftwares\\EyeCare";
     public String SETTINGS_KEY = "Settings";
     
@@ -179,6 +182,16 @@ public class Manager {
         }
     }
     
-    
+    //<editor-fold defaultstate="collapsed" desc=" UUID Code Block">  
+    public static String getNewID(String head) {
+        try {
+            Calendar cal = new GregorianCalendar();
+            String temp[] = cal.getTime().toString().split("[: ]");
+            return head + cal.get(Calendar.YEAR) + (cal.get(Calendar.MONTH)+1) + "" + cal.get(Calendar.DAY_OF_MONTH) + temp[3] + temp[4] + temp[5];
+        } catch (Exception er) {
+            return null;
+        }
+    }
+    //</editor-fold>
     
 }

@@ -19,14 +19,18 @@ package UI;
 import VComponents.VThemeManager;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
+import java.awt.KeyEventDispatcher;
+import java.awt.KeyboardFocusManager;
 import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
+import java.awt.event.KeyEvent;
 import java.io.File;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
 import javax.swing.ImageIcon;
+import javax.swing.JOptionPane;
 import javax.swing.JTable;
 import javax.swing.SwingConstants;
 import javax.swing.table.DefaultTableCellRenderer;
@@ -86,6 +90,7 @@ public class MainFrame extends javax.swing.JFrame {
         vTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
         PatientInit();
+        KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new MyDispatcher());
         
         try{
             tst = new ImageIcon(ImageIO.read(new File("C:\\Documents and Settings\\HERU\\My Documents\\My Pictures\\IMG_20150104_112100.jpg")).getScaledInstance(62, 50, Image.SCALE_DEFAULT));
@@ -97,6 +102,22 @@ public class MainFrame extends javax.swing.JFrame {
     private void MaximizeUsableBounds() {
         setMaximizedBounds(MaxBounds);
         setExtendedState(MainFrame.MAXIMIZED_BOTH);
+    }
+    
+    private class MyDispatcher implements KeyEventDispatcher {
+
+        @Override
+        public boolean dispatchKeyEvent(KeyEvent e) {
+            if (e.getID() == KeyEvent.KEY_PRESSED) {
+                if (e.isControlDown()) {
+                    if (e.getKeyCode() == KeyEvent.VK_F) {
+                        JOptionPane.showMessageDialog(null, "Show me something");
+                    }
+                    
+                }
+            }
+            return false;
+        }
     }
     
     private void PatientInit(){
