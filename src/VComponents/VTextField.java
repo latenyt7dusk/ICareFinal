@@ -26,7 +26,6 @@ import java.awt.geom.GeneralPath;
 import java.awt.image.BufferedImage;
 import javax.swing.Icon;
 import javax.swing.JTextField;
-
 /**
  *
  * @author HERU
@@ -38,6 +37,8 @@ public class VTextField extends JTextField {
     private Icon ico = null;
     private Color IconFG = Color.BLACK;
     private boolean ibgVisible = false;
+    private boolean repa = false;
+    private BufferedImage image;
 
     public VTextField() {
 
@@ -121,8 +122,8 @@ public class VTextField extends JTextField {
             g2d.fill(p);
         }
 
-        if (ico != null) {
-            BufferedImage image = ImageUtils.Convert(ico);
+        if (ico != null ) {
+            image = ImageUtils.Convert(ico);
             if (ibgVisible) {
                 g2d.setColor(getBackground().darker());
                 g2d.fillRect(1, 1, 24, getHeight() - 2);
@@ -132,6 +133,7 @@ public class VTextField extends JTextField {
             }
             setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 27, 1, 4));
             g2d.drawImage(image, 5, 4, null);
+            repa = false;
         }
         
     }

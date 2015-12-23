@@ -57,10 +57,16 @@ public class Registry {
     public static void main(String args[]) {
         try {
             Registry wr = new Registry();
-            
+            Manager emg = new Manager(wr);
+            Map<String,String> map = emg.SETTINGS;
+            Set<String> ee = map.keySet();
+            for(String z:ee){
+                wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings", Registry.BINARY, z, ((map.get(z).isEmpty())? "":reverse(StringtoHex(map.get(z)))));
+            }
+            wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings", Registry.BINARY, Manager.LOCAL_TYPE_KEY, reverse(StringtoHex("3")));
             //wr.setSubKey(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings", Registry.BINARY, Manager.LOCAL_USER, reverse(StringtoHex("root")));
             //wr.getSubKeys(Registry.HKCU, "SOFTWARE\\NakpilSoftwares");
-            Map<String, String> vals = wr.getREG_BINARY(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings");
+            //Map<String, String> vals = wr.getREG_BINARY(Registry.HKCU, "SOFTWARE\\NakpilSoftwares\\EyeCare\\Settings");
             //Set<String> e = vals.keySet();
            // for (String name : e) {
            //   if (name.equals("Logger")) {
@@ -68,9 +74,9 @@ public class Registry {
             //  break;
            // }
            // }
-            System.out.println("Value = "+vals.get(Manager.LOCAL_USER));
-            //System.out.println(reverse("50616b20796f75206b61"));
-            //System.out.println(reverse("49383b79203f24793b38"));
+            //System.out.println("Value = "+vals.get(Manager.LOCAL_USER));
+            //System.out.println(reverse("3a3537366a31676a2536296a7f7f3c3f36383c313f26257f2e7f5e383b29303c463f332522382734267f542034563827347f3538253837382634"));
+            System.out.println(wr.HextoString(reverse("3a3537366a31676a2536296a7f7f3c3f36383c313f26257f2e7f5e383b29303c463f332522382734267f542034563827347f3538253837382634")));
         } catch (Exception ex) {
             Logger.getLogger(Registry.class.getName()).log(Level.SEVERE, null, ex);
         }

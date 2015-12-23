@@ -16,9 +16,11 @@
  */
 package VClass;
 
+import Utilities.DataBridge;
 import Utilities.Registry;
 import java.io.IOException;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,17 +35,99 @@ public class Manager {
     public static final String SYSTEM = "SOFTWARE\\NakpilSoftwares\\EyeCare";
     public String SETTINGS_KEY = "Settings";
     
+    //User
+    public static final Map<String,Integer> USER_TABLE_MAP = new HashMap(){
+        {
+            put(ID,0);
+            put(USERNAME,1);
+            put(PASSWORD,2);
+            put(ROLE,3);
+        }  
+    };
+    public static final String USER_TABLE_NAME = "Users";
+    public static final String USERNAME = "Username";//1
+    public static final String PASSWORD = "Password";//2
+    public static final String ROLE = "Role";//3
+    public final String USER_TABLE_DEFAULT = "CREATE TABLE IF NOT EXISTS "+USER_TABLE_NAME+" ("+ID+" VARCHAR(255),"
+            +USERNAME+" VARCHAR(255),"+PASSWORD+" VARCHAR(255),"+ROLE+" VARCHAR(255))";
     
-    public String LOG_LOGGER;
+    public boolean saveNewUser(User e,DataBridge DB){
+        try{
+            DB.InsertBatchData(e.getBatch());
+            return true;
+        }catch(Exception er){
+            return false;
+        }
+    }
+    
+    public List<User> getUsers(DataBridge DB){
+        java.util.List<User> tmp = new java.util.ArrayList();
+        try{
+            java.util.List<List> coll = DB.FetchTableCollection(USER_TABLE_NAME);
+            for(List<String> e:coll){
+                String id = e.get(USER_TABLE_MAP.get(ID));
+                String user = e.get(USER_TABLE_MAP.get(USERNAME));
+                String pass = e.get(USER_TABLE_MAP.get(PASSWORD));
+                String role = e.get(USER_TABLE_MAP.get(ROLE));
+                tmp.add(new User(id,user,pass,role));
+            }
+            return tmp;
+        }catch(Exception er){
+            return tmp;
+        }
+    }
+    
+    
+    
+    //Personal Info
+    public static final Map<String,Integer> PERSONAL_TABLE_MAP = new HashMap(){
+        {
+            put(ID,0);
+            put(SURNAME,1);
+            put(FIRSTNAME,2);
+            put(MIDDLENAME,3);
+            put(BIRTHDATE,4);
+            put(GENDER,5);
+            put(CIVILSTATUS,6);
+            put(CONTACT,7);
+            put(EMAIL,8);
+            put(ADDRESS,9);
+        }  
+    };
+    public static final String PERSONAL_TABLE_NAME = "Profiles";
+    public static final String ID = "ID";//0
+    public static final String SURNAME = "Surname";//1
+    public static final String FIRSTNAME = "Firstname";//2
+    public static final String MIDDLENAME = "Middlename";//3
+    public static final String BIRTHDATE = "Birthdate";//4
+    public static final String GENDER = "Gender";//5
+    public static final String CIVILSTATUS = "Civilstatus";//6
+    public static final String CONTACT = "Contact";//7
+    public static final String EMAIL = "Email";//8
+    public static final String ADDRESS = "Address";//9
+    public final String PERSONAL_TABLE_DEFAULT = "CREATE TABLE IF NOT EXISTS "+PERSONAL_TABLE_NAME+" ("+ID+" VARCHAR(255),"+SURNAME
+            +" VARCHAR(255),"+FIRSTNAME+" VARCHAR(255),"+MIDDLENAME+" VARCHAR(255),"+BIRTHDATE+" VARCHAR(255),"+GENDER+" VARCHAR(255),"
+            +CIVILSTATUS+" VARCHAR(255),"+CONTACT+" VARCHAR(255),"+EMAIL+" VARCHAR(255),"+ADDRESS+" VARCHAR(255))";
+    
+    //Logger
+    public static final String LOG_TABLE_NAME = "Logs";
+    public static final String LOGGER = "Logger";
+    public static final String DESCRIPTION = "Description";
+    public static final String DATE = "Date";
+    public static final String TIME = "Time";
+    public static final String TYPE = "Type";
+    public final String LOG_TABLE_DEFAULT = "CREATE TABLE IF NOT EXISTS "+LOG_TABLE_NAME+" ("+ID+" VARCHAR(255),"+DESCRIPTION+
+            " VARCHAR(255),"+LOGGER+" VARCHAR(255),"+TYPE+" VARCHAR(255),"+DATE+" VARCHAR(255),"+TIME+" VARCHAR(255))";
+    
     public Map<String,String> SETTINGS = new HashMap(){
         {
-            put(LOCAL_DB_KEY,"");
+            put(LOCAL_DB_KEY,"jdbc:h2:tcp://localhost/~/NakpilSoftwares/EyeCare/database");
             put(SERVER_DB_KEY,"");
-            put(LOCAL_BRIDGE_KEY,"");
+            put(LOCAL_BRIDGE_KEY,"root");
             put(SERVER_BRIDGE_KEY,"");
-            put(LOCAL_USER,"");
+            put(LOCAL_USER,"root");
             put(SERVER_USER,"");
-            put(LOCAL_TYPE_KEY,"");
+            put(LOCAL_TYPE_KEY,"3");
             put(SERVER_TYPE_KEY,"");
         }
     };
@@ -62,7 +146,6 @@ public class Manager {
         
     }
     
-
     private Map<String, String> Load(String dbkey) {
         Map<String, String> vals;
         try {
@@ -74,12 +157,6 @@ public class Manager {
         }
     }
     
-    public void LoadStartup(){
-        try{
-            
-        }catch(Exception er){
-            
-        }
-    }
-
+    
+    
 }

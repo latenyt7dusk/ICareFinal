@@ -16,17 +16,81 @@
  */
 package UI;
 
+import Utilities.DataBridge;
+import Utilities.Registry;
+import VClass.Manager;
+import VClass.User;
+import java.sql.SQLException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.swing.JOptionPane;
+import javax.swing.UIManager;
+import javax.swing.UnsupportedLookAndFeelException;
+
 /**
  *
  * @author Late7dusk
  */
 public class Engine {
+
+    public static org.h2.tools.Server LocalServer;
+    public static Login LoginUI;
+    public static MainFrame MainUI = new MainFrame();
+    public static Engine ENGINE = new Engine();
+    public static Registry REGISTRY = new Registry();
+    public static Manager MANAGER = new Manager(REGISTRY);
+    public static DataBridge DB;
     
-    
-    
-    
-    public static void main(String[] args){
-        
+
+    public static void main(String[] args) {
+        try {
+
+            //Set System Look & Feel
+            UIManager.setLookAndFeel(UIManager.getSystemLookAndFeelClassName());
+            //Start Database Server
+            LocalServer = org.h2.tools.Server.createTcpServer();
+            LocalServer.start();
+            DB = new DataBridge(MANAGER.SETTINGS.get(Manager.LOCAL_DB_KEY),MANAGER.SETTINGS.get(Manager.LOCAL_USER),MANAGER.SETTINGS.get(Manager.LOCAL_BRIDGE_KEY),Integer.parseInt(MANAGER.SETTINGS.get(Manager.LOCAL_TYPE_KEY)));
+            LoadDefaults();
+            LoginUI = new Login();
+            LoginUI.setVisible(true);
+            User e = new User();
+            e.setID("0000");
+            e.setUsername("admin");
+            e.setPassword("admin");
+            e.setRole("Admin");
+            e.setSurname("Nakpil");
+            e.setFirstname("Kelvin Don Othello");
+            e.setMiddlename("Gasic");
+            e.setBirthdate("Jan 24, 1991");
+            e.setGender("Male");
+            e.setCivilStatus("Single");
+            e.setContactNumber("09055550830");
+            e.setEmail("kelvin.nakpil.heru@gmail.com");
+            e.setAddress("Naic Cavite");
+            JOptionPane.showMessageDialog(null, e.getBatch());
+           
+            System.out.println(MANAGER.saveNewUser(e, DB));
+
+        } catch (SQLException er) {
+
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | UnsupportedLookAndFeelException ex) {
+            Logger.getLogger(Engine.class.getName()).log(Level.SEVERE, null, ex);
+        }finally {
+            if(LocalServer != null){
+                LocalServer.shutdown();
+            }
+        }
     }
     
+    private static void LoadDefaults(){
+        try {
+            DB.RunScript(MANAGER.USER_TABLE_DEFAULT);
+            DB.RunScript(MANAGER.PERSONAL_TABLE_DEFAULT);
+            DB.RunScript(MANAGER.LOG_TABLE_DEFAULT);
+        } catch (SQLException ex) {
+            Logger.getLogger(Engine.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
 }

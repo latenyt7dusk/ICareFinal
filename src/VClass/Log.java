@@ -23,10 +23,7 @@ package VClass;
 public class Log {
     
     private final String logger,description,date,time;
-    public static final String LOGGER = "Logger";
-    public static final String DESCRIPTION = "Description";
-    public static final String DATE = "Date";
-    public static final String TIME = "Time";
+    
     
     public Log(String log,String desc,String date,String time){
         this(log,desc,date,time,false);

@@ -66,6 +66,18 @@ public class MainFrame extends javax.swing.JFrame {
      * Creates new form MainFrame
      */
     public MainFrame() {
+        
+        try {
+            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
+                if ("Nimbus".equals(info.getName())) {
+                    javax.swing.UIManager.setLookAndFeel(javax.swing.UIManager.getSystemLookAndFeelClassName());
+                    break;
+                }
+            }
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
+            java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
+        }
+        
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
         MaximizeUsableBounds();
@@ -301,6 +313,11 @@ public class MainFrame extends javax.swing.JFrame {
         vButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton7.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton7.setIconTextGap(10);
+        vButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton7ActionPerformed(evt);
+            }
+        });
 
         vButton8.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/usage.png"))); // NOI18N
         vButton8.setText("Usage");
@@ -961,6 +978,12 @@ public class MainFrame extends javax.swing.JFrame {
         model.setRowCount(0);
         model.addRow(new Object[]{tst,"Nakpil, Kirstein Jonnah Beciril","09055550830","Admin","Dec 2, 2015"});
     }//GEN-LAST:event_vButton21ActionPerformed
+
+    private void vButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton7ActionPerformed
+        // TODO add your handling code here:
+        dispose();
+        Engine.LoginUI.setVisible(true);
+    }//GEN-LAST:event_vButton7ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -24,10 +24,12 @@ public class User extends PersonalInfo{
     
     private String uname,upass,role;
     
+    
     public User(){
-        this(null,null,null);
+        this(null,null,null,null);
     }
-    public User(String u,String p,String r){
+    public User(String id,String u,String p,String r){
+        this.setID(id);
         this.uname = u;
         this.upass = p;
         this.role = r;
@@ -58,6 +60,14 @@ public class User extends PersonalInfo{
         return getID()+","+uname+","+upass+","+role;
     }
     
+    public java.util.List<String> getBatch(){
+        java.util.List<String> tmp = new java.util.ArrayList();
+        tmp.add("INSERT INTO "+Manager.USER_TABLE_NAME+ " VALUES('"+getID()+"','"+uname+"','"+upass+"','"+role+"')");
+        tmp.add("INSERT INTO "+Manager.PERSONAL_TABLE_NAME+ " VALUES('"+getID()+"','"+getSurname()+"','"+getFirstname()+"','"
+                +getMiddlename()+"','"+getBirthdate()+"','"+getGender()+"','"+getCivilStatus()+"','"+getContactNumber()+"','"
+                +getEmail()+"','"+getAddress()+"')");
+        return tmp;
+    }
     
     
 }

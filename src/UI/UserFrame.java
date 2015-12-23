@@ -34,6 +34,8 @@ public class UserFrame extends javax.swing.JFrame {
     private User cUser;
     private MainFrame cFrame;
     private boolean locked = false;
+    int xM;
+    int yM;
 
     /**
      * Creates new form UserFrame
@@ -167,6 +169,8 @@ public class UserFrame extends javax.swing.JFrame {
         vComboBox2 = new VComponents.VComboBox();
         vPhotoContainer2 = new VComponents.VPhotoContainer();
         vButton4 = new VComponents.VButton();
+        vLabel1 = new VComponents.VLabel();
+        vLabel2 = new VComponents.VLabel();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.DISPOSE_ON_CLOSE);
         setTitle("New User");
@@ -177,6 +181,16 @@ public class UserFrame extends javax.swing.JFrame {
 
         setBackground(new Color(0,0,0,0));
         getContentPane().setBackground(new Color(0,0,0,0));
+        vShadowedPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                vShadowedPanel1MousePressed(evt);
+            }
+        });
+        vShadowedPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                vShadowedPanel1MouseDragged(evt);
+            }
+        });
 
         vButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/power.png"))); // NOI18N
         vButton1.addActionListener(new java.awt.event.ActionListener() {
@@ -351,10 +365,8 @@ public class UserFrame extends javax.swing.JFrame {
         );
 
         vTextField1.setText("username");
-        vTextField1.setLabelIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/user.png"))); // NOI18N
 
         vPasswordField1.setText("password");
-        vPasswordField1.setLabelIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/lock.png"))); // NOI18N
 
         vComboBox2.setModel(new javax.swing.DefaultComboBoxModel(new String[] { "User", "Manager", "Admin" }));
 
@@ -364,6 +376,14 @@ public class UserFrame extends javax.swing.JFrame {
                 vButton4ActionPerformed(evt);
             }
         });
+
+        vLabel1.setForeground(new java.awt.Color(255, 255, 255));
+        vLabel1.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        vLabel1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/user.png"))); // NOI18N
+
+        vLabel2.setForeground(new java.awt.Color(255, 255, 255));
+        vLabel2.setHorizontalAlignment(javax.swing.SwingConstants.CENTER);
+        vLabel2.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/lock.png"))); // NOI18N
 
         javax.swing.GroupLayout vShadowedPanel1Layout = new javax.swing.GroupLayout(vShadowedPanel1);
         vShadowedPanel1.setLayout(vShadowedPanel1Layout);
@@ -375,19 +395,23 @@ public class UserFrame extends javax.swing.JFrame {
                     .addComponent(jPanel1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                     .addGroup(vShadowedPanel1Layout.createSequentialGroup()
                         .addComponent(vPhotoContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 134, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addGroup(vShadowedPanel1Layout.createSequentialGroup()
-                                .addGap(10, 10, 10)
-                                .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
-                                    .addComponent(vTextField1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                                    .addComponent(vPasswordField1, javax.swing.GroupLayout.DEFAULT_SIZE, 190, Short.MAX_VALUE))
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vComboBox2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addGroup(vShadowedPanel1Layout.createSequentialGroup()
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                 .addComponent(vButton4, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                                 .addGap(0, 0, 0)
-                                .addComponent(vButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)))))
+                                .addComponent(vButton1, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addGroup(vShadowedPanel1Layout.createSequentialGroup()
+                                .addGap(12, 12, 12)
+                                .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
+                                    .addComponent(vLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(vLabel2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                                .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                                    .addComponent(vPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(vComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(vTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 190, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addGap(0, 0, Short.MAX_VALUE)))))
                 .addContainerGap())
         );
         vShadowedPanel1Layout.setVerticalGroup(
@@ -395,19 +419,25 @@ public class UserFrame extends javax.swing.JFrame {
             .addGroup(vShadowedPanel1Layout.createSequentialGroup()
                 .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(vShadowedPanel1Layout.createSequentialGroup()
+                        .addContainerGap()
+                        .addComponent(vPhotoContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 10, Short.MAX_VALUE))
+                    .addGroup(vShadowedPanel1Layout.createSequentialGroup()
                         .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
                             .addComponent(vButton1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(vButton4, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-                        .addGap(20, 20, 20)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                         .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                            .addComponent(vTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addComponent(vComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
-                        .addComponent(vPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 25, javax.swing.GroupLayout.PREFERRED_SIZE))
-                    .addGroup(vShadowedPanel1Layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(vPhotoContainer2, javax.swing.GroupLayout.PREFERRED_SIZE, 124, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addGap(10, 10, 10)
+                            .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, vShadowedPanel1Layout.createSequentialGroup()
+                                .addGroup(vShadowedPanel1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
+                                    .addComponent(vTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                                    .addComponent(vLabel1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                                .addComponent(vPasswordField1, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                            .addComponent(vLabel2, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(vComboBox2, javax.swing.GroupLayout.PREFERRED_SIZE, 20, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                 .addComponent(jPanel1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
@@ -440,6 +470,20 @@ public class UserFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
         setExtendedState(UserFrame.ICONIFIED);
     }//GEN-LAST:event_vButton4ActionPerformed
+
+    private void vShadowedPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vShadowedPanel1MouseDragged
+        // TODO add your handling code here:
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+        
+        this.setLocation(x - xM, y - yM);
+    }//GEN-LAST:event_vShadowedPanel1MouseDragged
+
+    private void vShadowedPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_vShadowedPanel1MousePressed
+        // TODO add your handling code here:
+        xM = evt.getX();
+        yM = evt.getY();
+    }//GEN-LAST:event_vShadowedPanel1MousePressed
 
     /**
      * @param args the command line arguments
@@ -496,6 +540,8 @@ public class UserFrame extends javax.swing.JFrame {
     private VComponents.VComboBox vComboBox2;
     private VComponents.VComboBox vComboBox3;
     private VComponents.VDateChooser vDateChooser1;
+    private VComponents.VLabel vLabel1;
+    private VComponents.VLabel vLabel2;
     private VComponents.VPasswordField vPasswordField1;
     private VComponents.VPhotoContainer vPhotoContainer2;
     private VComponents.VShadowedPanel vShadowedPanel1;
