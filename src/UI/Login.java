@@ -16,11 +16,13 @@
  */
 package UI;
 
+import UI.VOption.VOptionPane;
 import VClass.User;
 import VComponents.VShadowBorder;
 import VComponents.VThemeManager;
 import java.awt.Color;
 import java.awt.Toolkit;
+import java.awt.event.KeyEvent;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -30,8 +32,10 @@ import java.util.List;
  */
 public class Login extends javax.swing.JFrame {
 
-    private MainFrame MainUI = Engine.MainUI;
     private List<User> Users = new ArrayList();
+    int xM;
+    int yM;
+    private User tempUser;
     /**
      * Creates new form Login
      */
@@ -50,6 +54,7 @@ public class Login extends javax.swing.JFrame {
         
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
+        
     }
     
     public void updateUserList(){
@@ -64,6 +69,29 @@ public class Login extends javax.swing.JFrame {
     public void setVisible(boolean bln) {
         super.setVisible(bln); //To change body of generated methods, choose Tools | Templates.
         updateUserList();
+    }
+    
+    public boolean doLogin(String user,String pass){
+        updateUserList();
+        for(User e:Users){
+            if(user.equals(e.getUsername()) && pass.equals(e.getPassword())){
+                tempUser = e;
+                return true;
+            }
+        }
+        return false;
+    }
+    
+    public void clearData(){
+        vTextField1.setText("");
+        vPasswordField1.setText("");
+    }
+    
+
+    @Override
+    public void dispose() {
+        clearData();
+        super.dispose(); //To change body of generated methods, choose Tools | Templates.
     }
     
 
@@ -100,6 +128,16 @@ public class Login extends javax.swing.JFrame {
 
         jPanel1.setBorder(javax.swing.BorderFactory.createCompoundBorder(new VShadowBorder(), javax.swing.BorderFactory.createEmptyBorder(0, 0, 7, 7)));
         jPanel1.setOpaque(false);
+        jPanel1.addMouseListener(new java.awt.event.MouseAdapter() {
+            public void mousePressed(java.awt.event.MouseEvent evt) {
+                jPanel1MousePressed(evt);
+            }
+        });
+        jPanel1.addMouseMotionListener(new java.awt.event.MouseMotionAdapter() {
+            public void mouseDragged(java.awt.event.MouseEvent evt) {
+                jPanel1MouseDragged(evt);
+            }
+        });
         jPanel1.setLayout(null);
         setBackground(new Color(0,0,0,0));
         getContentPane().setBackground(new Color(0,0,0,0));
@@ -128,14 +166,19 @@ public class Login extends javax.swing.JFrame {
 
         jPanel2.setBackground(VThemeManager.PanelBackgrounds);
 
-        vTextField1.setText("username");
+        vTextField1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vTextField1.addFocusListener(new java.awt.event.FocusAdapter() {
             public void focusGained(java.awt.event.FocusEvent evt) {
                 vTextField1FocusGained(evt);
             }
         });
 
-        vPasswordField1.setText("password");
+        vPasswordField1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        vPasswordField1.addKeyListener(new java.awt.event.KeyAdapter() {
+            public void keyReleased(java.awt.event.KeyEvent evt) {
+                vPasswordField1KeyReleased(evt);
+            }
+        });
 
         vButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/check.png"))); // NOI18N
         vButton1.setText("Login");
@@ -252,16 +295,42 @@ public class Login extends javax.swing.JFrame {
 
     private void vButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton1ActionPerformed
         // TODO add your handling code here:
-        //MainUI.setVisible(true);
-        UserFrame e = new UserFrame();
-        e.setVisible(true);
-        dispose();
+        //Engine.MainUI.setVisible(true);
+        if(doLogin(vTextField1.getText(),vPasswordField1.getText())){
+            Engine.MainUI.setUser(tempUser);
+            Engine.MainUI.setUserList(Users);
+            Engine.MainUI.setVisible(true);
+            dispose();
+        }else{
+            VOptionPane.showMessageDialog(this, "Login failed!", "User Login", VOptionPane.WARNING_MESSAGE);
+        }
     }//GEN-LAST:event_vButton1ActionPerformed
 
     private void vButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton2ActionPerformed
         // TODO add your handling code here:
         System.exit(0);
     }//GEN-LAST:event_vButton2ActionPerformed
+
+    private void jPanel1MouseDragged(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MouseDragged
+        // TODO add your handling code here:
+        int x = evt.getXOnScreen();
+        int y = evt.getYOnScreen();
+
+        this.setLocation(x - xM, y - yM);
+    }//GEN-LAST:event_jPanel1MouseDragged
+
+    private void jPanel1MousePressed(java.awt.event.MouseEvent evt) {//GEN-FIRST:event_jPanel1MousePressed
+        // TODO add your handling code here:
+        xM = evt.getX();
+        yM = evt.getY();
+    }//GEN-LAST:event_jPanel1MousePressed
+
+    private void vPasswordField1KeyReleased(java.awt.event.KeyEvent evt) {//GEN-FIRST:event_vPasswordField1KeyReleased
+        // TODO add your handling code here:
+        if(evt.getKeyCode() == KeyEvent.VK_ENTER){
+            vButton1.doClick();
+        }
+    }//GEN-LAST:event_vPasswordField1KeyReleased
 
     /**
      * @param args the command line arguments

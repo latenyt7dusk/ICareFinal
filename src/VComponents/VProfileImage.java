@@ -23,11 +23,13 @@ import java.awt.Graphics2D;
 import java.awt.Image;
 import java.awt.RenderingHints;
 import java.awt.geom.Ellipse2D;
+import java.awt.image.BufferedImage;
 import java.io.IOException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.Icon;
+import javax.swing.ImageIcon;
 
 /**
  *
@@ -41,6 +43,10 @@ public class VProfileImage extends javax.swing.JPanel{
         setOpaque(false);
     }
     
+    public void setImage(BufferedImage i){
+        img = new ImageIcon(i);
+        repaint();
+    }
     
     
     @Override
@@ -54,10 +60,10 @@ public class VProfileImage extends javax.swing.JPanel{
             circ.setFrame(9, 9, getWidth()-18, getHeight()-18);
             g2d.clip(circ);
             if(img != null){
-                g2d.drawImage(ImageUtils.Convert(img).getScaledInstance(getWidth()-18, getHeight()-18, Image.SCALE_SMOOTH), 9, 9, null);
+                g2d.drawImage(ImageUtils.Convert(img).getScaledInstance(getWidth()-10, getHeight()-10, Image.SCALE_SMOOTH), 5, 5, null);
             }else{
-                Image ig  = ImageIO.read(getClass().getResource("/UI/Icons/noimage.png")).getScaledInstance(getWidth()-18, getHeight()-18, Image.SCALE_SMOOTH);//Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png"));
-                g2d.drawImage(ig, 9, 9, null);
+                Image ig  = ImageIO.read(getClass().getResource("/UI/Icons/noimage.png")).getScaledInstance(getWidth()-10, getHeight()-10, Image.SCALE_SMOOTH);//Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png"));
+                g2d.drawImage(ig, 5, 5, null);
             }
             
             g2d.draw(circ);

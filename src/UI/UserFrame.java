@@ -26,10 +26,15 @@ import VComponents.VThemeManager;
 import java.awt.Color;
 import java.awt.Component;
 import java.awt.Toolkit;
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
+import javax.imageio.ImageIO;
+import javax.swing.ImageIcon;
 import javax.swing.JLabel;
 
 /**
@@ -40,8 +45,8 @@ public class UserFrame extends javax.swing.JFrame {
 
     private User cUser;
     private List<User> Users = new ArrayList();
-    private MainFrame cFrame;
     private boolean locked = false;
+    private boolean edit = false;
     int xM;
     int yM;
 
@@ -58,34 +63,38 @@ public class UserFrame extends javax.swing.JFrame {
     }
 
     public UserFrame(User user) {
-        initComponents();
-        this.cUser = user;
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
-        gender_tf.removeAllItems();
-        gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
-        gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
-        birthdate_tf.setAgeField(vTextField5);
+        try {
+            initComponents();
+            this.cUser = user;
+            cUser.LoadPersonalInfo(Engine.DB);
+            this.edit = true;
+            setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
+            gender_tf.removeAllItems();
+            gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
+            gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
+            birthdate_tf.setAgeField(vTextField5);
+            setUserData(cUser);
+            Lock(true);
+            vButton2.setText("Edit");
+            vButton2.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("/UI/Icons/notes.png"))));
+        } catch (IOException ex) {
+            Logger.getLogger(UserFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
-    public UserFrame(MainFrame mf) {
-        initComponents();
-        this.cFrame = mf;
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
-        gender_tf.removeAllItems();
-        gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
-        gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
-        birthdate_tf.setAgeField(vTextField5);
-    }
-
-    public UserFrame(User user, MainFrame mf) {
-        initComponents();
-        this.cUser = user;
-        this.cFrame = mf;
-        setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
-        gender_tf.removeAllItems();
-        gender_tf.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
-        gender_tf.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
-        birthdate_tf.setAgeField(vTextField5);
+    public void setUserData(User user) {
+        user_tf.setText(user.getUsername());
+        pass_tf.setText(user.getPassword());
+        role_tf.setSelectedValue(user.getRole());
+        firstname_tf.setText(user.getFirstname());
+        middlename_tf.setText(user.getMiddlename());
+        surname_tf.setText(user.getSurname());
+        birthdate_tf.setDate(user.getBirthdate(), Manager.DEFAULT_DATE_FORMAT);
+        gender_tf.setSelectedValue(user.getGender());
+        civilstatus_tf.setSelectedItem(user.getCivilStatus());
+        address_tf.setText(user.getAddress());
+        contactnumber_tf.setText(user.getContactNumber());
+        email_tf.setText(user.getEmail());
     }
 
     public void ClearData() {
@@ -121,9 +130,10 @@ public class UserFrame extends javax.swing.JFrame {
                 ((VComboBox) c).setEnabled(locked);
             }
         }
+        this.locked = b;
     }
 
-    public boolean buildUser() {
+    public boolean buildUser(boolean bol) {
         try {
             cUser = new User();
             cUser.setID(Manager.getNewID("USR"));
@@ -141,12 +151,19 @@ public class UserFrame extends javax.swing.JFrame {
             cUser.setAddress(address_tf.getText());
 
             List<String> msgs = new ArrayList();
+            if (bol) {
+                if (checkUsername()) {
+                    msgs.add("- Username & Password must consist 8 characters");
+                }
+                if (checkIfRegistered()) {
+                    msgs.add("- User has been already registered");
+                }
+            }
+
             if (checkEmptyValues()) {
                 msgs.add("- Please fill all fields correctly");
             }
-            if (checkIfRegistered()) {
-                msgs.add("- User has been already registered");
-            }
+
             if (msgs.size() > 0) {
                 VOptionPane.showListMessageDialog(this, "Registration Failed", "Warning", msgs.toArray(), VOptionPane.WARNING_MESSAGE);
                 return false;
@@ -156,6 +173,23 @@ public class UserFrame extends javax.swing.JFrame {
         } catch (Exception er) {
             System.out.println(er);
             return false;
+        }
+    }
+
+    public boolean checkUsername() {
+        try {
+            boolean hasEr = false;
+            if (user_tf.getText().length() < 8) {
+                user_tf.setHasError(true);
+                hasEr = true;
+            }
+            if (pass_tf.getText().length() < 8) {
+                pass_tf.setHasError(true);
+                hasEr = true;
+            }
+            return hasEr;
+        } catch (Exception er) {
+            return true;
         }
     }
 
@@ -187,17 +221,16 @@ public class UserFrame extends javax.swing.JFrame {
             }
             return hasEr;
         } catch (Exception er) {
-            return false;
+            return true;
         }
     }
 
     public boolean checkIfRegistered() {
         try {
             boolean hasEr = false;
-            updateUsers();
+            fetchUsers();
             for (User e : Users) {
                 if (cUser.getUsername().equalsIgnoreCase(e.getUsername())) {
-
                     user_tf.setHasError(true);
                     hasEr = true;
                 }
@@ -212,11 +245,11 @@ public class UserFrame extends javax.swing.JFrame {
 
             return hasEr;
         } catch (Exception er) {
-            return false;
+            return true;
         }
     }
 
-    public void updateUsers() {
+    public void fetchUsers() {
         try {
             Users = Engine.MANAGER.getUsers(Engine.DB);
             for (User e : Users) {
@@ -225,6 +258,12 @@ public class UserFrame extends javax.swing.JFrame {
         } catch (Exception er) {
             System.out.println(er);
         }
+    }
+
+    @Override
+    public void dispose() {
+        ClearData();
+        super.dispose(); //To change body of generated methods, choose Tools | Templates.
     }
 
     /**
@@ -571,26 +610,52 @@ public class UserFrame extends javax.swing.JFrame {
 
     private void vButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton2ActionPerformed
         // TODO add your handling code here:
-
-        if (buildUser()) {
-
-            String msg = "<html><br>Name     : " + cUser.getFirstname() + " " + cUser.getSurname() + "<br>"
-                    + "Username : " + cUser.getUsername() + "<br>" + "Role     : " + cUser.getRole()
-                    + "<br><br>" + "Enter your password</html>";
-            String pass = VOptionPane.showMaskedInputDialog(this, msg, "Registration Confirmation");
-            if (pass.equals(cUser.getPassword())) {
-                if (Engine.MANAGER.saveNewUser(cUser, Engine.DB)) {
-                    VOptionPane.showMessageDialog(this, "New User Registered", "Successful");
-                    this.ClearData();
+        try {
+            if (edit) {
+                if (locked) {
+                    Lock(false);
+                    vButton2.setText("Update");
+                    vButton2.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("/UI/Icons/save.png"))));
                 } else {
-                    VOptionPane.showMessageDialog(this, "User Registration Failed", "Error",VOptionPane.ERROR_MESSAGE);
+                    if (buildUser(false)) {
+                        String pass = VOptionPane.showMaskedInputDialog(this, "Enter User Password", "Update Confirmation");
+                        if (pass.equals(cUser.getPassword())) {
+                            if (Engine.MANAGER.UpdateUser(photo_tf.getFile(), cUser, Engine.DB)) {
+                                VOptionPane.showMessageDialog(this, "New User Information Updated!", "Update Successful");
+                                Lock(true);
+                                vButton2.setText("Edit");
+                                vButton2.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("/UI/Icons/notes.png"))));
+                            } else {
+                                VOptionPane.showMessageDialog(this, "Failed to update User information", "Error", VOptionPane.ERROR_MESSAGE);
+                            }
+                        } else {
+                            VOptionPane.showMessageDialog(this, "Incorrect Password!", "Warning", VOptionPane.WARNING_MESSAGE);
+                        }
+                    }
                 }
-
-                System.gc();
             } else {
-                VOptionPane.showMessageDialog(this, "Password does not match", "Warning", VOptionPane.WARNING_MESSAGE);
+                if (buildUser(true)) {
+                    String msg = "<html><br>Name     : " + cUser.getFirstname() + " " + cUser.getSurname() + "<br>"
+                            + "Username : " + cUser.getUsername() + "<br>" + "Role     : " + cUser.getRole()
+                            + "<br><br>" + "Enter your password</html>";
+                    String pass = VOptionPane.showMaskedInputDialog(this, msg, "Registration Confirmation");
+                    if (pass.equals(cUser.getPassword())) {
+                        if (Engine.MANAGER.saveNewUser(photo_tf.getFile(), cUser, Engine.DB)) {
+                            VOptionPane.showMessageDialog(this, "New User Registered", "Successful");
+                            dispose();
+                        } else {
+                            VOptionPane.showMessageDialog(this, "User Registration Failed", "Error", VOptionPane.ERROR_MESSAGE);
+                        }
+                        System.gc();
+                    } else {
+                        VOptionPane.showMessageDialog(this, "Password does not match", "Warning", VOptionPane.WARNING_MESSAGE);
+                    }
+                }
             }
+        } catch (Exception er) {
+            System.out.println(er);
         }
+
     }//GEN-LAST:event_vButton2ActionPerformed
 
     private void vButton4ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton4ActionPerformed

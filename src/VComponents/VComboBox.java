@@ -280,6 +280,19 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
     public String getSelectedValue(){
         return ((Object[])getSelectedItem())[0].toString();
     }
+    
+    public void setSelectedValue(String val){
+        try{
+            for(int i = 0;i < this.getItemCount();i++){
+                if(((Object[])this.getItemAt(i))[0].toString().equalsIgnoreCase(val)){
+                    this.setSelectedIndex(i);
+                    break;
+                }
+            }
+        }catch(Exception er){
+            System.out.println(er);
+        }
+    }
 
     private static class ComboBox_UI extends BasicComboBoxUI {
 

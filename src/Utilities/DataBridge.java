@@ -34,9 +34,13 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
+import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
+import javax.imageio.ImageWriteParam;
+import javax.imageio.ImageWriter;
 
 /**
  *
@@ -62,6 +66,17 @@ public class DataBridge {
     private Connection CONNECTION;
     private PreparedStatement PREPAREDST;
     private ResultSet RESULTS;
+    private java.sql.Statement STATEMENT;
+    private ByteArrayOutputStream output;
+    private List<List> record;
+    private List<String> Data;
+    private String ST;
+    private FileInputStream fis;
+    private InputStream stream;
+    private ByteArrayInputStream ba;
+    private BufferedImage resizedImage;
+    private BufferedImage i;
+    private Graphics2D g;
 
     public DataBridge(Properties p) {
         this(p.getProperty("DATA_SOURCE"), p.getProperty("USER"),
@@ -106,7 +121,6 @@ public class DataBridge {
 
     public List<List> FetchTableCollection(String TB) throws SQLException {
         try {
-            List<List> record = null;
             if (CONNECTION == null) {
                 Class.forName(DRIVER[TYPE]);
                 this.CONNECTION = DriverManager.getConnection(SOURCE, USER, PASS);
@@ -145,15 +159,15 @@ public class DataBridge {
             if (CONNECTION == null) {
                 Class.forName(DRIVER[TYPE]);
                 this.CONNECTION = DriverManager.getConnection(SOURCE, USER, PASS);
-                java.sql.Statement st = CONNECTION.createStatement();
+                STATEMENT = CONNECTION.createStatement();
 
-                String ST = "INSERT INTO " + TB + " values('" + data.get(0) + "'";
+                ST = "INSERT INTO " + TB + " values('" + data.get(0) + "'";
                 for (int i = 1; i < data.size(); i++) {
                     ST = ST.concat(",'" + data.get(i) + "'");
                 }
                 ST = ST.concat(")");
-                st.executeUpdate(ST);
-                st.close();
+                STATEMENT.executeUpdate(ST);
+                STATEMENT.close();
                 return true;
             }
             return false;
@@ -172,9 +186,9 @@ public class DataBridge {
             if (CONNECTION == null) {
                 Class.forName(DRIVER[TYPE]);
                 this.CONNECTION = DriverManager.getConnection(SOURCE, USER, PASS);
-                java.sql.Statement st = CONNECTION.createStatement();
-                st.executeUpdate(data);
-                st.close();
+                STATEMENT = CONNECTION.createStatement();
+                STATEMENT.executeUpdate(data);
+                STATEMENT.close();
                 return true;
             }
             return false;
@@ -195,13 +209,13 @@ public class DataBridge {
             if (CONNECTION == null) {
                 Class.forName(DRIVER[TYPE]);
                 this.CONNECTION = DriverManager.getConnection(SOURCE, USER, PASS);
-                java.sql.Statement st = CONNECTION.createStatement();
+                STATEMENT = CONNECTION.createStatement();
                 if (d.size() > 0) {
                     for (String tmp : d) {
-                        st.addBatch(tmp);
+                        STATEMENT.addBatch(tmp);
                     }
-                    st.executeBatch();
-                    st.close();
+                    STATEMENT.executeBatch();
+                    STATEMENT.close();
                     return true;
                 }
 
@@ -223,9 +237,9 @@ public class DataBridge {
             if (CONNECTION == null) {
                 Class.forName(DRIVER[TYPE]);
                 this.CONNECTION = DriverManager.getConnection(SOURCE, USER, PASS);
-                java.sql.Statement st = CONNECTION.createStatement();
+                STATEMENT = CONNECTION.createStatement();
 
-                String ST = "update " + TB + " set " + cols.get(0) + " = '" + data2.get(0) + "'";
+                ST = "update " + TB + " set " + cols.get(0) + " = '" + data2.get(0) + "'";
 
                 for (int i = 1; i < data2.size(); i++) {
                     ST = ST.concat("," + cols.get(i) + " = '" + data2.get(i) + "'");
@@ -234,8 +248,8 @@ public class DataBridge {
                 for (int i = 1; i < data1.size(); i++) {
                     ST = ST.concat("AND " + cols.get(i) + " = '" + data1.get(i) + "'");
                 }
-                st.executeUpdate(ST);
-                st.close();
+                STATEMENT.executeUpdate(ST);
+                STATEMENT.close();
                 return true;
             }
             return false;
@@ -277,7 +291,6 @@ public class DataBridge {
     }
 
     public List<String> FetchRowData(String TB, String id, String val) throws SQLException {
-        List<String> Data = null;
         try {
             if (CONNECTION == null) {
                 Class.forName(DRIVER[TYPE]);
@@ -313,12 +326,12 @@ public class DataBridge {
 
     public boolean SaveFile(String TB, String ID, File f) throws SQLException {
         try {
-            String INSERT_PICTURE = "INSERT INTO " + TB + " VALUES( ?, ?)";
-            FileInputStream fis = null;
+            ST = "INSERT INTO " + TB + " VALUES( ?, ?)";
+            fis = null;
             if (CONNECTION == null) {
                 Class.forName(DRIVER[TYPE]);
                 this.CONNECTION = DriverManager.getConnection(SOURCE, USER, PASS);
-                this.PREPAREDST = CONNECTION.prepareStatement(INSERT_PICTURE);
+                this.PREPAREDST = CONNECTION.prepareStatement(ST);
                 fis = new FileInputStream(f);
                 PREPAREDST.setString(1, ID);
                 PREPAREDST.setBinaryStream(2, fis, (int) f.length());
@@ -339,9 +352,11 @@ public class DataBridge {
             }
         }
     }
+    
+    
 
     public BufferedImage getBufferedImage(String TB, String imgCol, String idLb, String ID) throws SQLException, IOException {
-        ByteArrayOutputStream output = null;
+        output = new ByteArrayOutputStream();
         try {
             if (CONNECTION == null) {
                 Class.forName(DRIVER[TYPE]);
@@ -349,18 +364,16 @@ public class DataBridge {
                 this.PREPAREDST = CONNECTION.prepareStatement("SELECT * FROM " + TB + " WHERE " + idLb + " = '" + ID + "'");
                 this.RESULTS = PREPAREDST.executeQuery();
                 RESULTS.next();
-                InputStream stream = RESULTS.getBinaryStream(imgCol);
-                output = new ByteArrayOutputStream();
+                stream = RESULTS.getBinaryStream(imgCol);
                 int a1 = stream.read();
                 while (a1 >= 0) {
                     output.write((char) a1);
                     a1 = stream.read();
                 }
 
-                ByteArrayInputStream ba = new ByteArrayInputStream(output.toByteArray());
-                BufferedImage BI = ImageIO.read(ba);
+                ba = new ByteArrayInputStream(output.toByteArray());
 
-                return BI;//Toolkit.getDefaultToolkit().createImage(output.toByteArray());
+                return ImageIO.read(ba);//Toolkit.getDefaultToolkit().createImage(output.toByteArray());
 
             }
             return null;
@@ -379,7 +392,7 @@ public class DataBridge {
     }
 
     public Image getImage(String TB, String imgCol, String idLb, String ID) throws SQLException, IOException {
-        ByteArrayOutputStream output = null;
+        output = new ByteArrayOutputStream();
         try {
             if (CONNECTION == null) {
                 Class.forName(DRIVER[TYPE]);
@@ -387,8 +400,7 @@ public class DataBridge {
                 this.PREPAREDST = CONNECTION.prepareStatement("SELECT * FROM " + TB + " WHERE " + idLb + " = '" + ID + "'");
                 this.RESULTS = PREPAREDST.executeQuery();
                 RESULTS.next();
-                InputStream stream = RESULTS.getBinaryStream(imgCol);
-                output = new ByteArrayOutputStream();
+                stream = RESULTS.getBinaryStream(imgCol);
                 int a1 = stream.read();
                 while (a1 >= 0) {
                     output.write((char) a1);
@@ -417,9 +429,9 @@ public class DataBridge {
         try {
             File to = File.createTempFile("tempResImage", ".tmp");
             FileOutputStream tof = new FileOutputStream(to);
-            BufferedImage i = ImageIO.read(f);
-            BufferedImage ni = resizeImage(i, i.getColorModel().getTransparency(), w1, h1);
-            ImageIO.write(ni, "jpg", tof);
+            i = ImageIO.read(f);
+            i = resizeImage(i, i.getColorModel().getTransparency(), w1, h1);
+            ImageIO.write(i, "jpg", tof);
 
             return to;
         } catch (Exception er) {
@@ -429,13 +441,15 @@ public class DataBridge {
     }
 
     private BufferedImage resizeImage(BufferedImage originalImage, int type, int IMG_WIDTH, int IMG_HEIGHT) {
-        BufferedImage resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
-        Graphics2D g = resizedImage.createGraphics();
+        resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
+        g = resizedImage.createGraphics();
         g.drawImage(originalImage, 0, 0, IMG_WIDTH, IMG_HEIGHT, null);
         g.dispose();
 
         return resizedImage;
     }
+    
+    
 
     
     

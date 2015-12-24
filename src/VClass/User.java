@@ -17,6 +17,7 @@
 package VClass;
 
 import Utilities.DataBridge;
+import java.awt.image.BufferedImage;
 
 /**
  *
@@ -62,13 +63,21 @@ public class User extends PersonalInfo{
         return getID()+","+uname+","+upass+","+role;
     }
     
-    public java.util.List<String> getBatch(){
+    public java.util.List<String> getInsertBatch(){
         java.util.List<String> tmp = new java.util.ArrayList();
         tmp.add("INSERT INTO "+Manager.USER_TABLE_NAME+ " VALUES('"+getID()+"','"+uname+"','"+upass+"','"+role+"')");
         tmp.add("INSERT INTO "+Manager.PERSONAL_TABLE_NAME+ " VALUES('"+getID()+"','"+getSurname()+"','"+getFirstname()+"','"
                 +getMiddlename()+"','"+getBirthdate()+"','"+getGender()+"','"+getCivilStatus()+"','"+getContactNumber()+"','"
                 +getEmail()+"','"+getAddress()+"')");
         return tmp;
+    }
+    
+    public String getUpdateBatch(){
+        return "UPDATE "+Manager.USER_TABLE_NAME+" SET "+Manager.FIRSTNAME+" ='"+getFirstname()+"',"+Manager.MIDDLENAME+" ='"
+                +getMiddlename()+"',"+Manager.SURNAME+" ='"+getSurname()+"',"+Manager.BIRTHDATE+" ='"+getBirthdate()+"',"
+                +Manager.GENDER+" ='"+getGender()+"',"+Manager.CIVILSTATUS+" ='"+getCivilStatus()+"',"+Manager.CONTACT+" ='"
+                +getContactNumber()+"',"+Manager.ADDRESS+" ='"+getAddress()+"',"+Manager.EMAIL+" ='"+getEmail()+"' WHERE "
+                +Manager.ID+" ='"+getID()+"'"; 
     }
     
     public void LoadPersonalInfo(DataBridge DB){
@@ -84,7 +93,16 @@ public class User extends PersonalInfo{
             setEmail(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.EMAIL)));
             setAddress(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.ADDRESS)));
         }catch(Exception er){
-            
+            System.out.println(er);
+        }
+    }
+    
+    public BufferedImage LoadImage(DataBridge DB){
+        try{
+            return DB.getBufferedImage(Manager.IMAGE_TABLE_NAME, Manager.IMAGE, Manager.ID, getID());
+        }catch(Exception er){
+            System.out.println(er);
+            return null;
         }
     }
     

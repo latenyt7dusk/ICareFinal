@@ -108,6 +108,10 @@ public class VPhotoContainer extends JLabel {
             setText("No Picture");
         }
     }
+    
+    public File getFile(){
+        return img;
+    }
 
     public void setChangeAble(boolean b) {
         this.changeable = b;

@@ -16,6 +16,10 @@
  */
 package UI;
 
+import UI.VOption.VOptionPane;
+import Utilities.DataBridge;
+import VClass.Manager;
+import VClass.User;
 import VComponents.VThemeManager;
 import java.awt.GraphicsEnvironment;
 import java.awt.Image;
@@ -26,6 +30,14 @@ import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
 import java.io.File;
+import java.io.IOException;
+import java.nio.file.Files;
+import java.nio.file.StandardCopyOption;
+import java.nio.file.StandardOpenOption;
+import java.util.ArrayList;
+import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.AbstractAction;
 import javax.swing.Action;
@@ -55,7 +67,7 @@ public class MainFrame extends javax.swing.JFrame {
     public ImageIcon Item_return = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_down2.png")));
     public ImageIcon Item_cancel = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_x.png")));
     public ImageIcon Item_hold = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_hold.png")));
-    private ImageIcon tst;
+    
     
     Action delete = new AbstractAction() {
         public void actionPerformed(ActionEvent e) {
@@ -65,7 +77,10 @@ public class MainFrame extends javax.swing.JFrame {
         }
     };
     
-    
+    public User USER;
+    public List<User> USERS = new ArrayList();
+    private DefaultTableModel TempModel;
+    private ImageIcon TempImage;
     /**
      * Creates new form MainFrame
      */
@@ -82,18 +97,20 @@ public class MainFrame extends javax.swing.JFrame {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
         
+        //UI Inits
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
         MaximizeUsableBounds();
-        System.gc();
-        //vPhotoContainer3.Lock(true);
         vTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
         centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
+        
+        //Class Inits
         PatientInit();
+        UserInit();
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new MyDispatcher());
         
         try{
-            tst = new ImageIcon(ImageIO.read(new File("C:\\Documents and Settings\\HERU\\My Documents\\My Pictures\\IMG_20150104_112100.jpg")).getScaledInstance(62, 50, Image.SCALE_DEFAULT));
+            TempImage = new ImageIcon(ImageIO.read(new File("E:\\Wallpapers\\steve jobs.jpg")).getScaledInstance(72, 60, Image.SCALE_DEFAULT));
         }catch(Exception er){
             
         }
@@ -120,12 +137,61 @@ public class MainFrame extends javax.swing.JFrame {
         }
     }
     
+    //Main Inits
     private void PatientInit(){
         vTable1.getColumn("Contact").setCellRenderer(centerRenderer);
         vTable1.getColumn("Date").setCellRenderer(centerRenderer);
         vTable1.getColumn("Due").setCellRenderer(centerRenderer);
-    } 
+    }
+    
+    private void UserInit(){
+        vTable2.getColumn("Contact").setCellRenderer(centerRenderer);
+        vTable2.getColumn("Role").setCellRenderer(centerRenderer);
+    }
+    
+    
+    //Users
+    public void setUser(User u){
+        this.USER = u;
+        USER.LoadPersonalInfo(Engine.DB);
+        try{
+            vProfileImage1.setImage(Engine.DB.getBufferedImage(Manager.IMAGE_TABLE_NAME, Manager.IMAGE, Manager.ID, USER.getID()));
+        }catch(Exception er){
+            er.printStackTrace();
+        }
+    }
+    
+    public User getUser(){
+        return USER;
+    }
+    
+    public void setUserList(List<User> users){
+        this.USERS = users;
+    }
+    
+    public List<User> getUsersList(){
+        return USERS;
+    }
 
+    public void showUserPanel() throws IOException{
+        MainSlide.showPane(UserSlide);
+        for(User e:USERS){
+            e.LoadPersonalInfo(Engine.DB);
+        }
+        TempModel = (DefaultTableModel) vTable2.getModel();
+        TempModel.setRowCount(0);
+        for(User e:USERS){
+            ImageIcon tmp;
+            try{
+                TempImage = new ImageIcon(Engine.DB.getBufferedImage(Manager.IMAGE_TABLE_NAME, Manager.IMAGE, Manager.ID, e.getID()).getScaledInstance(72, 60, Image.SCALE_DEFAULT));
+            }catch(Exception er){
+                TempImage = new ImageIcon(ImageIO.read(getClass().getResource("/UI/Icons/noimage.png")).getScaledInstance(72, 60, Image.SCALE_DEFAULT));
+                er.printStackTrace();
+            }
+            TempModel.addRow(new Object[]{TempImage,"<html>"+e.getSurname()+",<br>"+e.getFirstname()+" "+e.getMiddlename(),e.getContactNumber(),e.getRole()});
+        }
+        System.gc();
+    }
     
     
     /**
@@ -411,16 +477,21 @@ public class MainFrame extends javax.swing.JFrame {
         vButton28.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/report16.png"))); // NOI18N
 
         vButton29.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/save.png"))); // NOI18N
+        vButton29.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton29ActionPerformed(evt);
+            }
+        });
 
         javax.swing.GroupLayout vProfileImage1Layout = new javax.swing.GroupLayout(vProfileImage1);
         vProfileImage1.setLayout(vProfileImage1Layout);
         vProfileImage1Layout.setHorizontalGroup(
             vProfileImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 75, Short.MAX_VALUE)
+            .addGap(0, 132, Short.MAX_VALUE)
         );
         vProfileImage1Layout.setVerticalGroup(
             vProfileImage1Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGap(0, 75, Short.MAX_VALUE)
+            .addGap(0, 0, Short.MAX_VALUE)
         );
 
         javax.swing.GroupLayout vShadowedPanel2Layout = new javax.swing.GroupLayout(vShadowedPanel2);
@@ -429,36 +500,33 @@ public class MainFrame extends javax.swing.JFrame {
             vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(vShadowedPanel2Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addGroup(vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(vButton9, javax.swing.GroupLayout.DEFAULT_SIZE, 180, Short.MAX_VALUE)
-                    .addGroup(vShadowedPanel2Layout.createSequentialGroup()
-                        .addGroup(vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING)
-                            .addComponent(vProfileImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                            .addGroup(vShadowedPanel2Layout.createSequentialGroup()
-                                .addComponent(vButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
-                                .addComponent(vButton28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                        .addComponent(vButton29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                .addContainerGap())
-        );
-        vShadowedPanel2Layout.setVerticalGroup(
-            vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addGroup(vShadowedPanel2Layout.createSequentialGroup()
-                .addComponent(vButton9, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(vProfileImage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(vProfileImage1, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(18, 18, 18)
                 .addGroup(vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addComponent(vButton24, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(vButton25, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                     .addComponent(vButton26, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vButton28, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(vButton29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                    .addComponent(vButton29, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vButton9, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, 26, javax.swing.GroupLayout.PREFERRED_SIZE)
+                    .addComponent(vButton28, javax.swing.GroupLayout.Alignment.TRAILING, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
+        );
+        vShadowedPanel2Layout.setVerticalGroup(
+            vShadowedPanel2Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+            .addGroup(vShadowedPanel2Layout.createSequentialGroup()
+                .addComponent(vButton24, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(vButton25, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(vButton26, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addGap(0, 0, 0)
+                .addComponent(vButton29, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(vButton9, javax.swing.GroupLayout.PREFERRED_SIZE, 22, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addComponent(vButton28, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+            .addGroup(vShadowedPanel2Layout.createSequentialGroup()
+                .addContainerGap()
+                .addComponent(vProfileImage1, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                 .addContainerGap())
         );
 
@@ -758,37 +826,35 @@ public class MainFrame extends javax.swing.JFrame {
 
         vTable2.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null},
-                {null, null, null, null, null}
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null},
+                {null, null, null, null}
             },
             new String [] {
-                "Image", "Name", "Contact", "Role", "Last Logged"
+                "Image", "Name", "Contact", "Role"
             }
         ) {
             boolean[] canEdit = new boolean [] {
-                false, false, false, false, false
+                false, false, false, false
             };
 
             public boolean isCellEditable(int rowIndex, int columnIndex) {
                 return canEdit [columnIndex];
             }
         });
-        vTable2.setFont(new java.awt.Font("Tahoma", 1, 13)); // NOI18N
-        vTable2.setRowHeight(50);
+        vTable2.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
+        vTable2.setRowHeight(60);
         vTable2.setShowHorizontalLines(false);
         vTable2.setShowVerticalLines(false);
         vScrollPane2.setViewportView(vTable2);
         if (vTable2.getColumnModel().getColumnCount() > 0) {
-            vTable2.getColumnModel().getColumn(0).setMinWidth(62);
-            vTable2.getColumnModel().getColumn(0).setMaxWidth(62);
+            vTable2.getColumnModel().getColumn(0).setMinWidth(72);
+            vTable2.getColumnModel().getColumn(0).setMaxWidth(72);
             vTable2.getColumnModel().getColumn(2).setMinWidth(150);
             vTable2.getColumnModel().getColumn(2).setMaxWidth(150);
             vTable2.getColumnModel().getColumn(3).setMinWidth(100);
             vTable2.getColumnModel().getColumn(3).setMaxWidth(100);
-            vTable2.getColumnModel().getColumn(4).setMinWidth(120);
-            vTable2.getColumnModel().getColumn(4).setMaxWidth(120);
         }
 
         vLabel10.setBackground(VThemeManager.ButtonNormal);
@@ -803,6 +869,11 @@ public class MainFrame extends javax.swing.JFrame {
         vButton19.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/remove.png"))); // NOI18N
 
         vButton20.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/admin.png"))); // NOI18N
+        vButton20.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton20ActionPerformed(evt);
+            }
+        });
 
         vButton21.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/addprofile.png"))); // NOI18N
         vButton21.addActionListener(new java.awt.event.ActionListener() {
@@ -956,20 +1027,6 @@ public class MainFrame extends javax.swing.JFrame {
         System.exit(0);
     }//GEN-LAST:event_vButton11ActionPerformed
 
-    private void vButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton9ActionPerformed
-        // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) vTable1.getModel();
-        model.setRowCount(0);
-        
-        
-        model.addRow(new Object[]{Paid,Item_proc,"Nakpil, Kelvin Don Othello Gasic","09055550830","Nov 21, 2015","Dec 5, 2015"});
-        model.addRow(new Object[]{Balance,Item_hold,"Nakpil, Johanna Mae Beciril","09055550830","Nov 22, 2015","Dec 6, 2015"});
-        
-        
-        
-        //VButtonColumn buttonColumn = new VButtonColumn(vTable1, delete, 2);
-    }//GEN-LAST:event_vButton9ActionPerformed
-
     private void vButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton10ActionPerformed
         // TODO add your handling code here:
         setExtendedState(MainFrame.ICONIFIED);
@@ -988,8 +1045,12 @@ public class MainFrame extends javax.swing.JFrame {
     }//GEN-LAST:event_vButton1ActionPerformed
 
     private void vButton5ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton5ActionPerformed
-        // TODO add your handling code here:
-        MainSlide.showPane(UserSlide);
+        try {
+            // TODO add your handling code here:
+            showUserPanel();
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }//GEN-LAST:event_vButton5ActionPerformed
 
     private void vButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton21ActionPerformed
@@ -997,7 +1058,7 @@ public class MainFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) vTable2.getModel();
         
         model.setRowCount(0);
-        model.addRow(new Object[]{tst,"Nakpil, Kirstein Jonnah Beciril","09055550830","Admin","Dec 2, 2015"});
+        model.addRow(new Object[]{TempImage,"<html> Nakpil, <br> Kirstein Jonnah Beciril</html>","09055550830","Admin","Dec 2, 2015"});
     }//GEN-LAST:event_vButton21ActionPerformed
 
     private void vButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton7ActionPerformed
@@ -1005,6 +1066,35 @@ public class MainFrame extends javax.swing.JFrame {
         dispose();
         Engine.LoginUI.setVisible(true);
     }//GEN-LAST:event_vButton7ActionPerformed
+
+    private void vButton29ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton29ActionPerformed
+        try {
+            // TODO add your handling code here:
+            Engine.main(new String[0]);
+            File ez = Engine.DB.ResizeImageFile(new File("E:\\Wallpapers\\Scan10004.JPG"), 160, 150);
+            
+            Files.write (new File("E:\\Wallpapers\\Test Compressed.jpg").toPath(), Files.readAllBytes(ez.toPath()), StandardOpenOption.CREATE);
+        } catch (IOException ex) {
+            Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }//GEN-LAST:event_vButton29ActionPerformed
+
+    private void vButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton20ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) vTable2.getModel();
+        VOptionPane.showMessageDialog(model.getValueAt(0, 1).toString());
+    }//GEN-LAST:event_vButton20ActionPerformed
+
+    private void vButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton9ActionPerformed
+        // TODO add your handling code here:
+        DefaultTableModel model = (DefaultTableModel) vTable1.getModel();
+        model.setRowCount(0);
+
+        model.addRow(new Object[]{Paid,Item_proc,"Nakpil, Kelvin Don Othello Gasic","09055550830","Nov 21, 2015","Dec 5, 2015"});
+        model.addRow(new Object[]{Balance,Item_hold,"Nakpil, Johanna Mae Beciril","09055550830","Nov 22, 2015","Dec 6, 2015"});
+
+        //VButtonColumn buttonColumn = new VButtonColumn(vTable1, delete, 2);
+    }//GEN-LAST:event_vButton9ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -21,10 +21,13 @@ import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.text.ParseException;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Date;
 import java.util.GregorianCalendar;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.BoxLayout;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -161,6 +164,24 @@ public class VDateChooser extends JPanel{
         YY.setSelectedIndex(selDate.getYear()-15);
         MaxDays(selDate.getMonth(),selDate.getYear());
         DD.setSelectedIndex(selDate.getDate()-1);
+    }
+    
+    public void setDate(String e,String f){
+        try {
+            SDF = new SimpleDateFormat(f);
+            Calendar cal = new GregorianCalendar();
+            cal.setTime(SDF.parse(e));
+            selDate = cal.getTime();
+            MM.setSelectedIndex(selDate.getMonth());
+            YY.setSelectedIndex(selDate.getYear()-15);
+            MaxDays(selDate.getMonth(),selDate.getYear());
+            DD.setSelectedIndex(selDate.getDate()-1);
+            if(Age!= null){
+                Age.setText(String.valueOf(computeAge(selDate)));
+            }
+        } catch (ParseException ex) {
+            Logger.getLogger(VDateChooser.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public Date getDate(){
