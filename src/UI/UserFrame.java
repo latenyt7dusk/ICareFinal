@@ -579,11 +579,14 @@ public class UserFrame extends javax.swing.JFrame {
                     + "<br><br>" + "Enter your password</html>";
             String pass = VOptionPane.showMaskedInputDialog(this, msg, "Registration Confirmation");
             if (pass.equals(cUser.getPassword())) {
-                Engine.MANAGER.saveNewUser(cUser, Engine.DB);
-                System.gc();
-                VOptionPane.showMessageDialog(this, "New User Registered", "Successful");
-                this.ClearData();
+                if (Engine.MANAGER.saveNewUser(cUser, Engine.DB)) {
+                    VOptionPane.showMessageDialog(this, "New User Registered", "Successful");
+                    this.ClearData();
+                } else {
+                    VOptionPane.showMessageDialog(this, "User Registration Failed", "Error",VOptionPane.ERROR_MESSAGE);
+                }
 
+                System.gc();
             } else {
                 VOptionPane.showMessageDialog(this, "Password does not match", "Warning", VOptionPane.WARNING_MESSAGE);
             }
