@@ -23,7 +23,7 @@ import java.awt.image.BufferedImage;
  *
  * @author HERU
  */
-public class User extends PersonalInfo{
+public class User extends PersonalInfo implements Cloneable{
     
     private String uname,upass,role;
     
@@ -83,15 +83,15 @@ public class User extends PersonalInfo{
     public void LoadPersonalInfo(DataBridge DB){
         try{
             java.util.List<String> data = DB.FetchRowData(Manager.PERSONAL_TABLE_NAME, Manager.ID, getID());
-            setSurname(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.SURNAME)));
-            setFirstname(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.FIRSTNAME)));
-            setMiddlename(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.MIDDLENAME)));
-            setBirthdate(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.BIRTHDATE)));
-            setGender(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.GENDER)));
-            setCivilStatus(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.CIVILSTATUS)));
-            setContactNumber(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.CONTACT)));
-            setEmail(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.EMAIL)));
-            setAddress(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.ADDRESS)));
+            this.setSurname(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.SURNAME)));
+            this.setFirstname(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.FIRSTNAME)));
+            this.setMiddlename(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.MIDDLENAME)));
+            this.setBirthdate(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.BIRTHDATE)));
+            this.setGender(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.GENDER)));
+            this.setCivilStatus(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.CIVILSTATUS)));
+            this.setContactNumber(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.CONTACT)));
+            this.setEmail(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.EMAIL)));
+            this.setAddress(data.get(Manager.PERSONAL_TABLE_MAP.get(Manager.ADDRESS)));
         }catch(Exception er){
             System.out.println(er);
         }

@@ -29,11 +29,13 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
+import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.logging.Level;
@@ -57,17 +59,18 @@ public class MainFrame extends javax.swing.JFrame {
     public static final GraphicsEnvironment GEnvironment = GraphicsEnvironment.getLocalGraphicsEnvironment();
     public static final Rectangle MaxBounds = GEnvironment.getMaximumWindowBounds().getBounds();
     public static DefaultTableCellRenderer centerRenderer = new DefaultTableCellRenderer();
-    public ImageIcon Paid = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/paid.png")));
-    public ImageIcon Balance = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/cash.png")));
-    public ImageIcon Canceled = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/canceled.png")));
-    public ImageIcon Item_proc = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_proc.png")));
-    public ImageIcon Item_warn = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_warn.png")));
-    public ImageIcon Item_ok = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_check.png")));
-    public ImageIcon Item_claimed = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_up.png")));
-    public ImageIcon Item_return = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_down2.png")));
-    public ImageIcon Item_cancel = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_x.png")));
-    public ImageIcon Item_hold = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_hold.png")));
-    
+    private ImageIcon Paid = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/paid.png")));
+    private ImageIcon Balance = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/cash.png")));
+    private ImageIcon Canceled = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/canceled.png")));
+    private ImageIcon Item_proc = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_proc.png")));
+    private ImageIcon Item_warn = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_warn.png")));
+    private ImageIcon Item_ok = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_check.png")));
+    private ImageIcon Item_claimed = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_up.png")));
+    private ImageIcon Item_return = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_down2.png")));
+    private ImageIcon Item_cancel = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_x.png")));
+    private ImageIcon Item_hold = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_hold.png")));
+    private final ImageIcon NO_IMAGE_72x60 = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png")).getScaledInstance(72, 60, Image.SCALE_DEFAULT));
+    //private final ImageIcon NO_IMAGE_72x60 = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png")));
     
     Action delete = new AbstractAction() {
         public void actionPerformed(ActionEvent e) {
@@ -181,15 +184,20 @@ public class MainFrame extends javax.swing.JFrame {
         TempModel = (DefaultTableModel) vTable2.getModel();
         TempModel.setRowCount(0);
         for(User e:USERS){
-            ImageIcon tmp;
             try{
-                TempImage = new ImageIcon(Engine.DB.getBufferedImage(Manager.IMAGE_TABLE_NAME, Manager.IMAGE, Manager.ID, e.getID()).getScaledInstance(72, 60, Image.SCALE_DEFAULT));
-            }catch(Exception er){
-                TempImage = new ImageIcon(ImageIO.read(getClass().getResource("/UI/Icons/noimage.png")).getScaledInstance(72, 60, Image.SCALE_DEFAULT));
-                er.printStackTrace();
+                Image z = Engine.DB.getBufferedImage(Manager.IMAGE_TABLE_NAME, Manager.IMAGE, Manager.ID, e.getID());
+                if(z != null){
+                    z = z.getScaledInstance(72, 60, Image.SCALE_DEFAULT);
+                    TempImage = new ImageIcon(z);
+                }else{
+                    TempImage = NO_IMAGE_72x60;
+                }
+            }catch(SQLException | IOException er){
+                System.out.println("Error : "+er);
             }
             TempModel.addRow(new Object[]{TempImage,"<html>"+e.getSurname()+",<br>"+e.getFirstname()+" "+e.getMiddlename(),e.getContactNumber(),e.getRole()});
         }
+        
         System.gc();
     }
     

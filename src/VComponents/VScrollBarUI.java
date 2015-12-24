@@ -112,7 +112,6 @@ public class VScrollBarUI {
                     g2d.fillRoundRect(r.x + 2, r.y + 2, r.width - 4, r.height - 4, 8, 8);
                     //g2d.drawImage(imageThumb,r.x, r.y, r.width, r.height, null);
                 }
-
             }
         }
 
@@ -135,7 +134,6 @@ public class VScrollBarUI {
                 } else {
                     g2d.fillRoundRect(r.x + 2, r.y + 2, r.width - 4, r.height - 4, 8, 8);
                 }
-
             }
         }
 

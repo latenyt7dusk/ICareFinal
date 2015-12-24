@@ -35,8 +35,8 @@ public class HSLColor
 	public HSLColor(Color rgb)
 	{
 		this.rgb = rgb;
-		hsl = fromRGB( rgb );
-		alpha = rgb.getAlpha() / 255.0f;
+		this.hsl = fromRGB( rgb );
+		this.alpha = rgb.getAlpha() / 255.0f;
 	}
 
 	/**

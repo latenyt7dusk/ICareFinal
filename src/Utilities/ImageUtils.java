@@ -34,13 +34,17 @@ import javax.swing.ImageIcon;
  * @author HERU
  */
 public class ImageUtils {
+    
+    private static BufferedImage bi;
+    private static Graphics g;
+    private static Graphics2D g2;
 
     public static BufferedImage Convert(Icon icon) {
-        BufferedImage bi = new BufferedImage(
+        bi = new BufferedImage(
                 icon.getIconWidth(),
                 icon.getIconHeight(),
                 BufferedImage.TYPE_INT_ARGB);
-        Graphics g = bi.createGraphics();
+        g = bi.createGraphics();
         icon.paintIcon(null, g, 0, 0);
         g.dispose();
         return bi;
@@ -48,33 +52,33 @@ public class ImageUtils {
     
     public static Icon makeWatermark(BufferedImage b,float o) {
         Icon icon = new ImageIcon(b);
-        BufferedImage bi = new BufferedImage(
+        bi = new BufferedImage(
                 icon.getIconWidth(),
                 icon.getIconHeight(),
                 BufferedImage.TYPE_INT_ARGB);
-        Graphics2D g = bi.createGraphics();
-        g.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, o));
+        g2 = bi.createGraphics();
+        g2.setComposite(AlphaComposite.getInstance(AlphaComposite.SRC_OVER, o));
         icon.paintIcon(null, g, 0, 0);
-        g.dispose();
+        g2.dispose();
         return new javax.swing.ImageIcon(bi);
     }
 
     public static BufferedImage Colorize(Icon icon, Color c) {
-        BufferedImage i = Convert(icon);
-        Colorizer.doRGB(c, i);
-        return i;
+        bi = Convert(icon);
+        Colorizer.doRGB(c, bi);
+        return bi;
     }
 
     public static BufferedImage Colorize(Icon icon, int r, int g, int b) {
-        BufferedImage i = Convert(icon);
-        Colorizer.doRGB(new Color(r, g, b), i);
-        return i;
+        bi = Convert(icon);
+        Colorizer.doRGB(new Color(r, g, b), bi);
+        return bi;
     }
 
     public static BufferedImage Colorize(Icon icon, int r, int g, int b, int a) {
-        BufferedImage i = Convert(icon);
-        Colorizer.doRGB(new Color(r, g, b, a), i);
-        return i;
+        bi = Convert(icon);
+        Colorizer.doRGB(new Color(r, g, b, a), bi);
+        return bi;
     }
     
     public static String RGBtoHex(Color col){

@@ -42,6 +42,7 @@ public class Colorizer
     private static int[] final_red_lookup;
     private static int[] final_green_lookup;
     private static int[] final_blue_lookup;
+    private static HSLColor HSL;
 
     public Colorizer()
     {
@@ -58,10 +59,10 @@ public class Colorizer
     }
     
     public static void doRGB(Color c,BufferedImage img){
-        HSLColor e = new HSLColor(c);
-        hue = e.getHue();
-        saturation = e.getSaturation();
-        lightness = e.getLuminance();
+        HSL = new HSLColor(c);
+        hue = HSL.getHue();
+        saturation = HSL.getSaturation();
+        lightness = HSL.getLuminance();
         doInit();
         doColorize(img);
     }

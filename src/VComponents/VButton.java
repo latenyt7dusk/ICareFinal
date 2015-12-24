@@ -38,6 +38,8 @@ public class VButton extends JButton {
     private boolean visi = true;
     private boolean hov = false;
     private boolean overpaint = true;
+    private Graphics2D g2d;
+    private GradientPaint gp;
 
     public VButton(String n) {
         super(n);
@@ -132,7 +134,7 @@ public class VButton extends JButton {
 
     @Override
     protected void paintComponent(Graphics g) {
-        Graphics2D g2d = (Graphics2D) g;
+        g2d = (Graphics2D) g;
         g2d.setRenderingHint(RenderingHints.KEY_ANTIALIASING, RenderingHints.VALUE_ANTIALIAS_ON);
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         
@@ -140,20 +142,21 @@ public class VButton extends JButton {
             g2d.setColor(VThemeManager.ButtonNormal);
             g2d.fillRect(0, 0, getWidth(), getHeight());
             if (hov) {
-                GradientPaint gp = new GradientPaint(getWidth(), 0, VThemeManager.ButtonNormal.brighter(), getWidth(), 27, VThemeManager.ButtonNormal, true);
+                gp = new GradientPaint(getWidth(), 0, VThemeManager.ButtonNormal.brighter(), getWidth(), 27, VThemeManager.ButtonNormal, true);
                 g2d.setPaint(gp);
                 //g2d.setStroke(new BasicStroke(3,BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER));
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         }else{
             if (hov) {
-                GradientPaint gp = new GradientPaint(getWidth(), 0, VThemeManager.ButtonNormal.brighter(), getWidth(), 27, VThemeManager.ButtonNormal, true);
+                gp = new GradientPaint(getWidth(), 0, VThemeManager.ButtonNormal.brighter(), getWidth(), 27, VThemeManager.ButtonNormal, true);
                 g2d.setPaint(gp);
                 //g2d.setStroke(new BasicStroke(3,BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER));
                 g2d.fillRect(0, 0, getWidth(), getHeight());
             }
         }
         super.paintComponent(g);
+        g2d.dispose();
     }
 
 }

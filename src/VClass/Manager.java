@@ -34,7 +34,7 @@ import java.util.logging.Logger;
  */
 public class Manager {
 
-    private Registry myRegistry;
+    private final Registry myRegistry;
     public static final String DEFAULT_DATE_FORMAT = "MMM dd, yyyy";
     public static final String SYSTEM = "SOFTWARE\\NakpilSoftwares\\EyeCare";
     public String SETTINGS_KEY = "Settings";
@@ -73,7 +73,7 @@ public class Manager {
                 DB.RunScript("DELETE FROM " + Manager.IMAGE_TABLE_NAME + " WHERE " + ID + " ='" + e.getID() + "'");
             } catch (Exception er) {
             }
-            boolean fin = false;
+            boolean fin;
             fin = DB.RunScript(e.getUpdateBatch());
             if (f != null) {
                 fin = DB.SaveFile(IMAGE_TABLE_NAME, e.getID(), f);

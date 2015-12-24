@@ -46,7 +46,6 @@ public class VShadowedPanel extends JPanel{
         g2d.setRenderingHint(RenderingHints.KEY_RENDERING, RenderingHints.VALUE_RENDER_QUALITY);
         g2d.setColor(getBackground());
         g2d.fillRect(0, 0, getWidth()-7, getHeight()-7);
-        
     }
     
 }

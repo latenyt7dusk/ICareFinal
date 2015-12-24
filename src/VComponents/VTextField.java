@@ -135,7 +135,6 @@ public class VTextField extends JTextField {
             g2d.drawImage(image, 5, 4, null);
             repa = false;
         }
-        
     }
 
 }

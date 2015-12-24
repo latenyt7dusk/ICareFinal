@@ -321,10 +321,9 @@ public class DataBridge {
         }
     }
 
-    public boolean SaveFile(String TB, String ID, File f) throws SQLException {
+    public boolean SaveFile(String TB, String ID, File f) throws SQLException, IOException {
         try {
             ST = "INSERT INTO " + TB + " VALUES( ?, ?)";
-            fis = null;
             if (CONNECTION == null) {
                 Class.forName(DRIVER[TYPE]);
                 this.CONNECTION = DriverManager.getConnection(SOURCE, USER, PASS);
@@ -342,15 +341,16 @@ public class DataBridge {
             return false;
         } finally {
             if (CONNECTION != null) {
-                PREPAREDST.close();
-                CONNECTION.close();
+                this.PREPAREDST.close();
+                this.CONNECTION.close();
                 this.CONNECTION = null;
+                if (fis != null) {
+                    this.fis.close();
+                }
                 System.gc();
             }
         }
     }
-    
-    
 
     public BufferedImage getBufferedImage(String TB, String imgCol, String idLb, String ID) throws SQLException, IOException {
         output = new ByteArrayOutputStream();
@@ -369,7 +369,6 @@ public class DataBridge {
                 }
 
                 ba = new ByteArrayInputStream(output.toByteArray());
-
                 return ImageIO.read(ba);//Toolkit.getDefaultToolkit().createImage(output.toByteArray());
 
             }
@@ -382,7 +381,12 @@ public class DataBridge {
                 PREPAREDST.close();
                 CONNECTION.close();
                 this.CONNECTION = null;
-                output.close();
+                if (stream != null) {
+                    this.stream.close();
+                }
+                if (output != null) {
+                    this.output.close();
+                }
                 System.gc();
             }
         }
@@ -412,20 +416,26 @@ public class DataBridge {
             return null;
         } finally {
             if (CONNECTION != null) {
-                RESULTS.close();
-                PREPAREDST.close();
-                CONNECTION.close();
+                this.RESULTS.close();
+                this.PREPAREDST.close();
+                this.CONNECTION.close();
                 this.CONNECTION = null;
-                output.close();
+                if (stream != null) {
+                    this.stream.close();
+                }
+                if (output != null) {
+                    this.output.close();
+                }
                 System.gc();
             }
         }
     }
 
-    public File ResizeImageFile(File f, int w1, int h1) {
+    public File ResizeImageFile(File f, int w1, int h1) throws IOException {
+        FileOutputStream tof = null;
         try {
             File to = File.createTempFile("tempResImage", ".tmp");
-            FileOutputStream tof = new FileOutputStream(to);
+            tof = new FileOutputStream(to);
             BUFFERED_IMAGE_1 = ImageIO.read(f);
             BUFFERED_IMAGE_1 = resizeImage(BUFFERED_IMAGE_1, BUFFERED_IMAGE_1.getColorModel().getTransparency(), w1, h1);
             ImageIO.write(BUFFERED_IMAGE_1, "jpg", tof);
@@ -434,6 +444,10 @@ public class DataBridge {
         } catch (Exception er) {
             System.out.println(er);
             return null;
+        } finally {
+            if(tof != null){
+                tof.close();
+            }
         }
     }
 
@@ -445,11 +459,5 @@ public class DataBridge {
 
         return BUFFERED_IMAGE_2;
     }
-    
-    
-
-    
-    
-    
 
 }

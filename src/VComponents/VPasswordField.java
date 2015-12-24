@@ -133,6 +133,5 @@ public class VPasswordField extends JPasswordField{
             setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 27, 1, 4));
             g2d.drawImage(image, 5, 4, null);
         }
-        
     }
 }
