@@ -24,6 +24,7 @@ import java.io.ByteArrayInputStream;
 import java.io.ByteArrayOutputStream;
 import java.io.File;
 import java.io.FileInputStream;
+import java.io.FileNotFoundException;
 import java.io.FileOutputStream;
 import java.io.IOException;
 import java.io.InputStream;
@@ -34,13 +35,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
-import java.util.Iterator;
 import java.util.List;
 import java.util.Properties;
-import javax.imageio.IIOImage;
 import javax.imageio.ImageIO;
-import javax.imageio.ImageWriteParam;
-import javax.imageio.ImageWriter;
 
 /**
  *
@@ -74,9 +71,9 @@ public class DataBridge {
     private FileInputStream fis;
     private InputStream stream;
     private ByteArrayInputStream ba;
-    private BufferedImage resizedImage;
-    private BufferedImage i;
-    private Graphics2D g;
+    private BufferedImage BUFFERED_IMAGE_2;
+    private BufferedImage BUFFERED_IMAGE_1;
+    private Graphics2D GRAPHICS_2D;
 
     public DataBridge(Properties p) {
         this(p.getProperty("DATA_SOURCE"), p.getProperty("USER"),
@@ -340,7 +337,7 @@ public class DataBridge {
             }
 
             return true;
-        } catch (Exception er) {
+        } catch (ClassNotFoundException | SQLException | FileNotFoundException er) {
             System.out.println(er);
             return false;
         } finally {
@@ -429,9 +426,9 @@ public class DataBridge {
         try {
             File to = File.createTempFile("tempResImage", ".tmp");
             FileOutputStream tof = new FileOutputStream(to);
-            i = ImageIO.read(f);
-            i = resizeImage(i, i.getColorModel().getTransparency(), w1, h1);
-            ImageIO.write(i, "jpg", tof);
+            BUFFERED_IMAGE_1 = ImageIO.read(f);
+            BUFFERED_IMAGE_1 = resizeImage(BUFFERED_IMAGE_1, BUFFERED_IMAGE_1.getColorModel().getTransparency(), w1, h1);
+            ImageIO.write(BUFFERED_IMAGE_1, "jpg", tof);
 
             return to;
         } catch (Exception er) {
@@ -441,12 +438,12 @@ public class DataBridge {
     }
 
     private BufferedImage resizeImage(BufferedImage originalImage, int type, int IMG_WIDTH, int IMG_HEIGHT) {
-        resizedImage = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
-        g = resizedImage.createGraphics();
-        g.drawImage(originalImage, 0, 0, IMG_WIDTH, IMG_HEIGHT, null);
-        g.dispose();
+        BUFFERED_IMAGE_2 = new BufferedImage(IMG_WIDTH, IMG_HEIGHT, type);
+        GRAPHICS_2D = BUFFERED_IMAGE_2.createGraphics();
+        GRAPHICS_2D.drawImage(originalImage, 0, 0, IMG_WIDTH, IMG_HEIGHT, null);
+        GRAPHICS_2D.dispose();
 
-        return resizedImage;
+        return BUFFERED_IMAGE_2;
     }
     
     
