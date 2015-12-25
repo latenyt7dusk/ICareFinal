@@ -290,7 +290,7 @@ public final class VComboBox extends JComboBox implements VTheme,VScrollTheme {
                 }
             }
         }catch(Exception er){
-            System.out.println(er);
+            System.out.println("Combobox ER : setSelectedValue() : "+er);
         }
     }
 

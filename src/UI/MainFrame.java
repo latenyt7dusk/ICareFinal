@@ -71,7 +71,7 @@ public class MainFrame extends javax.swing.JFrame {
     private ImageIcon Item_hold = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/item_hold.png")));
     private final ImageIcon NO_IMAGE_72x60 = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png")).getScaledInstance(72, 60, Image.SCALE_DEFAULT));
     //private final ImageIcon NO_IMAGE_72x60 = new ImageIcon(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/noimage.png")));
-    
+
     Action delete = new AbstractAction() {
         public void actionPerformed(ActionEvent e) {
             JTable table = (JTable) e.getSource();
@@ -79,16 +79,18 @@ public class MainFrame extends javax.swing.JFrame {
             ((DefaultTableModel) table.getModel()).removeRow(modelRow);
         }
     };
-    
+
     public User USER;
     public List<User> USERS = new ArrayList();
     private DefaultTableModel TempModel;
     private ImageIcon TempImage;
+    public UserFrame USER_FRAME;
+
     /**
      * Creates new form MainFrame
      */
     public MainFrame() {
-        
+
         try {
             for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
                 if ("Nimbus".equals(info.getName())) {
@@ -99,31 +101,31 @@ public class MainFrame extends javax.swing.JFrame {
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException | javax.swing.UnsupportedLookAndFeelException ex) {
             java.util.logging.Logger.getLogger(Login.class.getName()).log(java.util.logging.Level.SEVERE, null, ex);
         }
-        
+
         //UI Inits
         initComponents();
         setIconImage(Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/Icons/NSoftwares ICO.png")));
         MaximizeUsableBounds();
         vTable1.setSelectionMode(javax.swing.ListSelectionModel.SINGLE_SELECTION);
-        centerRenderer.setHorizontalAlignment( SwingConstants.CENTER );
-        
+        centerRenderer.setHorizontalAlignment(SwingConstants.CENTER);
+
         //Class Inits
         PatientInit();
         UserInit();
         KeyboardFocusManager.getCurrentKeyboardFocusManager().addKeyEventDispatcher(new MyDispatcher());
-        
-        try{
+
+        try {
             TempImage = new ImageIcon(ImageIO.read(new File("E:\\Wallpapers\\steve jobs.jpg")).getScaledInstance(72, 60, Image.SCALE_DEFAULT));
-        }catch(Exception er){
-            
+        } catch (Exception er) {
+
         }
     }
-    
+
     private void MaximizeUsableBounds() {
         setMaximizedBounds(MaxBounds);
         setExtendedState(MainFrame.MAXIMIZED_BOTH);
     }
-    
+
     private class MyDispatcher implements KeyEventDispatcher {
 
         @Override
@@ -133,75 +135,72 @@ public class MainFrame extends javax.swing.JFrame {
                     if (e.getKeyCode() == KeyEvent.VK_F) {
                         JOptionPane.showMessageDialog(null, "Show me something");
                     }
-                    
+
                 }
             }
             return false;
         }
     }
-    
+
     //Main Inits
-    private void PatientInit(){
+    private void PatientInit() {
         vTable1.getColumn("Contact").setCellRenderer(centerRenderer);
         vTable1.getColumn("Date").setCellRenderer(centerRenderer);
         vTable1.getColumn("Due").setCellRenderer(centerRenderer);
     }
-    
-    private void UserInit(){
+
+    private void UserInit() {
         vTable2.getColumn("Contact").setCellRenderer(centerRenderer);
         vTable2.getColumn("Role").setCellRenderer(centerRenderer);
     }
-    
-    
+
     //Users
-    public void setUser(User u){
+    public void setUser(User u) {
         this.USER = u;
         USER.LoadPersonalInfo(Engine.DB);
-        try{
+        try {
             vProfileImage1.setImage(Engine.DB.getBufferedImage(Manager.IMAGE_TABLE_NAME, Manager.IMAGE, Manager.ID, USER.getID()));
-        }catch(Exception er){
+        } catch (Exception er) {
             er.printStackTrace();
         }
     }
-    
-    public User getUser(){
+
+    public User getUser() {
         return USER;
     }
-    
-    public void setUserList(List<User> users){
+
+    public void setUserList(List<User> users) {
         this.USERS = users;
     }
-    
-    public List<User> getUsersList(){
+
+    public List<User> getUsersList() {
         return USERS;
     }
 
-    public void showUserPanel() throws IOException{
+    public void showUserPanel() throws IOException {
         MainSlide.showPane(UserSlide);
-        for(User e:USERS){
+        for (User e : USERS) {
             e.LoadPersonalInfo(Engine.DB);
         }
         TempModel = (DefaultTableModel) vTable2.getModel();
         TempModel.setRowCount(0);
-        for(User e:USERS){
-            try{
+        for (User e : USERS) {
+            try {
                 Image z = Engine.DB.getBufferedImage(Manager.IMAGE_TABLE_NAME, Manager.IMAGE, Manager.ID, e.getID());
-                if(z != null){
-                    z = z.getScaledInstance(72, 60, Image.SCALE_DEFAULT);
+                if (z != null) {
+                    z = z.getScaledInstance(72, 60, Image.SCALE_SMOOTH);
                     TempImage = new ImageIcon(z);
-                }else{
+                } else {
                     TempImage = NO_IMAGE_72x60;
                 }
-            }catch(SQLException | IOException er){
-                System.out.println("Error : "+er);
+            } catch (SQLException | IOException er) {
+                System.out.println("Error : " + er);
             }
-            TempModel.addRow(new Object[]{TempImage,"<html>"+e.getSurname()+",<br>"+e.getFirstname()+" "+e.getMiddlename(),e.getContactNumber(),e.getRole()});
+            TempModel.addRow(new Object[]{TempImage, "<html>" + e.getSurname() + ",<br>" + e.getFirstname() + " " + e.getMiddlename(), e.getContactNumber(), e.getRole()});
         }
-        
         System.gc();
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -373,6 +372,11 @@ public class MainFrame extends javax.swing.JFrame {
         vButton2.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         vButton2.setHorizontalAlignment(javax.swing.SwingConstants.LEADING);
         vButton2.setIconTextGap(10);
+        vButton2.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton2ActionPerformed(evt);
+            }
+        });
 
         vButton3.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/transaction.png"))); // NOI18N
         vButton3.setText("Transaction");
@@ -1031,8 +1035,17 @@ public class MainFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void vButton11ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton11ActionPerformed
-        // TODO add your handling code here:
-        System.exit(0);
+        // TODO add your handling code here:\
+        int i = VOptionPane.showCustomDialog(this, "Do you wish to logout or exit?", "Session Termination",
+                "Logout", "Exit", Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/VOption/Logout.png")),
+                VOptionPane.CUSTOM_A_B_CANCEL_OPTION);
+        if(i == VOptionPane.CUSTOM_OPTION_A){
+            Engine.LoginUI.setVisible(true);
+            dispose();
+        }else if(i == VOptionPane.CUSTOM_OPTION_B){
+            System.exit(0);
+        }
+        
     }//GEN-LAST:event_vButton11ActionPerformed
 
     private void vButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton10ActionPerformed
@@ -1042,7 +1055,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void formWindowStateChanged(java.awt.event.WindowEvent evt) {//GEN-FIRST:event_formWindowStateChanged
         // TODO add your handling code here:
-        if(getState() != MainFrame.ICONIFIED){
+        if (getState() != MainFrame.ICONIFIED) {
             MaximizeUsableBounds();
         }
     }//GEN-LAST:event_formWindowStateChanged
@@ -1064,9 +1077,9 @@ public class MainFrame extends javax.swing.JFrame {
     private void vButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton21ActionPerformed
         // TODO add your handling code here:
         DefaultTableModel model = (DefaultTableModel) vTable2.getModel();
-        
+
         model.setRowCount(0);
-        model.addRow(new Object[]{TempImage,"<html> Nakpil, <br> Kirstein Jonnah Beciril</html>","09055550830","Admin","Dec 2, 2015"});
+        model.addRow(new Object[]{TempImage, "<html> Nakpil, <br> Kirstein Jonnah Beciril</html>", "09055550830", "Admin", "Dec 2, 2015"});
     }//GEN-LAST:event_vButton21ActionPerformed
 
     private void vButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton7ActionPerformed
@@ -1080,8 +1093,8 @@ public class MainFrame extends javax.swing.JFrame {
             // TODO add your handling code here:
             Engine.main(new String[0]);
             File ez = Engine.DB.ResizeImageFile(new File("E:\\Wallpapers\\Scan10004.JPG"), 160, 150);
-            
-            Files.write (new File("E:\\Wallpapers\\Test Compressed.jpg").toPath(), Files.readAllBytes(ez.toPath()), StandardOpenOption.CREATE);
+
+            Files.write(new File("E:\\Wallpapers\\Test Compressed.jpg").toPath(), Files.readAllBytes(ez.toPath()), StandardOpenOption.CREATE);
         } catch (IOException ex) {
             Logger.getLogger(MainFrame.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -1089,8 +1102,22 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void vButton20ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton20ActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) vTable2.getModel();
-        VOptionPane.showMessageDialog(model.getValueAt(0, 1).toString());
+        try {
+            TempModel = (DefaultTableModel) vTable2.getModel();
+            if (TempModel.getRowCount() > 0 && vTable2.getSelectedRow() >= 0) {
+                if (USER_FRAME != null) {
+                    USER_FRAME.dispose();
+                    USER_FRAME = new UserFrame(USERS.get(vTable2.getSelectedRow()));
+                    USER_FRAME.setVisible(true);
+                } else {
+                    USER_FRAME = new UserFrame(USERS.get(vTable2.getSelectedRow()));
+                    USER_FRAME.setVisible(true);
+                }
+            }
+
+        } catch (Exception er) {
+            System.out.println(er);
+        }
     }//GEN-LAST:event_vButton20ActionPerformed
 
     private void vButton9ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton9ActionPerformed
@@ -1098,11 +1125,16 @@ public class MainFrame extends javax.swing.JFrame {
         DefaultTableModel model = (DefaultTableModel) vTable1.getModel();
         model.setRowCount(0);
 
-        model.addRow(new Object[]{Paid,Item_proc,"Nakpil, Kelvin Don Othello Gasic","09055550830","Nov 21, 2015","Dec 5, 2015"});
-        model.addRow(new Object[]{Balance,Item_hold,"Nakpil, Johanna Mae Beciril","09055550830","Nov 22, 2015","Dec 6, 2015"});
+        model.addRow(new Object[]{Paid, Item_proc, "Nakpil, Kelvin Don Othello Gasic", "09055550830", "Nov 21, 2015", "Dec 5, 2015"});
+        model.addRow(new Object[]{Balance, Item_hold, "Nakpil, Johanna Mae Beciril", "09055550830", "Nov 22, 2015", "Dec 6, 2015"});
 
         //VButtonColumn buttonColumn = new VButtonColumn(vTable1, delete, 2);
     }//GEN-LAST:event_vButton9ActionPerformed
+
+    private void vButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton2ActionPerformed
+        // TODO add your handling code here:
+        VOptionPane.showMessageDialog("<html>"+Manager.getDate()+"<br>"+Manager.getTime()+"</html>");
+    }//GEN-LAST:event_vButton2ActionPerformed
 
     /**
      * @param args the command line arguments

@@ -73,7 +73,7 @@ public class User extends PersonalInfo implements Cloneable{
     }
     
     public String getUpdateBatch(){
-        return "UPDATE "+Manager.USER_TABLE_NAME+" SET "+Manager.FIRSTNAME+" ='"+getFirstname()+"',"+Manager.MIDDLENAME+" ='"
+        return "UPDATE "+Manager.PERSONAL_TABLE_NAME+" SET "+Manager.FIRSTNAME+" ='"+getFirstname()+"',"+Manager.MIDDLENAME+" ='"
                 +getMiddlename()+"',"+Manager.SURNAME+" ='"+getSurname()+"',"+Manager.BIRTHDATE+" ='"+getBirthdate()+"',"
                 +Manager.GENDER+" ='"+getGender()+"',"+Manager.CIVILSTATUS+" ='"+getCivilStatus()+"',"+Manager.CONTACT+" ='"
                 +getContactNumber()+"',"+Manager.ADDRESS+" ='"+getAddress()+"',"+Manager.EMAIL+" ='"+getEmail()+"' WHERE "

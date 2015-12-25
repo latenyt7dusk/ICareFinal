@@ -44,7 +44,7 @@ public class VProfileImage extends javax.swing.JPanel{
     }
     
     public void setImage(BufferedImage i){
-        img = new ImageIcon(i);
+        img = ((i == null)? null:new ImageIcon(i));
         repaint();
     }
     
@@ -73,7 +73,7 @@ public class VProfileImage extends javax.swing.JPanel{
             g2d.setColor(VThemeManager.ButtonForeground);
             g2d.drawOval(8, 8, getWidth()-16, getHeight()-16);
             
-            g2d.setStroke(new BasicStroke(1,BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER));
+            g2d.setStroke(new BasicStroke(2,BasicStroke.CAP_SQUARE,BasicStroke.JOIN_MITER));
             g2d.setColor(VThemeManager.ButtonForeground);
             g2d.drawOval(2, 2, getWidth()-4, getHeight()-4);
         } catch (IOException ex) {

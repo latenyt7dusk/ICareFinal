@@ -27,15 +27,14 @@ import java.awt.Color;
 import java.awt.Component;
 import java.awt.Toolkit;
 import java.io.IOException;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Calendar;
-import java.util.GregorianCalendar;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.imageio.ImageIO;
 import javax.swing.ImageIcon;
-import javax.swing.JLabel;
 
 /**
  *
@@ -85,7 +84,7 @@ public class UserFrame extends javax.swing.JFrame {
     public void setUserData(User user) {
         user_tf.setText(user.getUsername());
         pass_tf.setText(user.getPassword());
-        role_tf.setSelectedValue(user.getRole());
+        role_tf.setSelectedItem(user.getRole());
         firstname_tf.setText(user.getFirstname());
         middlename_tf.setText(user.getMiddlename());
         surname_tf.setText(user.getSurname());
@@ -95,6 +94,13 @@ public class UserFrame extends javax.swing.JFrame {
         address_tf.setText(user.getAddress());
         contactnumber_tf.setText(user.getContactNumber());
         email_tf.setText(user.getEmail());
+        try {
+            photo_tf.setPhoto(Engine.DB.getBufferedImage(Manager.IMAGE_TABLE_NAME, Manager.IMAGE, Manager.ID, user.getID()));
+        } catch (SQLException ex) {
+            Logger.getLogger(UserFrame.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IOException ex) {
+            Logger.getLogger(UserFrame.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     public void ClearData() {
@@ -133,11 +139,13 @@ public class UserFrame extends javax.swing.JFrame {
         this.locked = b;
     }
 
-    public boolean buildUser(boolean bol) {
+    public boolean buildUser(User e) {
         try {
-            cUser = new User();
-            cUser.setID(Manager.getNewID("USR"));
-            cUser.setUsername(user_tf.getText());
+            cUser = ((e == null)? new User():e);
+            if (e == null) {
+                cUser.setID(Manager.getNewID("USR"));
+                cUser.setUsername(user_tf.getText());
+            }
             cUser.setPassword(pass_tf.getText());
             cUser.setRole(role_tf.getSelectedItem().toString());
             cUser.setFirstname(firstname_tf.getText());
@@ -151,7 +159,7 @@ public class UserFrame extends javax.swing.JFrame {
             cUser.setAddress(address_tf.getText());
 
             List<String> msgs = new ArrayList();
-            if (bol) {
+            if (e == null) {
                 if (checkUsername()) {
                     msgs.add("- Username & Password must consist 8 characters");
                 }
@@ -447,7 +455,7 @@ public class UserFrame extends javax.swing.JFrame {
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
             .addGroup(javax.swing.GroupLayout.Alignment.TRAILING, jPanel1Layout.createSequentialGroup()
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 70, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addComponent(vButton2, javax.swing.GroupLayout.PREFERRED_SIZE, 120, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addContainerGap())
         );
         jPanel1Layout.setVerticalGroup(
@@ -605,7 +613,7 @@ public class UserFrame extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void vButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton1ActionPerformed
-        System.exit(0);
+        dispose();
     }//GEN-LAST:event_vButton1ActionPerformed
 
     private void vButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton2ActionPerformed
@@ -616,8 +624,10 @@ public class UserFrame extends javax.swing.JFrame {
                     Lock(false);
                     vButton2.setText("Update");
                     vButton2.setIcon(new ImageIcon(ImageIO.read(getClass().getResource("/UI/Icons/save.png"))));
+                    user_tf.setEnabled(false);
+                    pass_tf.setEnabled(false);
                 } else {
-                    if (buildUser(false)) {
+                    if (buildUser(cUser)) {
                         String pass = VOptionPane.showMaskedInputDialog(this, "Enter User Password", "Update Confirmation");
                         if (pass.equals(cUser.getPassword())) {
                             if (Engine.MANAGER.UpdateUser(photo_tf.getFile(), cUser, Engine.DB)) {
@@ -634,7 +644,7 @@ public class UserFrame extends javax.swing.JFrame {
                     }
                 }
             } else {
-                if (buildUser(true)) {
+                if (buildUser(null)) {
                     String msg = "<html><br>Name     : " + cUser.getFirstname() + " " + cUser.getSurname() + "<br>"
                             + "Username : " + cUser.getUsername() + "<br>" + "Role     : " + cUser.getRole()
                             + "<br><br>" + "Enter your password</html>";
@@ -653,7 +663,7 @@ public class UserFrame extends javax.swing.JFrame {
                 }
             }
         } catch (Exception er) {
-            System.out.println(er);
+            er.printStackTrace();
         }
 
     }//GEN-LAST:event_vButton2ActionPerformed

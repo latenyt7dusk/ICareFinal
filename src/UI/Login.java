@@ -17,14 +17,18 @@
 package UI;
 
 import UI.VOption.VOptionPane;
+import VClass.Manager;
 import VClass.User;
 import VComponents.VShadowBorder;
 import VComponents.VThemeManager;
 import java.awt.Color;
 import java.awt.Toolkit;
 import java.awt.event.KeyEvent;
+import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -71,11 +75,14 @@ public class Login extends javax.swing.JFrame {
         updateUserList();
     }
     
-    public boolean doLogin(String user,String pass){
+    public boolean doLogin(String user,String pass) throws SQLException{
         updateUserList();
         for(User e:Users){
             if(user.equals(e.getUsername()) && pass.equals(e.getPassword())){
                 tempUser = e;
+                Engine.DB.RunScript("INSERT INTO "+Manager.LOG_TABLE_NAME+" VALUES('"+e.getID()
+                        +"','"+e.getFullname()+" Successfuly logged-in','"+Manager.SYSTEM_LOGGER+"','"
+                        +Manager.SYSTEM_USER_LOGIN+"','"+Manager.getDate()+"','"+Manager.getTime()+"')");
                 return true;
             }
         }
@@ -294,15 +301,19 @@ public class Login extends javax.swing.JFrame {
     }//GEN-LAST:event_vTextField1FocusGained
 
     private void vButton1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton1ActionPerformed
-        // TODO add your handling code here:
-        //Engine.MainUI.setVisible(true);
-        if(doLogin(vTextField1.getText(),vPasswordField1.getText())){
-            Engine.MainUI.setUser(tempUser);
-            Engine.MainUI.setUserList(Users);
-            Engine.MainUI.setVisible(true);
-            dispose();
-        }else{
-            VOptionPane.showMessageDialog(this, "Login failed!", "User Login", VOptionPane.WARNING_MESSAGE);
+        try {
+            // TODO add your handling code here:
+            //Engine.MainUI.setVisible(true);
+            if(doLogin(vTextField1.getText(),vPasswordField1.getText())){
+                Engine.MainUI.setUser(tempUser);
+                Engine.MainUI.setUserList(Users);
+                Engine.MainUI.setVisible(true);
+                dispose();
+            }else{
+                VOptionPane.showMessageDialog(this, "Login failed!", "User Login", VOptionPane.WARNING_MESSAGE);
+            }
+        } catch (SQLException ex) {
+            Logger.getLogger(Login.class.getName()).log(Level.SEVERE, null, ex);
         }
     }//GEN-LAST:event_vButton1ActionPerformed
 

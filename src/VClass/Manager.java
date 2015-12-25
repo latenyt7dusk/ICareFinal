@@ -20,6 +20,7 @@ import Utilities.DataBridge;
 import Utilities.Registry;
 import java.io.File;
 import java.io.IOException;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.HashMap;
@@ -36,9 +37,22 @@ public class Manager {
 
     private final Registry myRegistry;
     public static final String DEFAULT_DATE_FORMAT = "MMM dd, yyyy";
+    public static final String DEFAULT_TIME_FORMAT = "hh:mm";
     public static final String SYSTEM = "SOFTWARE\\NakpilSoftwares\\EyeCare";
     public String SETTINGS_KEY = "Settings";
+    public static Calendar CALENDAR = Calendar.getInstance();
+    public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
+    public static final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat(DEFAULT_TIME_FORMAT);
 
+    public static String getDate(){
+        CALENDAR = Calendar.getInstance();
+        return DATE_FORMATTER.format(CALENDAR.getTime());
+    }
+    public static String getTime(){
+         CALENDAR = Calendar.getInstance();
+        return TIME_FORMATTER.format(CALENDAR.getTime());
+    }
+    
     //User
     public static final Map<String, Integer> USER_TABLE_MAP = new HashMap() {
         {
@@ -58,6 +72,9 @@ public class Manager {
     public boolean saveNewUser(File img, User e, DataBridge DB) {
         try {
             DB.InsertBatchData(e.getInsertBatch());
+            DB.RunScript("INSERT INTO "+Manager.LOG_TABLE_NAME+" VALUES('"+e.getID()
+                        +"','User Registered','"+Manager.SYSTEM_LOGGER+"','"
+                        +Manager.SYSTEM_USER_REGISTER+"','"+Manager.getDate()+"','"+Manager.getTime()+"')");
             if (img != null) {
                 DB.SaveFile(IMAGE_TABLE_NAME, e.getID(), img);
             }
@@ -75,6 +92,9 @@ public class Manager {
             }
             boolean fin;
             fin = DB.RunScript(e.getUpdateBatch());
+            DB.RunScript("INSERT INTO "+Manager.LOG_TABLE_NAME+" VALUES('"+e.getID()
+                        +"','User Information update','"+Manager.SYSTEM_LOGGER+"','"
+                        +Manager.SYSTEM_USER_UPDATE+"','"+Manager.getDate()+"','"+Manager.getTime()+"')");
             if (f != null) {
                 fin = DB.SaveFile(IMAGE_TABLE_NAME, e.getID(), f);
             }
@@ -162,6 +182,13 @@ public class Manager {
     public static final String IMAGE = "Image";
     public final String IMAGE_TABLE_DEFAULT = "CREATE TABLE IF NOT EXISTS " + IMAGE_TABLE_NAME + " (" + ID + " VARCHAR(255),IMAGE BLOB)";
 
+    public static final String SYSTEM_USER_LOGIN = "User Login";
+    public static final String SYSTEM_USER_LOGOUT = "User Logout";
+    public static final String SYSTEM_LOGGER = "System";
+    public static final String SYSTEM_USER_REGISTER = "User Registration";
+    public static final String SYSTEM_USER_UPDATE = "User Update";
+    
+    
     public Map<String, String> SETTINGS = new HashMap() {
         {
             put(LOCAL_DB_KEY, "jdbc:h2:tcp://localhost/~/NakpilSoftwares/EyeCare/database");
