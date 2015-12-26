@@ -17,7 +17,6 @@
 package UI;
 
 import UI.VOption.VOptionPane;
-import Utilities.DataBridge;
 import VClass.Manager;
 import VClass.User;
 import VComponents.VThemeManager;
@@ -29,11 +28,9 @@ import java.awt.Rectangle;
 import java.awt.Toolkit;
 import java.awt.event.ActionEvent;
 import java.awt.event.KeyEvent;
-import java.awt.image.BufferedImage;
 import java.io.File;
 import java.io.IOException;
 import java.nio.file.Files;
-import java.nio.file.StandardCopyOption;
 import java.nio.file.StandardOpenOption;
 import java.sql.SQLException;
 import java.util.ArrayList;
@@ -200,7 +197,8 @@ public class MainFrame extends javax.swing.JFrame {
         }
         System.gc();
     }
-
+    
+    
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always

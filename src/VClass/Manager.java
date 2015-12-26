@@ -151,6 +151,10 @@ public class Manager {
             + " VARCHAR(255)," + FIRSTNAME + " VARCHAR(255)," + MIDDLENAME + " VARCHAR(255)," + BIRTHDATE + " VARCHAR(255)," + GENDER + " VARCHAR(255),"
             + CIVILSTATUS + " VARCHAR(255)," + CONTACT + " VARCHAR(255)," + EMAIL + " VARCHAR(255)," + ADDRESS + " VARCHAR(255))";
 
+    //Patient
+    
+    
+    
     //Logger
     public static final Map<String, String> LOG_TABLE_MAP = new HashMap() {
         {

@@ -101,10 +101,11 @@ public class VPhotoContainer extends JLabel {
     }
 
     public void setPhoto(BufferedImage i) {
-        setIcon(new ImageIcon(i.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH)));
         if (i != null) {
+            setIcon(new ImageIcon(i.getScaledInstance(getWidth(), getHeight(), Image.SCALE_SMOOTH)));
             setText("");
         } else {
+            setIcon(null);
             setText("No Picture");
         }
     }

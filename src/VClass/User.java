@@ -18,6 +18,8 @@ package VClass;
 
 import Utilities.DataBridge;
 import java.awt.image.BufferedImage;
+import java.io.IOException;
+import java.sql.SQLException;
 
 /**
  *
@@ -100,7 +102,7 @@ public class User extends PersonalInfo implements Cloneable{
     public BufferedImage LoadImage(DataBridge DB){
         try{
             return DB.getBufferedImage(Manager.IMAGE_TABLE_NAME, Manager.IMAGE, Manager.ID, getID());
-        }catch(Exception er){
+        }catch(SQLException | IOException er){
             System.out.println(er);
             return null;
         }
