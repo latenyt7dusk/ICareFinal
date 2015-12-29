@@ -35,7 +35,9 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
+import java.util.Map;
 import java.util.Properties;
 import javax.imageio.ImageIO;
 
@@ -74,6 +76,7 @@ public class DataBridge {
     private BufferedImage BUFFERED_IMAGE_2;
     private BufferedImage BUFFERED_IMAGE_1;
     private Graphics2D GRAPHICS_2D;
+    private Map<String,Map<String,String>> COLLECTION;
 
     public DataBridge(Properties p) {
         this(p.getProperty("DATA_SOURCE"), p.getProperty("USER"),
@@ -150,7 +153,42 @@ public class DataBridge {
             }
         }
     }
+    
+    public List<List> FetchTableCollection(String TB,String LB,String key) throws SQLException {
+        try {
+            if (CONNECTION == null) {
+                Class.forName(DRIVER[TYPE]);
+                this.CONNECTION = DriverManager.getConnection(SOURCE, USER, PASS);
+                this.PREPAREDST = CONNECTION.prepareStatement("SELECT * FROM " + TB +" WHERE "+LB+"='"+key+"'");
+                this.RESULTS = PREPAREDST.executeQuery();
 
+                record = new ArrayList();
+                int column = RESULTS.getMetaData().getColumnCount();
+                while (RESULTS.next()) {
+                    String tList[] = new String[column];
+                    int index = 0;
+                    for (int i = 1; i <= column; i++) {
+                        tList[index] = RESULTS.getString(i);
+                        index++;
+                    }
+                    record.add(Arrays.asList(tList.clone()));
+                }
+                return record;
+            }
+            return record;
+        } catch (SQLException | ClassNotFoundException er) {
+            return null;
+        } finally {
+            if (CONNECTION != null) {
+                RESULTS.close();
+                PREPAREDST.close();
+                CONNECTION.close();
+                this.CONNECTION = null;
+                System.gc();
+            }
+        }
+    }
+    
     public boolean AddData(String TB, List<String> data) throws SQLException {
         try {
             if (CONNECTION == null) {

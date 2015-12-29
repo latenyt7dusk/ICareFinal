@@ -16,7 +16,9 @@
  */
 package VClass;
 
+import Utilities.DataBridge;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 /**
@@ -28,19 +30,55 @@ public class Patient extends PersonalInfo{
     public static final String RECORDS = Manager.RECORDS_TABLE_NAME;
     public static final String TRANSACTIONS = Manager.TRANSACTIONS_TABLE_NAME;
     public static final String LOGS = Manager.LOG_TABLE_NAME;
+    private Map<String,Record> REC = new HashMap();
+    private Map<String,Transaction> TRA = new HashMap();
+    private Map<String,Log> LOG = new HashMap();
     
     private Map<String,Map<String,Object>> DATA = new HashMap(){
         {
-            put(RECORDS,new HashMap<String,Object>());
-            put(TRANSACTIONS,new HashMap<String,Object>());
-            put(LOGS,new HashMap<String,Object>());
+            put(RECORDS,REC);
+            put(TRANSACTIONS,TRA);
+            put(LOGS,LOG);
         }
     };
     
     public Patient(){
         this(null,null,null);
     }
+    
     public Patient(String s,String f,String m){
         
+    }
+    
+    public void fetchRecords(DataBridge DB){
+        try{
+            List<List> tmp = DB.FetchTableCollection(RECORDS,Manager.ID,getID());
+            for(int i = 0; i < tmp.size();i++){
+                
+            }
+        }catch(Exception er){
+            System.out.println(er);
+        }
+    }
+    
+    public void setRecords(Map<String,Record> records){
+        this.REC = records;
+    }
+    
+    public Map<String,Record> getRecords(){
+        return this.REC;
+    }
+    
+    
+    public void fetchTransactions(DataBridge DB){
+        
+    }
+    
+    public void setTransactions(Map<String,Transaction> transactions){
+        this.TRA = transactions;
+    }
+    
+    public Map<String,Transaction> getTransactions(){
+        return this.TRA;
     }
 }

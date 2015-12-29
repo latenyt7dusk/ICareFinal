@@ -36,8 +36,8 @@ import java.util.logging.Logger;
 public class Manager {
 
     private final Registry myRegistry;
-    public static final String DEFAULT_DATE_FORMAT = "MMM dd, yyyy";
-    public static final String DEFAULT_TIME_FORMAT = "hh:mm";
+    public static final String DEFAULT_DATE_FORMAT = "yyyy-MM-dd";
+    public static final String DEFAULT_TIME_FORMAT = "hh:mm:ss";
     public static final String SYSTEM = "SOFTWARE\\NakpilSoftwares\\EyeCare";
     public String SETTINGS_KEY = "Settings";
     public static Calendar CALENDAR = Calendar.getInstance();
@@ -148,7 +148,7 @@ public class Manager {
     public static final String EMAIL = "Email";//8
     public static final String ADDRESS = "Address";//9
     public final String PERSONAL_TABLE_DEFAULT = "CREATE TABLE IF NOT EXISTS " + PERSONAL_TABLE_NAME + " (" + ID + " VARCHAR(255)," + SURNAME
-            + " VARCHAR(255)," + FIRSTNAME + " VARCHAR(255)," + MIDDLENAME + " VARCHAR(255)," + BIRTHDATE + " VARCHAR(255)," + GENDER + " VARCHAR(255),"
+            + " VARCHAR(255)," + FIRSTNAME + " VARCHAR(255)," + MIDDLENAME + " VARCHAR(255)," + BIRTHDATE + " DATE," + GENDER + " VARCHAR(255),"
             + CIVILSTATUS + " VARCHAR(255)," + CONTACT + " VARCHAR(255)," + EMAIL + " VARCHAR(255)," + ADDRESS + " VARCHAR(255))";
 
     //Patient
@@ -159,47 +159,56 @@ public class Manager {
             put(FIRSTNAME, 2);
             put(MIDDLENAME, 3);
             put(CONTACT,4);
-            put(RECORD_DATE,5);
-            put(PATIENT_CASE,6);
-            put(RECORD_COUNT,7);
-            put(TRANSACTION_DATE,8);
-            put(TOTAL,9);
-            put(BALANCE,10);
-            put(DUE_DATE,11);
+            put(BIRTHDATE, 5);
+            put(GENDER, 6);
+            put(CIVILSTATUS, 7);
+            put(EMAIL, 8);
+            put(ADDRESS, 9);            
+            put(RECORD_DATE,10);
+            put(PATIENT_CASE,11);
+            put(RECORD_COUNT,12);
+            put(TRANSACTION_DATE,13);
+            put(TOTAL,14);
+            put(BALANCE,15);
+            put(DUE_DATE,16);
         }
     };
     public static final String PATIENT_TABLE_NAME = "Patients";
-    public static final String RECORD_DATE = "RecordDate";
-    public static final String TRANSACTION_DATE = "TransactionDate";
-    public static final String DUE_DATE = "DueDate";
-    public static final String ITEM_ARRIVE_DATE = "ArriveDate";
-    public static final String ITEM_RECIEVE_DATE = "RecieveDate";
-    public static final String PATIENT_CASE = "Case";
-    public static final String RECORD_COUNT = "RecordCount";
     
     public final String PATIENT_TABLE_DEFAULT = "CREATE TABLE IF NOT EXISTS "+ PATIENT_TABLE_NAME +" ("+ID
-            +" VARCHAR(255),"+RECORD_DATE+" VARCHAR(255),"+PATIENT_CASE+" VARCHAR(255),"+RECORD_COUNT
-            +" VARCHAR(255),"+TRANSACTION_DATE+" VARCHAR(255),"+TOTAL+" VARCHAR(255),"+BALANCE
-            +" VARCHAR(255),"+DUE_DATE+" VARCHAR(255))";
+            +" VARCHAR(255),"+RECORD_DATE+" DATE,"+PATIENT_CASE+" VARCHAR(255),"+RECORD_COUNT
+            +" VARCHAR(255),"+TRANSACTION_DATE+" DATE,"+TOTAL+" VARCHAR(255),"+BALANCE
+            +" VARCHAR(255),"+ITEM_STATUS+" VARCHAR(255),"+DUE_DATE+" DATE)";
     
     public final String PATIENT_TABLE_SCRIPT = "SELECT "+PERSONAL_TABLE_NAME+"."+ID+","+PERSONAL_TABLE_NAME+"."+SURNAME+","
             +PERSONAL_TABLE_NAME+"."+FIRSTNAME+","+PERSONAL_TABLE_NAME+"."+MIDDLENAME+","+PERSONAL_TABLE_NAME+"."+CONTACT+","
+            +PERSONAL_TABLE_NAME+"."+BIRTHDATE+","+PERSONAL_TABLE_NAME+"."+GENDER+","+PERSONAL_TABLE_NAME+"."+CIVILSTATUS+","
+            +PERSONAL_TABLE_NAME+"."+EMAIL+","+PERSONAL_TABLE_NAME+"."+ADDRESS+","
             +PATIENT_TABLE_NAME+"."+RECORD_DATE+","+PATIENT_TABLE_NAME+"."+PATIENT_CASE+","+PATIENT_TABLE_NAME+"."+RECORD_COUNT+","
             +PATIENT_TABLE_NAME+"."+TRANSACTION_DATE+","+PATIENT_TABLE_NAME+"."+TOTAL+","+PATIENT_TABLE_NAME+"."+BALANCE+","
             +PATIENT_TABLE_NAME+"."+DUE_DATE +" FROM "+PERSONAL_TABLE_NAME+ " INNER JOIN "+PATIENT_TABLE_NAME+" ON "
             +PERSONAL_TABLE_NAME+"."+ID+"="+PATIENT_TABLE_NAME+"."+ID;
+    
     
     //Items
     public static final String ITEMS = "Items";
     public static final String BALANCE = "Balance";
     public static final String DEPOSIT = "Deposit";
     public static final String TOTAL = "Total";
+    public static final String ITEM_ARRIVE_DATE = "ArriveDate";
+    public static final String ITEM_RECIEVE_DATE = "RecieveDate";
+    public static final String ITEM_STATUS = "ItemStatus";
     
     //Records
     public static final String RECORDS_TABLE_NAME = "Records";
+    public static final String RECORD_DATE = "RecordDate";
+    public static final String PATIENT_CASE = "Case";
+    public static final String RECORD_COUNT = "RecordCount";
     
     //Transactions
     public static final String TRANSACTIONS_TABLE_NAME = "Transactions";
+    public static final String TRANSACTION_DATE = "TransactionDate";
+    public static final String DUE_DATE = "DueDate";
     
     //Logger
     public static final Map<String, String> LOG_TABLE_MAP = new HashMap() {
@@ -219,7 +228,7 @@ public class Manager {
     public static final String DATE = "Date";//4
     public static final String TIME = "Time";//5
     public final String LOG_TABLE_DEFAULT = "CREATE TABLE IF NOT EXISTS " + LOG_TABLE_NAME + " (" + ID + " VARCHAR(255)," + DESCRIPTION
-            + " VARCHAR(255)," + LOGGER + " VARCHAR(255)," + TYPE + " VARCHAR(255)," + DATE + " VARCHAR(255)," + TIME + " VARCHAR(255))";
+            + " VARCHAR(255)," + LOGGER + " VARCHAR(255)," + TYPE + " VARCHAR(255)," + DATE + " DATE," + TIME + " TIME)";
 
     //Image
     public static final Map<String, Integer> IMAGE_TABLE_MAP = new HashMap() {

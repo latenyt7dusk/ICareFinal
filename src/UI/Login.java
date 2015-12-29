@@ -81,7 +81,7 @@ public class Login extends javax.swing.JFrame {
             if(user.equals(e.getUsername()) && pass.equals(e.getPassword())){
                 tempUser = e;
                 Engine.DB.RunScript("INSERT INTO "+Manager.LOG_TABLE_NAME+" VALUES('"+e.getID()
-                        +"','"+e.getFullname()+" Successfuly logged-in','"+Manager.SYSTEM_LOGGER+"','"
+                        +"','"+e.getUsername()+" Successfuly logged-in','"+Manager.SYSTEM_LOGGER+"','"
                         +Manager.SYSTEM_USER_LOGIN+"','"+Manager.getDate()+"','"+Manager.getTime()+"')");
                 return true;
             }
