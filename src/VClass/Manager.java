@@ -152,8 +152,54 @@ public class Manager {
             + CIVILSTATUS + " VARCHAR(255)," + CONTACT + " VARCHAR(255)," + EMAIL + " VARCHAR(255)," + ADDRESS + " VARCHAR(255))";
 
     //Patient
+    public static final Map<String, Integer> PATIENT_TABLE_MAP = new HashMap() {
+        {
+            put(ID, 0);
+            put(SURNAME, 1);
+            put(FIRSTNAME, 2);
+            put(MIDDLENAME, 3);
+            put(CONTACT,4);
+            put(RECORD_DATE,5);
+            put(PATIENT_CASE,6);
+            put(RECORD_COUNT,7);
+            put(TRANSACTION_DATE,8);
+            put(TOTAL,9);
+            put(BALANCE,10);
+            put(DUE_DATE,11);
+        }
+    };
+    public static final String PATIENT_TABLE_NAME = "Patients";
+    public static final String RECORD_DATE = "RecordDate";
+    public static final String TRANSACTION_DATE = "TransactionDate";
+    public static final String DUE_DATE = "DueDate";
+    public static final String ITEM_ARRIVE_DATE = "ArriveDate";
+    public static final String ITEM_RECIEVE_DATE = "RecieveDate";
+    public static final String PATIENT_CASE = "Case";
+    public static final String RECORD_COUNT = "RecordCount";
     
+    public final String PATIENT_TABLE_DEFAULT = "CREATE TABLE IF NOT EXISTS "+ PATIENT_TABLE_NAME +" ("+ID
+            +" VARCHAR(255),"+RECORD_DATE+" VARCHAR(255),"+PATIENT_CASE+" VARCHAR(255),"+RECORD_COUNT
+            +" VARCHAR(255),"+TRANSACTION_DATE+" VARCHAR(255),"+TOTAL+" VARCHAR(255),"+BALANCE
+            +" VARCHAR(255),"+DUE_DATE+" VARCHAR(255))";
     
+    public final String PATIENT_TABLE_SCRIPT = "SELECT "+PERSONAL_TABLE_NAME+"."+ID+","+PERSONAL_TABLE_NAME+"."+SURNAME+","
+            +PERSONAL_TABLE_NAME+"."+FIRSTNAME+","+PERSONAL_TABLE_NAME+"."+MIDDLENAME+","+PERSONAL_TABLE_NAME+"."+CONTACT+","
+            +PATIENT_TABLE_NAME+"."+RECORD_DATE+","+PATIENT_TABLE_NAME+"."+PATIENT_CASE+","+PATIENT_TABLE_NAME+"."+RECORD_COUNT+","
+            +PATIENT_TABLE_NAME+"."+TRANSACTION_DATE+","+PATIENT_TABLE_NAME+"."+TOTAL+","+PATIENT_TABLE_NAME+"."+BALANCE+","
+            +PATIENT_TABLE_NAME+"."+DUE_DATE +" FROM "+PERSONAL_TABLE_NAME+ " INNER JOIN "+PATIENT_TABLE_NAME+" ON "
+            +PERSONAL_TABLE_NAME+"."+ID+"="+PATIENT_TABLE_NAME+"."+ID;
+    
+    //Items
+    public static final String ITEMS = "Items";
+    public static final String BALANCE = "Balance";
+    public static final String DEPOSIT = "Deposit";
+    public static final String TOTAL = "Total";
+    
+    //Records
+    public static final String RECORDS_TABLE_NAME = "Records";
+    
+    //Transactions
+    public static final String TRANSACTIONS_TABLE_NAME = "Transactions";
     
     //Logger
     public static final Map<String, String> LOG_TABLE_MAP = new HashMap() {

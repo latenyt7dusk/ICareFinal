@@ -16,10 +16,31 @@
  */
 package VClass;
 
+import java.util.HashMap;
+import java.util.Map;
+
 /**
  *
  * @author Late7dusk
  */
 public class Patient extends PersonalInfo{
     
+    public static final String RECORDS = Manager.RECORDS_TABLE_NAME;
+    public static final String TRANSACTIONS = Manager.TRANSACTIONS_TABLE_NAME;
+    public static final String LOGS = Manager.LOG_TABLE_NAME;
+    
+    private Map<String,Map<String,Object>> DATA = new HashMap(){
+        {
+            put(RECORDS,new HashMap<String,Object>());
+            put(TRANSACTIONS,new HashMap<String,Object>());
+            put(LOGS,new HashMap<String,Object>());
+        }
+    };
+    
+    public Patient(){
+        this(null,null,null);
+    }
+    public Patient(String s,String f,String m){
+        
+    }
 }
