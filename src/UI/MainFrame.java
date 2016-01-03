@@ -197,8 +197,7 @@ public class MainFrame extends javax.swing.JFrame {
         }
         System.gc();
     }
-    
-    
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -1037,13 +1036,13 @@ public class MainFrame extends javax.swing.JFrame {
         int i = VOptionPane.showCustomDialog(this, "Do you wish to logout or exit?", "Session Termination",
                 "Logout", "Exit", Toolkit.getDefaultToolkit().getImage(getClass().getResource("/UI/VOption/Logout.png")),
                 VOptionPane.CUSTOM_A_B_CANCEL_OPTION);
-        if(i == VOptionPane.CUSTOM_OPTION_A){
+        if (i == VOptionPane.CUSTOM_OPTION_A) {
             Engine.LoginUI.setVisible(true);
             dispose();
-        }else if(i == VOptionPane.CUSTOM_OPTION_B){
+        } else if (i == VOptionPane.CUSTOM_OPTION_B) {
             System.exit(0);
         }
-        
+
     }//GEN-LAST:event_vButton11ActionPerformed
 
     private void vButton10ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton10ActionPerformed
@@ -1074,10 +1073,14 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void vButton21ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton21ActionPerformed
         // TODO add your handling code here:
-        DefaultTableModel model = (DefaultTableModel) vTable2.getModel();
-
-        model.setRowCount(0);
-        model.addRow(new Object[]{TempImage, "<html> Nakpil, <br> Kirstein Jonnah Beciril</html>", "09055550830", "Admin", "Dec 2, 2015"});
+        if (USER_FRAME != null) {
+            USER_FRAME.dispose();
+            USER_FRAME = new UserFrame();
+            USER_FRAME.setVisible(true);
+        } else {
+            USER_FRAME = new UserFrame();
+            USER_FRAME.setVisible(true);
+        }
     }//GEN-LAST:event_vButton21ActionPerformed
 
     private void vButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton7ActionPerformed
@@ -1131,7 +1134,7 @@ public class MainFrame extends javax.swing.JFrame {
 
     private void vButton2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton2ActionPerformed
         // TODO add your handling code here:
-        VOptionPane.showMessageDialog("<html>"+Manager.getDate()+"<br>"+Manager.getTime()+"</html>");
+        VOptionPane.showMessageDialog("<html>" + Manager.getDate() + "<br>" + Manager.getTime() + "</html>");
     }//GEN-LAST:event_vButton2ActionPerformed
 
     /**

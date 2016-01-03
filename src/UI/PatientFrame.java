@@ -18,7 +18,9 @@ package UI;
 
 import VComponents.VThemeManager;
 import java.awt.Color;
+import java.awt.Component;
 import java.awt.Toolkit;
+import javax.swing.JCheckBox;
 import javax.swing.JOptionPane;
 
 /**
@@ -27,6 +29,7 @@ import javax.swing.JOptionPane;
  */
 public class PatientFrame extends javax.swing.JFrame {
 
+    private Component[] TEMPCOMP;
     /**
      * Creates new form PatientFrame
      */
@@ -38,6 +41,34 @@ public class PatientFrame extends javax.swing.JFrame {
         //vComboBox1.removeAllItems();
         //vComboBox1.addItem(new Object[]{"Male", "/UI/Icons/male.png"});
         //vComboBox1.addItem(new Object[]{"Female", "/UI/Icons/female.png"});
+    }
+    
+    public String getComplaints(){
+        String comps = "None";
+        TEMPCOMP = jPanel5.getComponents();
+        for(Component tmp:TEMPCOMP){
+            if(tmp instanceof JCheckBox){
+                if(((JCheckBox)tmp).isSelected()){
+                    if(comps.equalsIgnoreCase("None")){
+                        comps = ((JCheckBox)tmp).getText();
+                    }else{
+                        comps = comps.concat(((JCheckBox)tmp).getText());
+                    }
+                }
+            }
+        }
+        return null;
+    }
+    
+    public void setComplaints(String comps){
+        TEMPCOMP = jPanel5.getComponents();
+        for(Component tmp:TEMPCOMP){
+            if(tmp instanceof JCheckBox){
+                if(comps.contains(((JCheckBox)tmp).getText())){
+                    ((JCheckBox)tmp).setSelected(true);
+                }
+            }
+        }
     }
 
     /**
@@ -103,7 +134,6 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel7 = new javax.swing.JPanel();
         jCheckBox11 = new javax.swing.JCheckBox();
         jCheckBox10 = new javax.swing.JCheckBox();
-        vTextField1 = new VComponents.VTextField();
         jLabel16 = new javax.swing.JLabel();
         jCheckBox13 = new javax.swing.JCheckBox();
         jCheckBox12 = new javax.swing.JCheckBox();
@@ -251,6 +281,11 @@ public class PatientFrame extends javax.swing.JFrame {
 
         vButton7.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/camera.png"))); // NOI18N
         vButton7.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        vButton7.addActionListener(new java.awt.event.ActionListener() {
+            public void actionPerformed(java.awt.event.ActionEvent evt) {
+                vButton7ActionPerformed(evt);
+            }
+        });
 
         vButton6.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/notes.png"))); // NOI18N
         vButton6.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
@@ -314,8 +349,8 @@ public class PatientFrame extends javax.swing.JFrame {
                                     .addComponent(jLabel10, javax.swing.GroupLayout.PREFERRED_SIZE, 184, javax.swing.GroupLayout.PREFERRED_SIZE))
                                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                                 .addGroup(ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                                    .addComponent(vTextField8, javax.swing.GroupLayout.PREFERRED_SIZE, 173, javax.swing.GroupLayout.PREFERRED_SIZE)
-                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
+                                    .addComponent(jLabel11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                                    .addComponent(vTextField8, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)))
                             .addComponent(vTextField4, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                             .addComponent(jLabel2, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
@@ -341,7 +376,7 @@ public class PatientFrame extends javax.swing.JFrame {
                                     .addGroup(ProfileLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.TRAILING, false)
                                         .addComponent(jLabel9, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
                                         .addComponent(vComboBox3, javax.swing.GroupLayout.Alignment.LEADING, javax.swing.GroupLayout.PREFERRED_SIZE, 180, javax.swing.GroupLayout.PREFERRED_SIZE)))
-                                .addGap(0, 0, Short.MAX_VALUE)))
+                                .addGap(0, 25, Short.MAX_VALUE)))
                         .addGap(38, 38, 38))
                     .addGroup(ProfileLayout.createSequentialGroup()
                         .addGap(20, 20, 20)
@@ -421,13 +456,13 @@ public class PatientFrame extends javax.swing.JFrame {
 
         vTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
-                {null, null},
-                {null, null},
-                {null, null},
-                {null, null}
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
             },
             new String [] {
-                "Date", "Details"
+                "Date", "Time", "Details"
             }
         ));
         vTable1.setRowHeight(24);
@@ -435,6 +470,8 @@ public class PatientFrame extends javax.swing.JFrame {
         if (vTable1.getColumnModel().getColumnCount() > 0) {
             vTable1.getColumnModel().getColumn(0).setMinWidth(90);
             vTable1.getColumnModel().getColumn(0).setMaxWidth(90);
+            vTable1.getColumnModel().getColumn(1).setMinWidth(90);
+            vTable1.getColumnModel().getColumn(1).setMaxWidth(90);
         }
 
         vButton13.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/notes.png"))); // NOI18N
@@ -593,11 +630,6 @@ public class PatientFrame extends javax.swing.JFrame {
         jCheckBox10.setFocusPainted(false);
         jCheckBox10.setOpaque(false);
 
-        vTextField1.setEditable(false);
-        vTextField1.setForeground(new java.awt.Color(255, 255, 255));
-        vTextField1.setText("Other");
-        vTextField1.setOpaque(false);
-
         jLabel16.setBackground(VThemeManager.ButtonNormal);
         jLabel16.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
         jLabel16.setForeground(new java.awt.Color(255, 255, 255));
@@ -606,6 +638,7 @@ public class PatientFrame extends javax.swing.JFrame {
         jLabel16.setOpaque(true);
 
         jCheckBox13.setForeground(new java.awt.Color(255, 255, 255));
+        jCheckBox13.setText("Red Eyes");
         jCheckBox13.setBorder(javax.swing.BorderFactory.createEmptyBorder(1, 1, 1, 1));
         jCheckBox13.setFocusPainted(false);
         jCheckBox13.setOpaque(false);
@@ -620,17 +653,14 @@ public class PatientFrame extends javax.swing.JFrame {
         jPanel7.setLayout(jPanel7Layout);
         jPanel7Layout.setHorizontalGroup(
             jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+            .addComponent(jLabel16, javax.swing.GroupLayout.DEFAULT_SIZE, 151, Short.MAX_VALUE)
             .addGroup(jPanel7Layout.createSequentialGroup()
                 .addContainerGap()
                 .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addGroup(jPanel7Layout.createSequentialGroup()
-                        .addComponent(jCheckBox13)
-                        .addGap(0, 0, 0)
-                        .addComponent(vTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 116, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addComponent(jCheckBox12, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox11, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(jCheckBox10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addComponent(jCheckBox11, javax.swing.GroupLayout.DEFAULT_SIZE, 131, Short.MAX_VALUE)
+                    .addComponent(jCheckBox10, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                    .addComponent(jCheckBox13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
                 .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         jPanel7Layout.setVerticalGroup(
@@ -643,9 +673,8 @@ public class PatientFrame extends javax.swing.JFrame {
                 .addComponent(jCheckBox11)
                 .addGap(0, 0, 0)
                 .addComponent(jCheckBox12)
-                .addGroup(jPanel7Layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING, false)
-                    .addComponent(jCheckBox13, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
-                    .addComponent(vTextField1, javax.swing.GroupLayout.PREFERRED_SIZE, 15, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addGap(0, 0, 0)
+                .addComponent(jCheckBox13)
                 .addContainerGap())
         );
 
@@ -881,7 +910,7 @@ public class PatientFrame extends javax.swing.JFrame {
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(jLabel19)
                 .addGap(0, 0, 0)
-                .addComponent(vScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 75, Short.MAX_VALUE)
+                .addComponent(vScrollPane2, javax.swing.GroupLayout.DEFAULT_SIZE, 69, Short.MAX_VALUE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addComponent(vButton14, javax.swing.GroupLayout.PREFERRED_SIZE, 28, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1083,7 +1112,7 @@ public class PatientFrame extends javax.swing.JFrame {
                 .addContainerGap()
                 .addComponent(jPanel12, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addGap(218, 218, 218)
-                .addComponent(vScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 191, Short.MAX_VALUE)
+                .addComponent(vScrollPane7, javax.swing.GroupLayout.DEFAULT_SIZE, 186, Short.MAX_VALUE)
                 .addGap(17, 17, 17)
                 .addComponent(vButton27, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
         );
@@ -1935,6 +1964,11 @@ public class PatientFrame extends javax.swing.JFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_vButton27ActionPerformed
 
+    private void vButton7ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_vButton7ActionPerformed
+        // TODO add your handling code here:
+        CameraFrame cff = new CameraFrame(this);
+    }//GEN-LAST:event_vButton7ActionPerformed
+
     /**
      * @param args the command line arguments
      */
@@ -2117,7 +2151,6 @@ public class PatientFrame extends javax.swing.JFrame {
     private VComponents.VTable vTable2;
     private VComponents.VTable vTable3;
     private VComponents.VTable vTable4;
-    private VComponents.VTextField vTextField1;
     private VComponents.VTextField vTextField10;
     private VComponents.VTextField vTextField11;
     private VComponents.VTextField vTextField12;

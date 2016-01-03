@@ -187,9 +187,8 @@ public class Login extends javax.swing.JFrame {
             }
         });
 
-        vButton1.setIcon(new javax.swing.ImageIcon(getClass().getResource("/UI/Icons/check.png"))); // NOI18N
         vButton1.setText("Login");
-        vButton1.setFont(new java.awt.Font("Tahoma", 1, 11)); // NOI18N
+        vButton1.setFont(new java.awt.Font("Tahoma", 1, 14)); // NOI18N
         vButton1.setIconTextGap(10);
         vButton1.addActionListener(new java.awt.event.ActionListener() {
             public void actionPerformed(java.awt.event.ActionEvent evt) {

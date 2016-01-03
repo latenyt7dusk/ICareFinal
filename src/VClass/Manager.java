@@ -20,6 +20,7 @@ import Utilities.DataBridge;
 import Utilities.Registry;
 import java.io.File;
 import java.io.IOException;
+import java.text.DecimalFormat;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
@@ -43,6 +44,7 @@ public class Manager {
     public static Calendar CALENDAR = Calendar.getInstance();
     public static final SimpleDateFormat DATE_FORMATTER = new SimpleDateFormat(DEFAULT_DATE_FORMAT);
     public static final SimpleDateFormat TIME_FORMATTER = new SimpleDateFormat(DEFAULT_TIME_FORMAT);
+    public static DecimalFormat CURRENCY_FORMATTER = new DecimalFormat("#,###,####,###.00");
 
     public static String getDate(){
         CALENDAR = Calendar.getInstance();

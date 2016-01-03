@@ -16,10 +16,76 @@
  */
 package VClass;
 
+import java.util.ArrayList;
+import java.util.List;
+
 /**
  *
  * @author HERU
  */
 public class Transaction {
     
+    public String ID,OR,DATE,TOTAL,TAX,DISC,DEP,BAL,DUE;
+    public List<Item> items = new ArrayList();
+    
+    public void setID(String id){
+        this.ID = id;
+    }
+    public String getID(){
+        return this.ID;
+    }
+    public void setOR(String or){
+        this.OR = or;
+    }
+    public String getOR(){
+        return this.OR;
+    }
+    public void setDate(String date){
+        this.DATE = date;
+    }
+    public String getDate(){
+        return this.DATE;
+    }
+    public void setTotal(String total){
+        this.TOTAL = total;
+    }
+    public String getTax(){
+        return this.TAX;
+    }
+    public void setDiscount(String disc){
+        this.DISC = disc;
+    }
+    public String getDiscount(){
+        return this.DISC;
+    }
+    public void setDeposit(String dep){
+        this.DEP = dep;
+    }
+    public String getDeposit(){
+        return this.DEP;
+    }
+    public void setBalance(String bal){
+        this.BAL = bal;
+    }
+    public String getBalance(){
+        return this.BAL;
+    }
+    public void setDue(String due){
+        this.DUE = due;
+    }
+    public String getDue(){
+        return this.DUE;
+    }
+    
+    public void setItems(List<Item> items){
+        this.items = items;
+    }
+    public void addItem(Item e){
+        if(e != null){
+            this.items.add(e);
+        }        
+    }
+    public List<Item> getItems(){
+        return this.items;
+    }
 }
