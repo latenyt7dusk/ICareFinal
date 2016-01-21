@@ -77,6 +77,7 @@ public class VDateChooser extends JPanel{
         
         MM.addActionListener(DAction);
         YY.addActionListener(DAction);
+        DD.addActionListener(DAction);
     }
     
     public VDateChooser(VTextField e){
@@ -109,6 +110,7 @@ public class VDateChooser extends JPanel{
         
         MM.addActionListener(DAction);
         YY.addActionListener(DAction);
+        DD.addActionListener(DAction);
     }
     
         
@@ -162,7 +164,7 @@ public class VDateChooser extends JPanel{
         MM.setSelectedIndex(selDate.getMonth());
         YY.setSelectedIndex(selDate.getYear()-15);
         MaxDays(selDate.getMonth(),selDate.getYear());
-        DD.setSelectedIndex(selDate.getDate()-1);
+        DD.setSelectedIndex(selDate.getDay()-1);
     }
     
     public void setDate(String e,String f){
@@ -174,7 +176,8 @@ public class VDateChooser extends JPanel{
             MM.setSelectedIndex(selDate.getMonth());
             YY.setSelectedIndex(selDate.getYear()-15);
             MaxDays(selDate.getMonth(),selDate.getYear());
-            DD.setSelectedIndex(selDate.getDate()-1);
+            DD.setSelectedIndex(selDate.getDay()-1);
+            
             if(Age!= null){
                 Age.setText(String.valueOf(computeAge(selDate)));
             }
